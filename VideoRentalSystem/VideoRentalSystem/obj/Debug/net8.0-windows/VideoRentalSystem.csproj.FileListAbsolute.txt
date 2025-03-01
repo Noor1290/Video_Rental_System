@@ -1,0 +1,15 @@
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\bin\Debug\net8.0-windows\VideoRentalSystem.exe
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\bin\Debug\net8.0-windows\VideoRentalSystem.deps.json
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\bin\Debug\net8.0-windows\VideoRentalSystem.runtimeconfig.json
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\bin\Debug\net8.0-windows\VideoRentalSystem.dll
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\bin\Debug\net8.0-windows\VideoRentalSystem.pdb
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.AssemblyInfoInputs.cache
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.AssemblyInfo.cs
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.csproj.CoreCompileInputs.cache
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.sourcelink.json
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.dll
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\refint\VideoRentalSystem.dll
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.pdb
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\VideoRentalSystem.genruntimeconfig.cache
+C:\Users\noorp\OneDrive\Desktop\Video_Rental\VideoRentalSystem\VideoRentalSystem\obj\Debug\net8.0-windows\ref\VideoRentalSystem.dll
