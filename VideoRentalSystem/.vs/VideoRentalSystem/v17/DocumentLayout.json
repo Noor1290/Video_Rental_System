@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,6 +30,19 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Welcome.cs",
+              "DocumentMoniker": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Welcome.cs",
+              "RelativeDocumentMoniker": "VideoRentalSystem\\Welcome.cs",
+              "ToolTip": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Welcome.cs",
+              "RelativeToolTip": "VideoRentalSystem\\Welcome.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T18:19:39.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Program.cs",
@@ -38,19 +51,7 @@
               "RelativeToolTip": "VideoRentalSystem\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-01T18:20:08.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Welcome.cs",
-              "DocumentMoniker": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Welcome.cs",
-              "RelativeDocumentMoniker": "VideoRentalSystem\\Welcome.cs",
-              "ToolTip": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Welcome.cs",
-              "RelativeToolTip": "VideoRentalSystem\\Welcome.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-01T18:19:39.93Z",
+              "WhenOpened": "2025-03-01T18:20:08.641Z",
               "EditorCaption": ""
             }
           ]
