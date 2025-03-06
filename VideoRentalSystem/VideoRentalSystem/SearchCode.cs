@@ -42,7 +42,7 @@ namespace VideoRentalSystem
                 Height=30
             };
 
-            SearchButton.Click += SearchButton_Click; // attach click event handler
+            //SearchButton.Click += SearchButton_Click; // attach click event handler
 
             // data grid to display results
             DataGridView = new DataGridView()

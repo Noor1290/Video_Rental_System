@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VideoRentalSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ab98757d9b4a7ba54422b115d3bca5673078a96")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f0a1de636855db25681675db89f3239c9fdd661")]
 [assembly: System.Reflection.AssemblyProductAttribute("VideoRentalSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VideoRentalSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
