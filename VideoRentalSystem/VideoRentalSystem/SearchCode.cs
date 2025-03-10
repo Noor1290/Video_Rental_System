@@ -1,8 +1,10 @@
-﻿using System;
+﻿//imports
+using System;
 using System.Data;
 using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections; // for hash table
 
 namespace VideoRentalSystem
 {
@@ -10,9 +12,11 @@ namespace VideoRentalSystem
     {
         //UI components
         private TextBox SearchTextBox;
-        private Button SearchButton;
+        private Button ClearButton;
         private DataGridView DataGridView;
         private DataTable DataTable; // temporarily video data
+        private Label NoResultsLabel;
+        private Hashtable VideoHashTable;
 
         public SearchForm()
         {
@@ -22,10 +26,10 @@ namespace VideoRentalSystem
         private void InitialiseUI()
         {
             //set form properties
-            this.Text = "Search Form";
-            this.Size = new System.Drawing.Size(600, 450);
-            this.BackColor = Color.LightBlue;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.Text = "Video Search";
+            this.Size = new System.Drawing.Size(650, 500);
+            this.BackColor = Color.WhiteSmoke;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Font = new Font("Segeo UI", 10);
 
@@ -34,36 +38,40 @@ namespace VideoRentalSystem
             SearchTextBox = new TextBox()
             {
                 Location = new System.Drawing.Point(20,20),
-                Width=380,
+                Width=450,
                 Height=30,
-                Font = new Font("Segeo UI", 10),
+                Font = new Font("Segeo UI", 12),
                 BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.WhiteSmoke
+                BackColor = Color.WhiteSmoke,
+                ForeColor = Color.Black,
             };
+            //live search
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
 
             //search button
-            SearchButton = new Button()
+            ClearButton = new Button()
             {
-                Text = "🔍 Search",
-                Location = new System.Drawing.Point(420,  18),
-                Width= 140,
+                Text = "❌ Clear",
+                Location = new System.Drawing.Point(490,  18),
+                Width= 120,
                 Height=35,
                 Font = new Font("Segeo UI", 10, FontStyle.Bold),
-                BackColor = Color.DodgerBlue,
+                BackColor = Color.Crimson,
                 ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand
 
             };
 
-            SearchButton.FlatAppearance.BorderSize = 0;
-            SearchButton.Click += SearchButton_Click; // attach click event handler
+            ClearButton.FlatAppearance.BorderSize = 0;
+            ClearButton.Click += ClearButton_Click; // attach click event handler
 
             // data grid to display results
             DataGridView = new DataGridView()
             {
-                Location = new System.Drawing.Point(20, 60),
-                Width = 440,
-                Height = 220,
+                Location = new System.Drawing.Point(20, 70),
+                Width = 600,
+                Height = 350,
                 Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Top,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 BackgroundColor = Color.White,
@@ -77,11 +85,11 @@ namespace VideoRentalSystem
                     Font = new Font("Segeo UI", 10),
                     ForeColor = Color.DarkSlateGray,
                     SelectionBackColor = Color.LightSkyBlue,
-                    SelectionForeColor = Color.Black,
+                    SelectionForeColor = Color.Black
                 },
 
                 ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle() {
-                    Font = new Font("Segeo UI", 10),
+                    Font = new Font("Segeo UI", 11, FontStyle.Bold),
                     ForeColor = Color.White,
                     BackColor = Color.SteelBlue,
                     Alignment= DataGridViewContentAlignment.MiddleCenter
@@ -90,10 +98,34 @@ namespace VideoRentalSystem
 
             };
 
+            NoResultsLabel = new Label()
+            {
+                Text = "No results found",
+                ForeColor = Color.Red,
+                Font = new Font("Segeo UI", 12, FontStyle.Bold),
+                AutoSize= true,
+                //hidden by default
+                Visible = false
+            };
+            //dynamically position it at the center 
+            PositionNoResultsLabel();
+
             //add components to the form
             this.Controls.Add( SearchTextBox );
-            this.Controls.Add( SearchButton );
+            this.Controls.Add( NoResultsLabel );
+            this.Controls.Add( ClearButton );
             this.Controls.Add( DataGridView );
+        }
+
+        private void PositionNoResultsLabel()
+        {
+            int gridX = DataGridView.Location.X;
+            int gridY = DataGridView.Location.Y;
+            int gridWidth = DataGridView.Width;
+            int gridHeight = DataGridView.Height;
+
+            //position in the center
+            NoResultsLabel.Location = new Point( gridX + (gridWidth /2) - (NoResultsLabel.Width/2), gridY +(gridHeight/2 )- (NoResultsLabel.Height/2));
         }
         private void InitialiseDataTable()
         {
@@ -105,22 +137,33 @@ namespace VideoRentalSystem
             DataTable.Columns.Add("Year", typeof(int));
             DataTable.Columns.Add("Category", typeof(string));
 
-            DataTable.Rows.Add(1, "aaa", "Horror", 2001, "Movie");
-            DataTable.Rows.Add(2, "bbb", "Romance", 2008, "Movie");
-            DataTable.Rows.Add(3, "ccc", "Horror", 2001, "TV Show");
-            DataTable.Rows.Add(4, "dd", "Horror", 2002, "Movie");
+            VideoHashTable = new Hashtable();
+            AddVideo(1, "aaa", "Horror", 2001, "Movie");
+            AddVideo(2, "bbb", "Romance", 2008, "Movie");
+            AddVideo(3, "ccc", "Horror", 2001, "TV Show");
+            AddVideo(4, "dd", "Horror", 2002, "Movie");
 
             DataGridView.DataSource = DataTable;
 
         }
 
-        private void SearchButton_Click( object sender, EventArgs e)
+        //add video data  in hashtable
+        private void AddVideo(int id, string name, string genre, int year, string category)
         {
+            var VideoData = new { ID = id, Name = name, Genre = genre, Year = year, Category = category };
+            //store in hashtable
+            VideoHashTable[id] = VideoData;
+            DataTable.Rows.Add(id, name, genre, year, category);
+        }
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+
             string SearchText = SearchTextBox.Text.Trim().ToLower();
 
             //check if any input is entered
-            if (string.IsNullOrEmpty(SearchText)) { 
-                MessageBox.Show("No input","Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                ResetSearch();
                 return;
             }
             var FilteredRows = DataTable.AsEnumerable()
@@ -132,15 +175,30 @@ namespace VideoRentalSystem
                );
 
             //display
-            if (FilteredRows.Any()) { 
+            if (FilteredRows.Any())
+            {
                 DataGridView.DataSource = FilteredRows.CopyToDataTable();
-                
+                NoResultsLabel.Visible = false;
+
             }
             else
             {
-                MessageBox.Show("No results", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DataGridView.DataSource = null;
+                var EmptyTable = DataTable.Clone();
+                DataGridView.DataSource = EmptyTable;
+                PositionNoResultsLabel();
+                NoResultsLabel.Visible = true;
             }
+        }
+        private void ClearButton_Click( object sender, EventArgs e)
+        {
+            ResetSearch();
+        }
+
+        private void ResetSearch()
+        {
+            SearchTextBox.Clear();
+            DataGridView.DataSource = DataTable;
+            NoResultsLabel.Visible = false;
         }
     }
 }
