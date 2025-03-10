@@ -23,39 +23,25 @@ namespace VideoRentalSystem
         {
             //set form properties
             this.Text = "Search Form";
-            this.Size = new System.Drawing.Size(600, 450);
-            this.BackColor = Color.LightBlue;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Font = new Font("Segeo UI", 10);
-
+            this.Size = new System.Drawing.Size(500, 350);
 
             //Search Input field
             SearchTextBox = new TextBox()
             {
                 Location = new System.Drawing.Point(20,20),
-                Width=380,
-                Height=30,
-                Font = new Font("Segeo UI", 10),
-                BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.WhiteSmoke
+                Width=300,
+                Height=50
             };
 
             //search button
             SearchButton = new Button()
             {
-                Text = "🔍 Search",
-                Location = new System.Drawing.Point(420,  18),
-                Width= 140,
-                Height=35,
-                Font = new Font("Segeo UI", 10, FontStyle.Bold),
-                BackColor = Color.DodgerBlue,
-                ForeColor = Color.White,
-                Cursor = Cursors.Hand
-
+                Text = "Search",
+                Location = new System.Drawing.Point(330,  18),
+                Width= 80,
+                Height=30
             };
 
-            SearchButton.FlatAppearance.BorderSize = 0;
             SearchButton.Click += SearchButton_Click; // attach click event handler
 
             // data grid to display results
@@ -63,31 +49,8 @@ namespace VideoRentalSystem
             {
                 Location = new System.Drawing.Point(20, 60),
                 Width = 440,
-                Height = 220,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Top,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                BackgroundColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle,
-                AllowUserToAddRows = false,
-                ReadOnly = true,
-                EnableHeadersVisualStyles = false,
-
-                DefaultCellStyle = new DataGridViewCellStyle()
-                {
-                    Font = new Font("Segeo UI", 10),
-                    ForeColor = Color.DarkSlateGray,
-                    SelectionBackColor = Color.LightSkyBlue,
-                    SelectionForeColor = Color.Black,
-                },
-
-                ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle() {
-                    Font = new Font("Segeo UI", 10),
-                    ForeColor = Color.White,
-                    BackColor = Color.SteelBlue,
-                    Alignment= DataGridViewContentAlignment.MiddleCenter
-
-                }
-
+                Height=220,
+                AutoSizeColumnsMode=DataGridViewAutoSizeColumnsMode.Fill   
             };
 
             //add components to the form
@@ -100,8 +63,8 @@ namespace VideoRentalSystem
             //temporary data
             DataTable = new DataTable();
             DataTable.Columns.Add("ID",typeof(int));
-            DataTable.Columns.Add("Video Name", typeof(string));
             DataTable.Columns.Add("Genre", typeof(string));
+            DataTable.Columns.Add("Video Name", typeof(int));
             DataTable.Columns.Add("Year", typeof(int));
             DataTable.Columns.Add("Category", typeof(string));
 
@@ -128,18 +91,14 @@ namespace VideoRentalSystem
                row.Field<string>("Video Name").ToLower().Contains(SearchText) ||
                row.Field<string>("Genre").ToLower().Contains(SearchText) ||
                row.Field<int>("Year").ToString().Contains(SearchText) ||
-               row.Field<string>("Category").ToLower().Contains(SearchText)
+               row.Field<string>("Category").ToLower().Contains(SearchText) ||
                );
 
             //display
             if (FilteredRows.Any()) { 
                 DataGridView.DataSource = FilteredRows.CopyToDataTable();
-                
-            }
-            else
-            {
                 MessageBox.Show("No results", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DataGridView.DataSource = null;
+                DataGridView.DataSource= null
             }
         }
     }
