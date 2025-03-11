@@ -26,6 +26,7 @@ namespace VideoRentalSystem
         private void InitialiseUI()
         {
             //set form properties
+<<<<<<< HEAD
             this.Text = "Video Search";
             this.Size = new System.Drawing.Size(650, 500);
             this.BackColor = Color.WhiteSmoke;
@@ -33,17 +34,26 @@ namespace VideoRentalSystem
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Font = new Font("Segeo UI", 10);
 
+=======
+            this.Text = "Search Form";
+            this.Size = new System.Drawing.Size(500, 350);
+>>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
 
             //Search Input field
             SearchTextBox = new TextBox()
             {
                 Location = new System.Drawing.Point(20,20),
+<<<<<<< HEAD
                 Width=450,
                 Height=30,
                 Font = new Font("Segeo UI", 12),
                 BorderStyle = BorderStyle.FixedSingle,
                 BackColor = Color.WhiteSmoke,
                 ForeColor = Color.Black,
+=======
+                Width=300,
+                Height=50
+>>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
             };
             //live search
             SearchTextBox.TextChanged += SearchTextBox_TextChanged;
@@ -51,6 +61,7 @@ namespace VideoRentalSystem
             //search button
             ClearButton = new Button()
             {
+<<<<<<< HEAD
                 Text = "❌ Clear",
                 Location = new System.Drawing.Point(490,  18),
                 Width= 120,
@@ -65,10 +76,20 @@ namespace VideoRentalSystem
 
             ClearButton.FlatAppearance.BorderSize = 0;
             ClearButton.Click += ClearButton_Click; // attach click event handler
+=======
+                Text = "Search",
+                Location = new System.Drawing.Point(330,  18),
+                Width= 80,
+                Height=30
+            };
+
+            SearchButton.Click += SearchButton_Click; // attach click event handler
+>>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
 
             // data grid to display results
             DataGridView = new DataGridView()
             {
+<<<<<<< HEAD
                 Location = new System.Drawing.Point(20, 70),
                 Width = 600,
                 Height = 350,
@@ -96,6 +117,12 @@ namespace VideoRentalSystem
 
                 }
 
+=======
+                Location = new System.Drawing.Point(20, 60),
+                Width = 440,
+                Height=220,
+                AutoSizeColumnsMode=DataGridViewAutoSizeColumnsMode.Fill   
+>>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
             };
 
             NoResultsLabel = new Label()
@@ -132,8 +159,8 @@ namespace VideoRentalSystem
             //temporary data
             DataTable = new DataTable();
             DataTable.Columns.Add("ID",typeof(int));
-            DataTable.Columns.Add("Video Name", typeof(string));
             DataTable.Columns.Add("Genre", typeof(string));
+            DataTable.Columns.Add("Video Name", typeof(int));
             DataTable.Columns.Add("Year", typeof(int));
             DataTable.Columns.Add("Category", typeof(string));
 
@@ -171,13 +198,14 @@ namespace VideoRentalSystem
                row.Field<string>("Video Name").ToLower().Contains(SearchText) ||
                row.Field<string>("Genre").ToLower().Contains(SearchText) ||
                row.Field<int>("Year").ToString().Contains(SearchText) ||
-               row.Field<string>("Category").ToLower().Contains(SearchText)
+               row.Field<string>("Category").ToLower().Contains(SearchText) ||
                );
 
             //display
             if (FilteredRows.Any())
             {
                 DataGridView.DataSource = FilteredRows.CopyToDataTable();
+<<<<<<< HEAD
                 NoResultsLabel.Visible = false;
 
             }
@@ -187,6 +215,10 @@ namespace VideoRentalSystem
                 DataGridView.DataSource = EmptyTable;
                 PositionNoResultsLabel();
                 NoResultsLabel.Visible = true;
+=======
+                MessageBox.Show("No results", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataGridView.DataSource= null
+>>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
             }
         }
         private void ClearButton_Click( object sender, EventArgs e)
