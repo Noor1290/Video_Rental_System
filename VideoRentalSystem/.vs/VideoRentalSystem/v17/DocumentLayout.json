@@ -40,11 +40,7 @@
               "RelativeDocumentMoniker": "VideoRentalSystem\\SearchCode.cs",
               "ToolTip": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\SearchCode.cs",
               "RelativeToolTip": "VideoRentalSystem\\SearchCode.cs",
-<<<<<<< HEAD
-              "ViewState": "AgIAALMAAAAAAAAAAAAswMMAAAAAAAAAAAAAAA==",
-=======
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAAtAAAAAAAAAA==",
->>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-06T17:53:43.429Z",
               "EditorCaption": ""
@@ -71,8 +67,7 @@
               "RelativeToolTip": "VideoRentalSystem\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-01T18:20:08.641Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-01T18:20:08.641Z"
             }
           ]
         }
