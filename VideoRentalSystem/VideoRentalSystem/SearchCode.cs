@@ -12,11 +12,13 @@ namespace VideoRentalSystem
     {
         //UI components
         private TextBox SearchTextBox;
+        private NumericUpDown MinPriceBox, MaxPriceBox;
         private Button ClearButton;
         private DataGridView DataGridView;
         private DataTable DataTable; // temporarily video data
-        private Label NoResultsLabel;
-        private CustomHashTable VideoHashTable = new CustomHashTable(10000);
+        private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel,SearchLabel;
+        //data storage
+        private Dictionary <int, DataRow> VideoHashTable;
 
         public SearchForm()
         {
@@ -26,103 +28,103 @@ namespace VideoRentalSystem
         private void InitialiseUI()
         {
             //set form properties
-<<<<<<< HEAD
             this.Text = "Video Search";
-            this.Size = new System.Drawing.Size(650, 500);
+            this.Size = new Size(700, 500);
             this.BackColor = Color.WhiteSmoke;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Font = new Font("Segeo UI", 10);
 
-=======
-            this.Text = "Search Form";
-            this.Size = new System.Drawing.Size(500, 350);
->>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
-
+            // search label
+            SearchLabel = new Label()
+            {
+                Text="Search:",
+                Location = new Point(15,20),
+                AutoSize = true,
+                Font = new Font("Segeo UI", 10, FontStyle.Bold)
+            };
             //Search Input field
             SearchTextBox = new TextBox()
             {
-                Location = new System.Drawing.Point(20,20),
-<<<<<<< HEAD
-                Width=450,
-                Height=30,
+                Location = new Point(90,15),
+                Width=250,
                 Font = new Font("Segeo UI", 12),
-                BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.WhiteSmoke,
-                ForeColor = Color.Black,
-=======
-                Width=300,
-                Height=50
->>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
+                BorderStyle = BorderStyle.FixedSingle
             };
             //live search
             SearchTextBox.TextChanged += SearchTextBox_TextChanged;
 
+            //minimum price label
+            MinPriceLabel = new Label()
+            {
+                Text="Min Price:",
+                Location= new Point(340,20),
+                AutoSize= true,
+                Font = new Font("Segeo UI", 10, FontStyle.Bold)
+            };
+
+            //minimum price input
+            MinPriceBox = new NumericUpDown()
+            {
+                Location= new Point(440,15),
+                Width=80,
+                Minimum=0,
+                Maximum=1000,
+                DecimalPlaces=2,
+                Font = new Font("Segeo UI", 10)
+            };
+
+            MinPriceBox.ValueChanged += SearchTextBox_TextChanged; // refilter upon value changes
+            
+            //maximum price label
+            MaxPriceLabel = new Label()
+            {
+                Text = "Max Price:",
+                Location = new Point(340, 60),
+                AutoSize = true,
+                Font = new Font("Segeo UI", 10, FontStyle.Bold)
+            };
+
+            //maximum price input
+            MaxPriceBox = new NumericUpDown()
+            {
+                Location = new Point(440, 55),
+                Width = 80,
+                Minimum = 0,
+                Maximum = 1000,
+                DecimalPlaces = 2,
+                Font = new Font("Segeo UI", 10)
+            };
+
+            MaxPriceBox.ValueChanged += SearchTextBox_TextChanged; // refilter upon value changes
+
             //search button
             ClearButton = new Button()
             {
-<<<<<<< HEAD
                 Text = "❌ Clear",
-                Location = new System.Drawing.Point(490,  18),
+                Location = new System.Drawing.Point(550,  35),
                 Width= 120,
-                Height=35,
-                Font = new Font("Segeo UI", 10, FontStyle.Bold),
+                Height=40,
                 BackColor = Color.Crimson,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand
-
             };
 
             ClearButton.FlatAppearance.BorderSize = 0;
             ClearButton.Click += ClearButton_Click; // attach click event handler
-=======
-                Text = "Search",
-                Location = new System.Drawing.Point(330,  18),
-                Width= 80,
-                Height=30
-            };
-
-            SearchButton.Click += SearchButton_Click; // attach click event handler
->>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
 
             // data grid to display results
             DataGridView = new DataGridView()
             {
-<<<<<<< HEAD
-                Location = new System.Drawing.Point(20, 70),
-                Width = 600,
-                Height = 350,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Top,
+                Location = new System.Drawing.Point(20, 100),
+                Width = 640,
+                Height = 300,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 BackgroundColor = Color.White,
                 BorderStyle = BorderStyle.FixedSingle,
                 AllowUserToAddRows = false,
                 ReadOnly = true,
-                EnableHeadersVisualStyles = false,
-
-                DefaultCellStyle = new DataGridViewCellStyle()
-                {
-                    Font = new Font("Segeo UI", 10),
-                    ForeColor = Color.DarkSlateGray,
-                    SelectionBackColor = Color.LightSkyBlue,
-                    SelectionForeColor = Color.Black
-                },
-
-                ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle() {
-                    Font = new Font("Segeo UI", 11, FontStyle.Bold),
-                    ForeColor = Color.White,
-                    BackColor = Color.SteelBlue,
-                    Alignment= DataGridViewContentAlignment.MiddleCenter
-
-                }
-
-=======
-                Location = new System.Drawing.Point(20, 60),
-                Width = 440,
-                Height=220,
-                AutoSizeColumnsMode=DataGridViewAutoSizeColumnsMode.Fill   
->>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
             };
 
             NoResultsLabel = new Label()
@@ -134,103 +136,121 @@ namespace VideoRentalSystem
                 //hidden by default
                 Visible = false
             };
-            //dynamically position it at the center 
-            PositionNoResultsLabel();
 
             //add components to the form
+            this.Controls.Add(SearchLabel);
             this.Controls.Add( SearchTextBox );
+            this.Controls.Add(MinPriceLabel);
+            this.Controls.Add(MaxPriceLabel);
+            this.Controls.Add(MinPriceBox);
+            this.Controls.Add(MaxPriceBox);
             this.Controls.Add( NoResultsLabel );
             this.Controls.Add( ClearButton );
             this.Controls.Add( DataGridView );
+
+            //dynamically position it at the center 
+            PositionNoResultsLabel();
         }
 
         private void PositionNoResultsLabel()
         {
-            int gridX = DataGridView.Location.X;
-            int gridY = DataGridView.Location.Y;
-            int gridWidth = DataGridView.Width;
-            int gridHeight = DataGridView.Height;
-
             //position in the center
-            NoResultsLabel.Location = new Point( gridX + (gridWidth /2) - (NoResultsLabel.Width/2), gridY +(gridHeight/2 )- (NoResultsLabel.Height/2));
+            NoResultsLabel.Location = new Point(
+                DataGridView.Location.X + (DataGridView.Width / 2 ) -(NoResultsLabel.Width/2),
+                 DataGridView.Location.Y + (DataGridView.Height / 2) - (NoResultsLabel.Height / 2)
+                );
+
+            NoResultsLabel.BringToFront();
         }
         private void InitialiseDataTable()
         {
             //temporary data
             DataTable = new DataTable();
             DataTable.Columns.Add("ID",typeof(int));
+            DataTable.Columns.Add("Video", typeof(string));
             DataTable.Columns.Add("Genre", typeof(string));
-            DataTable.Columns.Add("Video Name", typeof(int));
-            DataTable.Columns.Add("Year", typeof(int));
-            DataTable.Columns.Add("Category", typeof(string));
+            DataTable.Columns.Add("Duration (min)", typeof(int));
+            DataTable.Columns.Add("Price ($)", typeof(decimal));
 
-            VideoHashTable = new CustomHashTable(10000);
-            AddVideo(1, "aaa", "Horror", 2001, "Movie");
-            AddVideo(2, "bbb", "Romance", 2008, "Movie");
-            AddVideo(3, "ccc", "Horror", 2001, "TV Show");
-            AddVideo(4, "dd", "Horror", 2002, "Movie");
+            //initialise hash table
+            VideoHashTable = new Dictionary <int ,DataRow>();
+
+            //add sample video
+            AddVideo(1, "aaa", "Horror", 148,5.99m);
+            AddVideo(2, "bbb", "Romance", 451,7.48m);
+            AddVideo(3, "ccc", "Horror", 110,7.23m);
+            AddVideo(4, "dd", "Horror", 98,4.56m);
 
             DataGridView.DataSource = DataTable;
 
         }
 
         //add video data  in hashtable
-        private void AddVideo(int id, string name, string genre, int year, string category)
+        private void AddVideo(int id, string name, string genre, int duration, decimal price)
         {
-            var VideoData = new { ID = id, Name = name, Genre = genre, Year = year, Category = category };
-            //store in hashtable
-            VideoHashTable[id] = VideoData;
-            DataTable.Rows.Add(id, name, genre, year, category);
+            DataRow row = DataTable.NewRow();
+            row["ID"] = id;
+            row["Video"] = name;
+            row["Genre"] = genre;
+            row["Duration (min)"] = duration;
+            row["Price ($)"]= price;
+
+            DataTable.Rows.Add(row);
+            VideoHashTable[id] = row; // store in hashtable
         }
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
 
             string SearchText = SearchTextBox.Text.Trim().ToLower();
+            decimal MinPrice = MinPriceBox.Value;
+            decimal MaxPrice = MaxPriceBox.Value == 0 ? 1000 : MaxPriceBox.Value;
 
-            //check if any input is entered
-            if (string.IsNullOrEmpty(SearchText))
-            {
-                ResetSearch();
-                return;
-            }
-            var FilteredRows = DataTable.AsEnumerable()
-               .Where(row =>
-               row.Field<string>("Video Name").ToLower().Contains(SearchText) ||
-               row.Field<string>("Genre").ToLower().Contains(SearchText) ||
-               row.Field<int>("Year").ToString().Contains(SearchText) ||
-               row.Field<string>("Category").ToLower().Contains(SearchText) ||
-               );
+
+
+            var FilteredRows = VideoHashTable.Values
+                .Where(row =>
+                {
+                    decimal price = row.Field<decimal>("Price ($)");
+                    bool MatchSearch = row.Field<string>("Video").ToLower().Contains(SearchText) ||
+                                       row.Field<string>("Genre").ToLower().Contains(SearchText) ||
+                                       row.Field<int>("Duration (min)").ToString().Contains(SearchText);
+                    bool MatchPrice = price>= MinPrice && price<= MaxPrice;
+                    return MatchSearch && MatchPrice;
+
+                })
+                .ToList();
+ 
+
 
             //display
             if (FilteredRows.Any())
             {
-                DataGridView.DataSource = FilteredRows.CopyToDataTable();
-<<<<<<< HEAD
-                NoResultsLabel.Visible = false;
+                DataTable FilteredTable = DataTable.Clone();
 
+                foreach ( var row in FilteredRows)
+                    FilteredTable.ImportRow(row);
+
+                DataGridView.DataSource = FilteredTable;
+                NoResultsLabel.Visible = false;
             }
             else
             {
-                var EmptyTable = DataTable.Clone();
-                DataGridView.DataSource = EmptyTable;
+                DataGridView.DataSource = DataTable.Clone();
                 PositionNoResultsLabel();
                 NoResultsLabel.Visible = true;
-=======
-                MessageBox.Show("No results", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DataGridView.DataSource= null
->>>>>>> 42f68fe98dc71d7bb7fbd4b2c0098331302de2ad
             }
         }
+
+        //clears the search input and reset filters
         private void ClearButton_Click( object sender, EventArgs e)
         {
-            ResetSearch();
-        }
 
-        private void ResetSearch()
-        {
             SearchTextBox.Clear();
+            MinPriceBox.Value = 0;
+            MaxPriceBox.Value = 0;
             DataGridView.DataSource = DataTable;
             NoResultsLabel.Visible = false;
+
         }
     }
 }
