@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\SearchCode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:VideoRentalSystem\\SearchCode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0EEF5FAC-CD9A-4F93-A43A-FA4338DA4A52}|VideoRentalSystem\\VideoRentalSystem.csproj|c:\\users\\noorp\\onedrive\\desktop\\video_rental\\videorentalsystem\\videorentalsystem\\searchcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EEF5FAC-CD9A-4F93-A43A-FA4338DA4A52}|VideoRentalSystem\\VideoRentalSystem.csproj|solutionrelative:videorentalsystem\\searchcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:VideoRentalSystem\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0EEF5FAC-CD9A-4F93-A43A-FA4338DA4A52}|VideoRentalSystem\\VideoRentalSystem.csproj|c:\\users\\noorp\\onedrive\\desktop\\video_rental\\videorentalsystem\\videorentalsystem\\welcome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EEF5FAC-CD9A-4F93-A43A-FA4338DA4A52}|VideoRentalSystem\\VideoRentalSystem.csproj|solutionrelative:videorentalsystem\\welcome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Welcome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:VideoRentalSystem\\Welcome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0EEF5FAC-CD9A-4F93-A43A-FA4338DA4A52}|VideoRentalSystem\\VideoRentalSystem.csproj|c:\\users\\noorp\\onedrive\\desktop\\video_rental\\videorentalsystem\\videorentalsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EEF5FAC-CD9A-4F93-A43A-FA4338DA4A52}|VideoRentalSystem\\VideoRentalSystem.csproj|solutionrelative:videorentalsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,14 +40,14 @@
               "RelativeDocumentMoniker": "VideoRentalSystem\\SearchCode.cs",
               "ToolTip": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\SearchCode.cs",
               "RelativeToolTip": "VideoRentalSystem\\SearchCode.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAwwGQAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-06T17:53:43.429Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Welcome.cs",
               "DocumentMoniker": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Welcome.cs",
               "RelativeDocumentMoniker": "VideoRentalSystem\\Welcome.cs",
@@ -59,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\noorp\\OneDrive\\Desktop\\Video_Rental\\VideoRentalSystem\\VideoRentalSystem\\Program.cs",
               "RelativeDocumentMoniker": "VideoRentalSystem\\Program.cs",
