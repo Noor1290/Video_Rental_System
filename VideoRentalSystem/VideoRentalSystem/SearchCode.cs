@@ -16,7 +16,7 @@ namespace VideoRentalSystem
         private DataGridView DataGridView;
         private DataTable DataTable; // temporarily video data
         private Label NoResultsLabel;
-        private Hashtable VideoHashTable;
+        private CustomHashTable VideoHashTable = new CustomHashTable(10000);
 
         public SearchForm()
         {
@@ -164,7 +164,7 @@ namespace VideoRentalSystem
             DataTable.Columns.Add("Year", typeof(int));
             DataTable.Columns.Add("Category", typeof(string));
 
-            VideoHashTable = new Hashtable();
+            VideoHashTable = new CustomHashTable(10000);
             AddVideo(1, "aaa", "Horror", 2001, "Movie");
             AddVideo(2, "bbb", "Romance", 2008, "Movie");
             AddVideo(3, "ccc", "Horror", 2001, "TV Show");
