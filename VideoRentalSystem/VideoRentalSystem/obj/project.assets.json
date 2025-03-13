@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DVanT\\OneDrive\\Desktop\\test\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
+      "projectUniqueName": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CWCSHARP\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
       "projectName": "VideoRentalSystem",
-      "projectPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\test\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
+      "projectPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CWCSHARP\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
       "packagesPath": "C:\\Users\\DVanT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\test\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\obj\\",
+      "outputPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CWCSHARP\\VideoRentalSystem\\VideoRentalSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
