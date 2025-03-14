@@ -38,7 +38,7 @@ namespace VideoRentalSystem
             this.Text = "Welcome Window";
             this.AutoScaleDimensions = new SizeF(9F, 20F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(813, 647);
+            this.ClientSize = new Size(875, 650);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.LightBlue; // LightBlue background
 
@@ -49,7 +49,7 @@ namespace VideoRentalSystem
                 ForeColor = Color.Black,
                 Font = new Font("Lucida Handwriting", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true,
-                Location = new Point(200, 50), // Position at the top center
+                Location = new Point(125, 45), // Position at the top center
                 TextAlign = ContentAlignment.MiddleCenter,
             };
             this.Controls.Add(lblWelcome);
@@ -58,11 +58,12 @@ namespace VideoRentalSystem
             btnLogin = new Button
             {
                 Text = "Login",
-                Size = new Size(150, 70),
-                Location = new Point(340, 200),
+                Size = new Size(175, 90),
+                Location = new Point(360, 230),
                 BackColor = SystemColors.ActiveCaption,
                 ForeColor = Color.White,
-                Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)))
+                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                Anchor = AnchorStyles.Bottom,
             };
             btnLogin.Click += BtnLogin_Click; // Attach click event
             this.Controls.Add(btnLogin);
@@ -71,12 +72,14 @@ namespace VideoRentalSystem
             btnRegister = new Button
             {
                 Text = "Register",
-                Size = new Size(150, 70),
-                Location = new Point(340, 280),
+                Size = new Size(175, 90),
+                Location = new Point(360, 350),
                 BackColor = SystemColors.ActiveCaption,
                 ForeColor = Color.White,
-                Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)))
+                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                Anchor = AnchorStyles.Top,
             };
+        
             btnRegister.Click += BtnRegister_Click; // Attach click event
             this.Controls.Add(btnRegister);
         }
