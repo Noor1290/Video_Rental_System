@@ -1,4 +1,6 @@
-﻿namespace Last
+﻿using System.Windows.Forms;
+
+namespace Last
 {
     partial class Register
     {
@@ -271,6 +273,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 625);
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Controls.Add(this.PasswordErrorMessage);
             this.Controls.Add(this.UsernameErrorMessage);
             this.Controls.Add(this.EmailErrorMessage);

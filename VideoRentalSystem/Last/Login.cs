@@ -12,8 +12,10 @@ using VideoRentalSystem;
 
 namespace Last
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public partial class Login : Form
     {
+
         public Login()
         {
             InitializeComponent();

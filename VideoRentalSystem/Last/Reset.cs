@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Last
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public partial class Reset : Form
     {
         public Reset()

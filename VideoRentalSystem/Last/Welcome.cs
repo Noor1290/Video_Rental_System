@@ -7,6 +7,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace Last
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     // Main form class for the welcome screen
     public partial class WelcomeForm : Form
     {
@@ -35,9 +36,10 @@ namespace Last
         {
             // Form properties
             this.Text = "Welcome Window";
-            this.Size = new Size(900, 500);
+            this.AutoScaleDimensions = new SizeF(9F, 20F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(813, 647);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.None; // Removing Border
             this.BackColor = Color.LightBlue; // LightBlue background
 
             // Welcome Label
@@ -45,10 +47,10 @@ namespace Last
             {
                 Text = "", // Starts empty for typing effect
                 ForeColor = Color.Black,
-                Font = new Font("Lucida Handwriting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Font = new Font("Lucida Handwriting", 20F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true,
-                Location = new Point(200, 50) // Position at the top center
-
+                Location = new Point(200, 50), // Position at the top center
+                TextAlign = ContentAlignment.MiddleCenter,
             };
             this.Controls.Add(lblWelcome);
 
@@ -56,11 +58,11 @@ namespace Last
             btnLogin = new Button
             {
                 Text = "Login",
-                Size = new Size(120, 60),
+                Size = new Size(150, 70),
                 Location = new Point(340, 200),
-                BackColor = Color.Blue,
+                BackColor = SystemColors.ActiveCaption,
                 ForeColor = Color.White,
-                Font = new Font("Arial", 14, FontStyle.Bold)
+                Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)))
             };
             btnLogin.Click += BtnLogin_Click; // Attach click event
             this.Controls.Add(btnLogin);
@@ -69,11 +71,11 @@ namespace Last
             btnRegister = new Button
             {
                 Text = "Register",
-                Size = new Size(120, 60),
+                Size = new Size(150, 70),
                 Location = new Point(340, 280),
-                BackColor = Color.Blue,
+                BackColor = SystemColors.ActiveCaption,
                 ForeColor = Color.White,
-                Font = new Font("Arial", 14, FontStyle.Bold)
+                Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)))
             };
             btnRegister.Click += BtnRegister_Click; // Attach click event
             this.Controls.Add(btnRegister);

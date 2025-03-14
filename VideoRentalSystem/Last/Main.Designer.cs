@@ -1,4 +1,6 @@
-﻿namespace Last
+﻿using System.Windows.Forms;
+
+namespace Last
 {
     partial class Main
     {
@@ -289,6 +291,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";

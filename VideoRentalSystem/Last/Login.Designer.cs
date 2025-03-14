@@ -1,4 +1,6 @@
-﻿namespace Last
+﻿using System.Windows.Forms;
+
+namespace Last
 {
     partial class Login
     {
@@ -169,6 +171,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
             this.Text = "Form1";

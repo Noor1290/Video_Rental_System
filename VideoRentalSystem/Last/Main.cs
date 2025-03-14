@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Last
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public partial class Main : Form
     {
         public Main()
