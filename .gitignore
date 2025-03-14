@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/VideoRentalSystem/.vs/VideoRentalSystem/CopilotIndices/17.12.53.23981
+/VideoRentalSystem/.vs/VideoRentalSystem/FileContentIndex
+/VideoRentalSystem/Last/bin/Debug
+/VideoRentalSystem/Last/obj/Debug
+/VideoRentalSystem/Last/obj/Release
