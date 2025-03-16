@@ -246,7 +246,7 @@ namespace VideoRentalSystem
             button4.Name = "button4";
             button4.Size = new Size(174, 62);
             button4.TabIndex = 48;
-            button4.Text = "Enter";
+            button4.Text = "Delete";
             button4.UseVisualStyleBackColor = false;
             button4.Click += Order_Click;
             // 
