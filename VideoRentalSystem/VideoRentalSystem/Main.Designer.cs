@@ -46,6 +46,7 @@ namespace VideoRentalSystem
             dataGridView1 = new DataGridView();
             label2 = new Label();
             button4 = new Button();
+            button1 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -55,6 +56,7 @@ namespace VideoRentalSystem
             // panel1
             // 
             panel1.BackColor = Color.LightBlue;
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(button7);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(button6);
@@ -69,7 +71,7 @@ namespace VideoRentalSystem
             // button7
             // 
             button7.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button7.Location = new Point(0, 465);
+            button7.Location = new Point(0, 428);
             button7.Margin = new Padding(3, 4, 3, 4);
             button7.Name = "button7";
             button7.Size = new Size(260, 62);
@@ -116,7 +118,7 @@ namespace VideoRentalSystem
             // button5
             // 
             button5.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.Location = new Point(0, 387);
+            button5.Location = new Point(0, 358);
             button5.Margin = new Padding(3, 4, 3, 4);
             button5.Name = "button5";
             button5.Size = new Size(260, 62);
@@ -168,8 +170,6 @@ namespace VideoRentalSystem
             button8.TabIndex = 43;
             button8.Text = "Enter";
             button8.UseVisualStyleBackColor = false;
-            //live search
-            
             // 
             // comboBox1
             // 
@@ -226,6 +226,17 @@ namespace VideoRentalSystem
             button4.UseVisualStyleBackColor = false;
             button4.Click += Order_Click;
             // 
+            // button1
+            // 
+            button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(0, 498);
+            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(260, 62);
+            button1.TabIndex = 43;
+            button1.Text = "About Us";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -271,5 +282,6 @@ namespace VideoRentalSystem
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button4;
+        private Button button1;
     }
 }
