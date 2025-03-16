@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Last;
 using Timer = System.Windows.Forms.Timer;
 
 
 namespace VideoRentalSystem
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     // Main form class for the welcome screen
     public partial class WelcomeForm : Form
     {
@@ -34,18 +36,21 @@ namespace VideoRentalSystem
         {
             // Form properties
             this.Text = "Welcome Window";
-            this.Size = new Size(900, 500);
+            this.AutoScaleDimensions = new SizeF(9F, 20F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(875, 650);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.FromArgb(0, 31, 63); // Dark blue background
+            this.BackColor = Color.LightBlue; // LightBlue background
 
             // Welcome Label
             lblWelcome = new Label
             {
                 Text = "", // Starts empty for typing effect
-                ForeColor = Color.White,
-                Font = new Font("Arial", 24, FontStyle.Bold),
+                ForeColor = Color.Black,
+                Font = new Font("Lucida Handwriting", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true,
-                Location = new Point(200, 50) // Position at the top center
+                Location = new Point(125, 45), // Position at the top center
+                TextAlign = ContentAlignment.MiddleCenter,
             };
             this.Controls.Add(lblWelcome);
 
@@ -53,11 +58,12 @@ namespace VideoRentalSystem
             btnLogin = new Button
             {
                 Text = "Login",
-                Size = new Size(120, 60),
-                Location = new Point(340, 200),
-                BackColor = Color.Blue,
+                Size = new Size(175, 90),
+                Location = new Point(360, 230),
+                BackColor = SystemColors.ActiveCaption,
                 ForeColor = Color.White,
-                Font = new Font("Arial", 14, FontStyle.Bold)
+                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                Anchor = AnchorStyles.Bottom,
             };
             btnLogin.Click += BtnLogin_Click; // Attach click event
             this.Controls.Add(btnLogin);
@@ -66,12 +72,14 @@ namespace VideoRentalSystem
             btnRegister = new Button
             {
                 Text = "Register",
-                Size = new Size(120, 60),
-                Location = new Point(340, 280),
-                BackColor = Color.Blue,
+                Size = new Size(175, 90),
+                Location = new Point(360, 350),
+                BackColor = SystemColors.ActiveCaption,
                 ForeColor = Color.White,
-                Font = new Font("Arial", 14, FontStyle.Bold)
+                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                Anchor = AnchorStyles.Top,
             };
+        
             btnRegister.Click += BtnRegister_Click; // Attach click event
             this.Controls.Add(btnRegister);
         }
@@ -103,7 +111,7 @@ namespace VideoRentalSystem
             {
                 if (lblWelcome.ForeColor.A > 20) // Ensure Alpha value doesn't go negative
                 {
-                    lblWelcome.ForeColor = Color.FromArgb(lblWelcome.ForeColor.A - 20, 255, 255, 255);
+                    lblWelcome.ForeColor = Color.FromArgb(lblWelcome.ForeColor.A - 20, 255, 255);
                 }
                 else
                 {
@@ -121,13 +129,18 @@ namespace VideoRentalSystem
         // Event handler for Login button click
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            
+            Login login = new Login();
+            login.Show();
+            this.Hide();
         }
 
         // Event handler for Register button click
         private void BtnRegister_Click(object sender, EventArgs e)
         {
-            
+            Register register = new Register();
+            register.Show();
+            this.Hide();
+
         }
     }
 }
