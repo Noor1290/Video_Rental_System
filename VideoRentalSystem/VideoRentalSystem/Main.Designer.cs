@@ -35,8 +35,6 @@ namespace VideoRentalSystem
             button7 = new Button();
             pictureBox2 = new PictureBox();
             button6 = new Button();
-            button2 = new Button();
-            button1 = new Button();
             pictureBox1 = new PictureBox();
             button5 = new Button();
             button3 = new Button();
@@ -60,8 +58,6 @@ namespace VideoRentalSystem
             panel1.Controls.Add(button7);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(button6);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(button5);
             panel1.Location = new Point(0, -1);
@@ -73,13 +69,14 @@ namespace VideoRentalSystem
             // button7
             // 
             button7.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button7.Location = new Point(0, 535);
+            button7.Location = new Point(0, 465);
             button7.Margin = new Padding(3, 4, 3, 4);
             button7.Name = "button7";
             button7.Size = new Size(260, 62);
             button7.TabIndex = 42;
             button7.Text = "Profile";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // pictureBox2
             // 
@@ -105,29 +102,6 @@ namespace VideoRentalSystem
             button6.UseVisualStyleBackColor = false;
             button6.Click += Logout_CLick;
             // 
-            // button2
-            // 
-            button2.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(0, 465);
-            button2.Margin = new Padding(3, 4, 3, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(260, 62);
-            button2.TabIndex = 38;
-            button2.Text = "Orders";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(0, 395);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(260, 62);
-            button1.TabIndex = 37;
-            button1.Text = "Transactions";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
@@ -142,7 +116,7 @@ namespace VideoRentalSystem
             // button5
             // 
             button5.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.Location = new Point(0, 325);
+            button5.Location = new Point(0, 387);
             button5.Margin = new Padding(3, 4, 3, 4);
             button5.Name = "button5";
             button5.Size = new Size(260, 62);
@@ -194,6 +168,8 @@ namespace VideoRentalSystem
             button8.TabIndex = 43;
             button8.Text = "Enter";
             button8.UseVisualStyleBackColor = false;
+            //live search
+            
             // 
             // comboBox1
             // 
@@ -281,10 +257,8 @@ namespace VideoRentalSystem
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button6;
