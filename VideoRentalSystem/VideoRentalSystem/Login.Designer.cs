@@ -35,13 +35,15 @@ namespace VideoRentalSystem
             pictureBox1 = new PictureBox();
             button2 = new Button();
             button1 = new Button();
-            textBox1 = new TextBox();
+            txtUsername = new TextBox();
             label1 = new Label();
-            textBox2 = new TextBox();
+            txtPassword = new TextBox();
             label2 = new Label();
             label3 = new Label();
             button3 = new Button();
             button4 = new Button();
+            lblMessage = new Label();
+            lblPassword = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -53,18 +55,18 @@ namespace VideoRentalSystem
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Margin = new Padding(2, 3, 2, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(222, 812);
+            panel1.Size = new Size(178, 650);
             panel1.TabIndex = 11;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(27, 49);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(22, 39);
+            pictureBox1.Margin = new Padding(2, 3, 2, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(174, 189);
+            pictureBox1.Size = new Size(139, 151);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 14;
             pictureBox1.TabStop = false;
@@ -73,10 +75,10 @@ namespace VideoRentalSystem
             // button2
             // 
             button2.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(27, 491);
-            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Location = new Point(22, 393);
+            button2.Margin = new Padding(2, 3, 2, 3);
             button2.Name = "button2";
-            button2.Size = new Size(168, 62);
+            button2.Size = new Size(134, 50);
             button2.TabIndex = 13;
             button2.Text = "Reset";
             button2.UseVisualStyleBackColor = true;
@@ -85,50 +87,52 @@ namespace VideoRentalSystem
             // button1
             // 
             button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(27, 361);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(22, 289);
+            button1.Margin = new Padding(2, 3, 2, 3);
             button1.Name = "button1";
-            button1.Size = new Size(168, 62);
+            button1.Size = new Size(134, 50);
             button1.TabIndex = 12;
             button1.Text = "Register";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Register_Click;
             // 
-            // textBox1
+            // txtUsername
             // 
-            textBox1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(287, 298);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(433, 37);
-            textBox1.TabIndex = 6;
+            txtUsername.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsername.Location = new Point(230, 238);
+            txtUsername.Margin = new Padding(2, 3, 2, 3);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(347, 32);
+            txtUsername.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(281, 230);
+            label1.Location = new Point(225, 184);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(145, 28);
+            label1.Size = new Size(124, 24);
             label1.TabIndex = 7;
             label1.Text = "Username";
             // 
-            // textBox2
+            // txtPassword
             // 
-            textBox2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(287, 530);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(433, 37);
-            textBox2.TabIndex = 8;
+            txtPassword.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassword.Location = new Point(230, 424);
+            txtPassword.Margin = new Padding(2, 3, 2, 3);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(347, 32);
+            txtPassword.TabIndex = 8;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(281, 462);
+            label2.Location = new Point(225, 370);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(132, 28);
+            label2.Size = new Size(116, 24);
             label2.TabIndex = 9;
             label2.Text = "Password";
             // 
@@ -136,9 +140,10 @@ namespace VideoRentalSystem
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Lucida Handwriting", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(294, 24);
+            label3.Location = new Point(235, 19);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(351, 41);
+            label3.Size = new Size(299, 36);
             label3.TabIndex = 10;
             label3.Text = "VideoRental Shop";
             // 
@@ -146,10 +151,10 @@ namespace VideoRentalSystem
             // 
             button3.BackColor = SystemColors.ActiveCaption;
             button3.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(372, 676);
-            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Location = new Point(298, 541);
+            button3.Margin = new Padding(2, 3, 2, 3);
             button3.Name = "button3";
-            button3.Size = new Size(262, 62);
+            button3.Size = new Size(210, 50);
             button3.TabIndex = 14;
             button3.Text = "Enter";
             button3.UseVisualStyleBackColor = false;
@@ -159,30 +164,52 @@ namespace VideoRentalSystem
             // 
             button4.BackColor = SystemColors.ActiveCaption;
             button4.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(783, 0);
-            button4.Margin = new Padding(3, 4, 3, 4);
+            button4.Location = new Point(626, 0);
+            button4.Margin = new Padding(2, 3, 2, 3);
             button4.Name = "button4";
-            button4.Size = new Size(92, 62);
+            button4.Size = new Size(74, 50);
             button4.TabIndex = 15;
             button4.Text = "X";
             button4.UseVisualStyleBackColor = false;
             button4.Click += Close_CLick;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(271, 289);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(50, 20);
+            lblMessage.TabIndex = 16;
+            lblMessage.Text = "label4";
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.ForeColor = SystemColors.ButtonHighlight;
+            lblPassword.Location = new Point(271, 472);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(50, 20);
+            lblPassword.TabIndex = 17;
+            lblPassword.Text = "label4";
+            // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(889, 812);
+            ClientSize = new Size(711, 650);
+            Controls.Add(lblPassword);
+            Controls.Add(lblMessage);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(panel1);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(textBox2);
+            Controls.Add(txtPassword);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(txtUsername);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(2, 3, 2, 3);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -197,13 +224,15 @@ namespace VideoRentalSystem
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private Label lblMessage;
+        private Label lblPassword;
     }
 }
 

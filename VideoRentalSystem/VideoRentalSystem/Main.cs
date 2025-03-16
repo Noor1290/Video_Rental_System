@@ -11,13 +11,20 @@ using System.Windows.Forms;
 namespace VideoRentalSystem
 {
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
+
     public partial class Main : Form
     {
-        
-        public Main()
+        private CustomHashTable userInfo;
+        private CustomHashTable videoData;
+        private CustomHashTable videoRentals;
+        private CustomHashTable uploads;
+        public Main(CustomHashTable userInfo, CustomHashTable videoData, CustomHashTable videoRentals, CustomHashTable uploads)
         {
+            this.userInfo = userInfo;
+            this.videoData = videoData;
+            this.videoRentals = videoRentals;
+            this.uploads = uploads;
             InitializeComponent();
-            
         }
 
         private void button2_Click(object sender, EventArgs e)

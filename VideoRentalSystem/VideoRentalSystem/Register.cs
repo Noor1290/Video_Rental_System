@@ -1,11 +1,19 @@
-﻿using System;
+﻿#nullable disable
+using System;
+using System.Data.Common;
 using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using System.IO;
+
 
 namespace VideoRentalSystem
 {
     public partial class Register : Form
     {
+        private DatabaseConnection dbConnection;
+        private byte[] profilePictureData;
+
         public Register()
         {
             InitializeComponent();
@@ -13,6 +21,7 @@ namespace VideoRentalSystem
             EmailErrorMessage.Text = "";
             PasswordErrorMessage.Text = "";
             UsernameErrorMessage.Text = "";
+            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS", "VideoRentingSystem");
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -38,29 +47,46 @@ namespace VideoRentalSystem
 
         private void Upload_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-            dialog.Multiselect = false;
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            try
             {
-                try 
-                { 
-                    string picPath = dialog.FileName.ToString();
-                    pictureBox1.ImageLocation = picPath;
-                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                }
-                catch (Exception ex)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    ErrorTextImage.Text = "An error occured while uploading the image";
+                    openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Load the selected image
+                        Image originalImage = Image.FromFile(openFileDialog.FileName);
+
+                        // Resize the image to fit PictureBox
+                        pictureBox1.Image = ResizeImage(originalImage, pictureBox1.Width, pictureBox1.Height);
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // Ensures the image fills the box
+
+                        // Convert image to byte array
+                        profilePictureData = File.ReadAllBytes(openFileDialog.FileName);
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                DisplayMessage("Error uploading image: " + ex.Message, Color.Red);
+            }
         }
+        private Image ResizeImage(Image img, int width, int height)
+        {
+            Bitmap resizedImage = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resizedImage))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(img, 0, 0, width, height);
+            }
+            return resizedImage;
+        }
+
 
         private void Close_Click(object sender, EventArgs e)
         {
-           Login login = new Login();
-            login.Show();
+            WelcomeForm welcome = new WelcomeForm();
+            welcome.Show();
             this.Hide();
 
         }
@@ -98,7 +124,7 @@ namespace VideoRentalSystem
 
             string password = PasswordTextBox.Text;
 
-            if(IsPasswordValid(password))
+            if (IsPasswordValid(password))
             {
                 PasswordErrorMessage.Text = "";
             }
@@ -133,11 +159,27 @@ namespace VideoRentalSystem
             {
                 return;
             }
+            try
+            {
+                dbConnection.InsertUser(username, email, password, profilePictureData);
+                DisplayMessage("Registered successfully!", Color.Green);
+            }
+            catch (SqlException sqlEx)
+            {
+                // Log sqlEx if needed
+                UsernameErrorMessage.Text = "SQL Error: " + sqlEx.Message;
+                UsernameErrorMessage.ForeColor = Color.Red;
+            }
+            catch (Exception ex)
+            {
+                // Log ex if needed
+                DisplayMessage("Error: " + ex.Message, Color.Red);
+            }
 
-            
 
 
         }
+
         private bool IsValidEmail(string email)
         {
             try
@@ -151,8 +193,8 @@ namespace VideoRentalSystem
             }
         }
 
-         private static bool IsPasswordValid(string password)
-         {
+        private static bool IsPasswordValid(string password)
+        {
             const int MIN_LENGTH = 5;
             const int MAX_LENGTH = 10;
 
@@ -180,7 +222,7 @@ namespace VideoRentalSystem
                         ;
             return isPasswordStrong;
 
-         }
+        }
 
         private void label7_Click(object sender, EventArgs e)
         {
@@ -195,6 +237,59 @@ namespace VideoRentalSystem
         private void label7_Click_1(object sender, EventArgs e)
         {
 
+        }
+        private void DisplayMessage(string message, Color color)
+        {
+            ErrorTextImage.Text = message;  // Ensure ErrorTextImage is a Label in your form
+            ErrorTextImage.ForeColor = color;
+        }
+    }
+    public class DatabaseConnection
+    {
+        private string connectionString;
+
+        public DatabaseConnection(string server, string database)
+        {
+            connectionString = $"Server={server};Database={database};Integrated Security=True;TrustServerCertificate=True;";
+        }
+
+        public void InsertUser(string username, string email, string password, byte[] profilePicture)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
+                {
+
+                    // Now insert
+                    string query = @"
+                    INSERT INTO Users (Username, Email, Password, ProfilePic) 
+                    VALUES (@Username, @Email, @Password, @ProfilePic)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Password", password);
+                        command.Parameters.AddWithValue("@ProfilePic", profilePicture);  // Insert image as byte array
+                        command.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                    Console.WriteLine("User registered successfully!");
+                }
+                catch (SqlException sqlEx)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Database insert failed: " + sqlEx.Message);
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Error: " + ex.Message);
+                }
+            }
         }
     }
 }
