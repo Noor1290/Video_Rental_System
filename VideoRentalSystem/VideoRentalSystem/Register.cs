@@ -21,7 +21,7 @@ namespace VideoRentalSystem
             EmailErrorMessage.Text = "";
             PasswordErrorMessage.Text = "";
             UsernameErrorMessage.Text = "";
-            dbConnection = new DatabaseConnection("DESKTOP-6GUDQI9", "VideoRentingSystem");
+            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS", "VideoRentingSystem");
         }
 
         private void Register_Load(object sender, EventArgs e)
