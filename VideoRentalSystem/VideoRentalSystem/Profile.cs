@@ -47,7 +47,7 @@ namespace VideoRentalSystem
 
             btnUploadImage = new Button()
             {
-                Text = "Upload Image",
+                Text = "Uploaf Image",
                 Location = new Point(20, 190),
                 Size = new Size(100, 30)
 
