@@ -34,54 +34,51 @@ namespace VideoRentalSystem
         // Initialize and configure form elements
         private void InitializeComponent()
         {
-            // Form properties
-            this.Text = "Welcome Window";
-            this.AutoScaleDimensions = new SizeF(9F, 20F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(875, 650);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.LightBlue; // LightBlue background
-
-            // Welcome Label
-            lblWelcome = new Label
-            {
-                Text = "", // Starts empty for typing effect
-                ForeColor = Color.Black,
-                Font = new Font("Lucida Handwriting", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
-                AutoSize = true,
-                Location = new Point(125, 45), // Position at the top center
-                TextAlign = ContentAlignment.MiddleCenter,
-            };
-            this.Controls.Add(lblWelcome);
-
-            // Login Button
-            btnLogin = new Button
-            {
-                Text = "Login",
-                Size = new Size(175, 90),
-                Location = new Point(360, 230),
-                BackColor = SystemColors.ActiveCaption,
-                ForeColor = Color.White,
-                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
-                Anchor = AnchorStyles.Bottom,
-            };
-            btnLogin.Click += BtnLogin_Click; // Attach click event
-            this.Controls.Add(btnLogin);
-
-            // Register Button
-            btnRegister = new Button
-            {
-                Text = "Register",
-                Size = new Size(175, 90),
-                Location = new Point(360, 350),
-                BackColor = SystemColors.ActiveCaption,
-                ForeColor = Color.White,
-                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
-                Anchor = AnchorStyles.Top,
-            };
-        
-            btnRegister.Click += BtnRegister_Click; // Attach click event
-            this.Controls.Add(btnRegister);
+            lblWelcome = new Label();
+            btnLogin = new Button();
+            btnRegister = new Button();
+            SuspendLayout();
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.Location = new Point(0, 0);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(111, 29);
+            lblWelcome.TabIndex = 0;
+            // 
+            // btnLogin
+            // 
+            btnLogin.Location = new Point(0, 0);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(83, 29);
+            btnLogin.TabIndex = 1;
+            btnLogin.Click += BtnLogin_Click;
+            // 
+            // btnRegister
+            // 
+            btnRegister.Location = new Point(0, 0);
+            btnRegister.Margin = new Padding(3, 4, 3, 4);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(83, 29);
+            btnRegister.TabIndex = 2;
+            btnRegister.Click += BtnRegister_Click;
+            // 
+            // WelcomeForm
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightBlue;
+            ClientSize = new Size(972, 812);
+            Controls.Add(lblWelcome);
+            Controls.Add(btnLogin);
+            Controls.Add(btnRegister);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "WelcomeForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Welcome Window";
+            Load += WelcomeForm_Load;
+            ResumeLayout(false);
         }
 
         // Start the typing effect for the welcome message
@@ -117,7 +114,7 @@ namespace VideoRentalSystem
                 {
                     fadeTimer.Stop();
                     lblWelcome.Text = ""; // Clear text
-                    lblWelcome.ForeColor = Color.White; // Reset color
+                    lblWelcome.ForeColor = Color.Black; // Reset color
                     charIndex = 0;
                     welcomeText = "Please login or register!"; // Update text
                     StartTypingAnimation(); // Restart typing effect with new text
@@ -140,6 +137,11 @@ namespace VideoRentalSystem
             Register register = new Register();
             register.Show();
             this.Hide();
+
+        }
+
+        private void WelcomeForm_Load(object sender, EventArgs e)
+        {
 
         }
     }

@@ -32,6 +32,7 @@ namespace VideoRentalSystem
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel1 = new Panel();
+            button1 = new Button();
             button7 = new Button();
             pictureBox2 = new PictureBox();
             button6 = new Button();
@@ -46,7 +47,6 @@ namespace VideoRentalSystem
             dataGridView1 = new DataGridView();
             label2 = new Label();
             button4 = new Button();
-            button1 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -67,6 +67,18 @@ namespace VideoRentalSystem
             panel1.Name = "panel1";
             panel1.Size = new Size(260, 892);
             panel1.TabIndex = 32;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(0, 498);
+            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(260, 62);
+            button1.TabIndex = 43;
+            button1.Text = "About Us";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += AboutUs_Click;
             // 
             // button7
             // 
@@ -226,17 +238,6 @@ namespace VideoRentalSystem
             button4.UseVisualStyleBackColor = false;
             button4.Click += Order_Click;
             // 
-            // button1
-            // 
-            button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(0, 498);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(260, 62);
-            button1.TabIndex = 43;
-            button1.Text = "About Us";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -257,6 +258,7 @@ namespace VideoRentalSystem
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
+            Load += Main_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
