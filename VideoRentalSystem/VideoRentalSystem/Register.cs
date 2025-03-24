@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.IO;
+using System.Diagnostics;
 
 
 namespace VideoRentalSystem
@@ -21,7 +22,7 @@ namespace VideoRentalSystem
             EmailErrorMessage.Text = "";
             PasswordErrorMessage.Text = "";
             UsernameErrorMessage.Text = "";
-            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS", "VideoRentingSystem");
+            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS", "VideoRental1");
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace VideoRentalSystem
         {
             try
             {
+
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
@@ -277,10 +279,14 @@ namespace VideoRentalSystem
                     }
 
                     transaction.Commit();
-                    Console.WriteLine("User registered successfully!");
+                    Debug.WriteLine("User registered successfully!");
                 }
                 catch (SqlException sqlEx)
                 {
+                    Debug.WriteLine("SQL Error: " + sqlEx.Message);
+                    Debug.WriteLine("SQL Error Number: " + sqlEx.Number);
+                    Debug.WriteLine("SQL Error Line Number: " + sqlEx.LineNumber);
+
                     transaction.Rollback();
                     throw new Exception("Database insert failed: " + sqlEx.Message);
                 }

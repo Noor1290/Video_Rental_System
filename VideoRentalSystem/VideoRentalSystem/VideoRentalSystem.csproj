@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="database.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Image\Action.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

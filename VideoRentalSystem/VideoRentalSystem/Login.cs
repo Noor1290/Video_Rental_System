@@ -50,7 +50,7 @@ namespace VideoRentalSystem
 
         private async void Login_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=NOOR\\SQLEXPRESS;Database=VideoRentingSystem;Integrated Security=True;TrustServerCertificate=True;";
+            string connectionString = "Server=NOOR\\SQLEXPRESS;Database=VideoRental1;Integrated Security=True;TrustServerCertificate=True;";
 
             await using var conn = new SqlConnection(connectionString);
             try
@@ -88,20 +88,20 @@ namespace VideoRentalSystem
                     return;
                 }
 
-                string videoDataFilePath = "test2.txt";
-                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt");
-                if (!File.Exists(videoDataFilePath))
-                {
-                    Console.WriteLine($"File {videoDataFilePath} not found in {Environment.CurrentDirectory}");
-                    return;
-                }
-                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt");
+                string videoDataFilePath = "database.txt";
+                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt1");
+                //if (!File.Exists(videoDataFilePath))
+                //{
+                //    Console.WriteLine($"File {videoDataFilePath} not found in {Environment.CurrentDirectory}");
+                //    return;
+                //}
+                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt2");
                 await ImportVideoDatabaseFromTxt(videoDataFilePath, connectionString);
-                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt");
+                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt3");
 
-                var (videoData, uploads, videoRentals) = await LoadVideoDataAsync(userInfo["UserID"].ToString(), connectionString);
+                var (videoData, videoRentals) = await LoadVideoDataAsync(userInfo["UserID"].ToString(), connectionString);
 
-                Main mainPage = new Main(userInfo, videoData, videoRentals, uploads);
+                Main mainPage = new Main(userInfo, videoData, videoRentals);
                 mainPage.Show();
                 this.Hide();
 
@@ -205,7 +205,7 @@ namespace VideoRentalSystem
                         Debug.WriteLine($"  Token[{j}]: '{tokens[j]}'");
                     }
 
-                    if (tokens.Length != 7)  // Correct token count should be 8 now
+                    if (tokens.Length != 8)  // Correct token count should be 8 now
                     {
                         Debug.WriteLine($"Skipping malformed line {i} (expected 8 tokens, got {tokens.Length}): '{line}'");
                         continue;
@@ -217,41 +217,42 @@ namespace VideoRentalSystem
                     // Process the combined UploadDate and TimeLimit in token[3].
                     string combinedDateTime = tokens[3].Trim();
                     string uploadDateStr;
-                    string timeLimitStr;
+                    string DurationStr;
                     int lastSpaceInDate = combinedDateTime.LastIndexOf(' ');
                     if (lastSpaceInDate > 0)
                     {
                         uploadDateStr = combinedDateTime.Substring(0, lastSpaceInDate);
-                        timeLimitStr = combinedDateTime.Substring(lastSpaceInDate + 1);
+                        DurationStr = combinedDateTime.Substring(lastSpaceInDate + 1);
                     }
                     else
                     {
                         uploadDateStr = combinedDateTime;
-                        timeLimitStr = "";
+                        DurationStr = "";
                     }
-
-                    string priceStr = tokens[4].Trim();
+                    string timeLimitStr = tokens[4].Trim();
+                    string priceStr = tokens[5].Trim();
 
                     // Token[5] contains Genre
-                    string genre = tokens[5].Trim();
+                    string genre = tokens[6].Trim();
 
-                    // Token[7] contains the videoPath
-                    string videoPath = tokens[6].Trim();
 
-                    Debug.WriteLine("Parsed values:");
-                    Debug.WriteLine($"  UserId: {userId}");
-                    Debug.WriteLine($"  VideoTitle: {videoTitle}");
-                    Debug.WriteLine($"  UploadDateStr: {uploadDateStr}");
-                    Debug.WriteLine($"  TimeLimitStr: {timeLimitStr}");
-                    Debug.WriteLine($"  PriceStr: {priceStr}");
-                    Debug.WriteLine($"  Genre: {genre}");
-                    Debug.WriteLine($"  VideoPath: {videoPath}");
+                    string videoPath = tokens[7].Trim();
+
+                    //Debug.WriteLine("Parsed values:");
+                    //Debug.WriteLine($"  UserId: {userId}");
+                    //Debug.WriteLine($"  VideoTitle: {videoTitle}");
+                    //Debug.WriteLine($"  UploadDateStr: {uploadDateStr}");
+                    //Debug.WriteLine($"  TimeLimitStr: {timeLimitStr}");
+                    //Debug.WriteLine($"  DurationStr: {DurationStr}");
+                    //Debug.WriteLine($"  PriceStr: {priceStr}");
+                    //Debug.WriteLine($"  Genre: {genre}");
+                    //Debug.WriteLine($"  VideoPath: {videoPath}");
 
                     string insertQuery = @"
                                             INSERT INTO VideoDatabase
-                                                (UserID, VideoTitle, UploadDate, TimeLimit, Price, Genre, videoPath)
+                                                (UserID, VideoTitle, UploadDate, Duration, TimeLimit, Price, Genre, VideoPath)
                                             VALUES
-                                                (@UserID, @VideoTitle, @UploadDate, @TimeLimit, @Price, @Genre, @videoPath);
+                                                (@UserID, @VideoTitle, @UploadDate, @Duration, @TimeLimit, @Price, @Genre, @VideoPath);
                                         ";
 
                     try
@@ -301,7 +302,7 @@ namespace VideoRentalSystem
                                 cmd.Parameters.AddWithValue("@Price", DBNull.Value);
                             }
 
-                            // Ignore VideoImage (do not insert it) by not including it in the query
+                            cmd.Parameters.AddWithValue("@Duration", DurationStr);
                             cmd.Parameters.AddWithValue("@Genre", genre);
                             cmd.Parameters.AddWithValue("@videoPath", videoPath);
 
@@ -322,10 +323,9 @@ namespace VideoRentalSystem
 
 
 
-        private async Task<(CustomHashTable, CustomHashTable, CustomHashTable)> LoadVideoDataAsync(string userId, string connectionString)
+        private async Task<(CustomHashTable, CustomHashTable)> LoadVideoDataAsync(string userId, string connectionString)
         {
             CustomHashTable videoData = new CustomHashTable(10000);
-            CustomHashTable uploads = new CustomHashTable(10000);
             CustomHashTable videoRentals = new CustomHashTable(10000);
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -347,82 +347,14 @@ namespace VideoRentalSystem
                             videoDetails.Add("VideoTitle", videoReader["VideoTitle"].ToString());
                             videoDetails.Add("UploadDate", videoReader["UploadDate"].ToString());
                             videoDetails.Add("TimeLimit", videoReader["TimeLimit"].ToString());
-                            videoDetails.Add("videoPath", videoReader["videoPath"]);
-                            var videoImageValue = videoReader["videoPath"];
-                            Debug.WriteLine($"Type: {videoImageValue.GetType().Name}");
-                            Debug.WriteLine($"Type: {videoImageValue}");
-
-                            // Check the length if it's a string or byte array
-                            if (videoImageValue is string videoImageString)
-                            {
-                                Debug.WriteLine($"Length of string: {videoImageString.Length}");
-
-                                // Check if the string looks like a file path
-                                if (IsValidPath(videoImageString))
-                                {
-                                    Debug.WriteLine("This is a valid file path.");
-                                }
-                                else
-                                {
-                                    Debug.WriteLine("This is a string, but not a valid file path.");
-                                }
-                            }
-                            else if (videoImageValue is byte[] videoImageBytes)
-                            {
-                                Debug.WriteLine($"Length of bytes array: {videoImageBytes.Length}");
-                            }
-                            else
-                            {
-                                Debug.WriteLine("Unknown type or unsupported type for length checking.");
-                            }
-
-
-
-
-
+                            videoDetails.Add("Duration", videoReader["Duration"].ToString());
+                            videoDetails.Add("VideoPath", videoReader["VideoPath"]);
                             videoDetails.Add("Price", videoReader["Price"].ToString());
                             videoDetails.Add("Genre", videoReader["Genre"].ToString());
 
                             // Now store the entire videoDetails in the videoData hashtable
                             videoData[videoReader["VideoID"].ToString()] = videoDetails;
 
-                            Console.WriteLine($"Stored video with ID: {videoReader["VideoTitle"].ToString()}");
-                        }
-                    }
-                }
-
-
-                // Get user-specific videos (uploads)
-                string userVideoQuery = "SELECT * FROM VideoDatabase WHERE UserID = @UserID";
-                using (SqlCommand userVideoCmd = new SqlCommand(userVideoQuery, conn))
-                {
-                    userVideoCmd.Parameters.AddWithValue("@UserID", userId);
-                    using (SqlDataReader userVideoReader = await userVideoCmd.ExecuteReaderAsync()) // Make this async
-                    {
-                        try
-                        {
-                            while (await userVideoReader.ReadAsync()) // Make this async
-                            {
-                                // Create CustomHashTable for each upload record
-                                var uploadDetails = new CustomHashTable(10000);
-
-                                uploadDetails.Add("VideoID", userVideoReader["VideoID"].ToString());
-                                uploadDetails.Add("UserID", userVideoReader["UserID"].ToString());
-                                uploadDetails.Add("VideoTitle", userVideoReader["VideoTitle"].ToString());
-                                uploadDetails.Add("UploadDate", userVideoReader["UploadDate"].ToString());
-                                uploadDetails.Add("TimeLimit", userVideoReader["TimeLimit"].ToString());
-                                uploadDetails.Add("videoPath", userVideoReader["videoPath"]);
-                                uploadDetails.Add("Price", userVideoReader["Price"].ToString());
-                                uploadDetails.Add("Genre", userVideoReader["Genre"].ToString());
-
-                                // Store uploadDetails in uploads using VideoId as the key
-                                uploads[userVideoReader["VideoID"].ToString()] = uploadDetails;
-                                Console.WriteLine($"Stored upload with ID: {userVideoReader["VideoID"].ToString()}");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error: " + ex.Message);
                         }
                     }
                 }
@@ -466,7 +398,7 @@ namespace VideoRentalSystem
                 }
             }
 
-            return (videoData, uploads, videoRentals); // Returning all three Hashtables
+            return (videoData, videoRentals); 
         }
 
         private void label4_Click(object sender, EventArgs e)

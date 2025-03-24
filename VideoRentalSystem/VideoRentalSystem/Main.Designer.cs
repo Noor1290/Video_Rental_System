@@ -42,15 +42,13 @@ namespace VideoRentalSystem
             label4 = new Label();
             label1 = new Label();
             button8 = new Button();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            dataGridView1 = new DataGridView();
             label2 = new Label();
             button4 = new Button();
+            ProductsName = new TextBox();
+            Categories = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -63,42 +61,40 @@ namespace VideoRentalSystem
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(button5);
             panel1.Location = new Point(0, -1);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Margin = new Padding(2, 3, 2, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(260, 892);
+            panel1.Size = new Size(208, 921);
             panel1.TabIndex = 32;
             // 
             // button1
             // 
             button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(0, 498);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(0, 398);
+            button1.Margin = new Padding(2, 3, 2, 3);
             button1.Name = "button1";
-            button1.Size = new Size(260, 62);
+            button1.Size = new Size(208, 50);
             button1.TabIndex = 43;
             button1.Text = "About Us";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += AboutUs_Click;
             // 
             // button7
             // 
             button7.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button7.Location = new Point(0, 428);
-            button7.Margin = new Padding(3, 4, 3, 4);
+            button7.Location = new Point(0, 342);
+            button7.Margin = new Padding(2, 3, 2, 3);
             button7.Name = "button7";
-            button7.Size = new Size(260, 62);
+            button7.Size = new Size(208, 50);
             button7.TabIndex = 42;
             button7.Text = "Profile";
             button7.UseVisualStyleBackColor = true;
-            button7.Click += button7_Click;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(13, 812);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Location = new Point(2, 858);
+            pictureBox2.Margin = new Padding(2, 3, 2, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(58, 64);
+            pictureBox2.Size = new Size(46, 51);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 41;
             pictureBox2.TabStop = false;
@@ -107,10 +103,10 @@ namespace VideoRentalSystem
             // 
             button6.BackColor = SystemColors.ActiveCaption;
             button6.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.Location = new Point(3, 800);
-            button6.Margin = new Padding(3, 4, 3, 4);
+            button6.Location = new Point(0, 844);
+            button6.Margin = new Padding(2, 3, 2, 3);
             button6.Name = "button6";
-            button6.Size = new Size(257, 92);
+            button6.Size = new Size(206, 74);
             button6.TabIndex = 40;
             button6.Text = "Logout";
             button6.UseVisualStyleBackColor = false;
@@ -119,10 +115,10 @@ namespace VideoRentalSystem
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(41, 32);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(33, 26);
+            pictureBox1.Margin = new Padding(2, 3, 2, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(174, 189);
+            pictureBox1.Size = new Size(139, 151);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 36;
             pictureBox1.TabStop = false;
@@ -130,10 +126,10 @@ namespace VideoRentalSystem
             // button5
             // 
             button5.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.Location = new Point(0, 358);
-            button5.Margin = new Padding(3, 4, 3, 4);
+            button5.Location = new Point(0, 286);
+            button5.Margin = new Padding(2, 3, 2, 3);
             button5.Name = "button5";
-            button5.Size = new Size(260, 62);
+            button5.Size = new Size(208, 50);
             button5.TabIndex = 34;
             button5.Text = "Products";
             button5.UseVisualStyleBackColor = true;
@@ -142,10 +138,10 @@ namespace VideoRentalSystem
             // 
             button3.BackColor = SystemColors.ActiveCaption;
             button3.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(1407, -1);
-            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Location = new Point(1126, -1);
+            button3.Margin = new Padding(2, 3, 2, 3);
             button3.Name = "button3";
-            button3.Size = new Size(131, 62);
+            button3.Size = new Size(105, 50);
             button3.TabIndex = 39;
             button3.Text = "🔍";
             button3.UseVisualStyleBackColor = false;
@@ -154,9 +150,10 @@ namespace VideoRentalSystem
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(356, 146);
+            label4.Location = new Point(285, 117);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(128, 28);
+            label4.Size = new Size(111, 24);
             label4.TabIndex = 41;
             label4.Text = "Products";
             label4.Click += label4_Click;
@@ -165,9 +162,10 @@ namespace VideoRentalSystem
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(983, 146);
+            label1.Location = new Point(786, 117);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(153, 28);
+            label1.Size = new Size(131, 24);
             label1.TabIndex = 43;
             label1.Text = "Categories";
             // 
@@ -175,53 +173,22 @@ namespace VideoRentalSystem
             // 
             button8.BackColor = SystemColors.ActiveCaption;
             button8.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button8.Location = new Point(661, 264);
-            button8.Margin = new Padding(3, 4, 3, 4);
+            button8.Location = new Point(529, 211);
+            button8.Margin = new Padding(2, 3, 2, 3);
             button8.Name = "button8";
-            button8.Size = new Size(174, 62);
+            button8.Size = new Size(139, 50);
             button8.TabIndex = 43;
             button8.Text = "Enter";
             button8.UseVisualStyleBackColor = false;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Movies", "Documentories" });
-            comboBox1.Location = new Point(361, 185);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(352, 33);
-            comboBox1.TabIndex = 44;
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "Action", "", "Adventure", "", "Animation", "", "Biography", "", "Comedy", "", "Crime", "", "Documentary", "", "Drama", "", "Family", "", "Fantasy", "", "History", "", "Horror", "", "Musical", "", "Mystery", "", "Romance", "", "Sci-Fi", "", "Sports", "", "Thriller", "", "War", "Western" });
-            comboBox2.Location = new Point(989, 185);
-            comboBox2.Margin = new Padding(3, 4, 3, 4);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(352, 33);
-            comboBox2.TabIndex = 45;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(357, 442);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 28;
-            dataGridView1.Size = new Size(1092, 432);
-            dataGridView1.TabIndex = 46;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(836, 404);
+            label2.Location = new Point(669, 323);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(128, 28);
+            label2.Size = new Size(111, 24);
             label2.TabIndex = 47;
             label2.Text = "Products";
             // 
@@ -229,32 +196,45 @@ namespace VideoRentalSystem
             // 
             button4.BackColor = SystemColors.ActiveCaption;
             button4.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(927, 264);
-            button4.Margin = new Padding(3, 4, 3, 4);
+            button4.Location = new Point(742, 211);
+            button4.Margin = new Padding(2, 3, 2, 3);
             button4.Name = "button4";
-            button4.Size = new Size(174, 62);
+            button4.Size = new Size(139, 50);
             button4.TabIndex = 48;
             button4.Text = "Delete";
             button4.UseVisualStyleBackColor = false;
             button4.Click += Order_Click;
             // 
+            // ProductsName
+            // 
+            ProductsName.Location = new Point(288, 156);
+            ProductsName.Name = "ProductsName";
+            ProductsName.Size = new Size(281, 27);
+            ProductsName.TabIndex = 49;
+            // 
+            // Categories
+            // 
+            Categories.Location = new Point(786, 144);
+            Categories.Name = "Categories";
+            Categories.Size = new Size(281, 27);
+            Categories.TabIndex = 50;
+            // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1537, 890);
+            ClientSize = new Size(1230, 920);
+            Controls.Add(Categories);
+            Controls.Add(ProductsName);
             Controls.Add(button4);
             Controls.Add(label2);
-            Controls.Add(dataGridView1);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
             Controls.Add(button8);
             Controls.Add(label1);
             Controls.Add(label4);
             Controls.Add(button3);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(2, 3, 2, 3);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
@@ -262,7 +242,6 @@ namespace VideoRentalSystem
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -279,11 +258,10 @@ namespace VideoRentalSystem
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button4;
         private Button button1;
+        private TextBox ProductsName;
+        private TextBox Categories;
     }
 }
