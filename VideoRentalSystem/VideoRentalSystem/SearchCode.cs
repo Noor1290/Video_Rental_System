@@ -19,10 +19,12 @@ namespace VideoRentalSystem
         private DataTable DataTable; // temporarily video data
         private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel, SearchLabel;
         //data storage
+        private CustomHashTable videoData;
         private Dictionary<int, DataRow> VideoHashTable;
 
-        public SearchForm()
+        public SearchForm(CustomHashTable videoData)
         {
+            this.videoData = videoData;
             InitialiseUI(); // setup UI components
             InitialiseDataTable(); // Load sample data
         }

@@ -22,7 +22,7 @@ namespace VideoRentalSystem
             EmailErrorMessage.Text = "";
             PasswordErrorMessage.Text = "";
             UsernameErrorMessage.Text = "";
-            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS", "VideoRental1");
+            dbConnection = new DatabaseConnection("VANSHIKA", "VideoRentalSystem");
         }
 
         private void Register_Load(object sender, EventArgs e)
