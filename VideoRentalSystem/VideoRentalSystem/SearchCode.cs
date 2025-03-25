@@ -21,7 +21,7 @@ namespace VideoRentalSystem
         private DataTable DataTable; // temporarily video data
         private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel, SearchLabel;
         //data storage
-        private CustomHashTable videoData;
+        private readonly CustomHashTable videoData;
         //database connection string
         private string ConnectionString = "Data Source=VANSHIKA;Initial Catalog=VideoRentalSystem;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
 
@@ -211,6 +211,7 @@ namespace VideoRentalSystem
 
                 DataGridView.DataSource = DataTable;
             }
+        }
 
         //add video data  in hashtable
         private void AddVideo(int VID, int UID, string VideoName, int duration, DateTime date, decimal price, int timelimit, string genre)
@@ -237,7 +238,7 @@ namespace VideoRentalSystem
 
             //perform live search and filter results
 
-            var FilteredRows = videoData.Values.Cast<DataRow>()
+            var FilteredRows = videoData.Cast<DataRow>()
                 .Where(row =>
                 {
                     decimal price = row.Field<decimal>("Price");
