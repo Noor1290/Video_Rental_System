@@ -31,7 +31,6 @@ namespace VideoRentalSystem
             this.videoRentals = videoRentals;
             InitializeComponent();
             DisplayVideoDataAsCards();
-            //DisplayVideoDataAsCards1();
 
         }
 
@@ -43,6 +42,7 @@ namespace VideoRentalSystem
 
         private void button4_Click(object sender, EventArgs e)
         {
+
         }
 
         private void Logout_CLick(object sender, EventArgs e)
@@ -127,7 +127,7 @@ namespace VideoRentalSystem
                     AutoScroll = true, // Allow scrolling if content exceeds the panel size
                     Padding = new Padding(10),
                     MaximumSize = new Size(Width, 600), // Set the max height to control overflow
-                    Size = new Size(1000, 800) // Example size, adjust based on your design
+                    Size = new Size(1000, 900) // Example size, adjust based on your design
                 };
                 // Adjust the height to accommodate rows dynamically if required
                 int rowHeight = 1320; // Assuming the height of each video card including padding
@@ -337,26 +337,27 @@ namespace VideoRentalSystem
 
         private void ProductsName_TextChanged(object sender, EventArgs e)
         {
-            // Get the search query from the textbox
-            string searchQuery = ProductsName.Text.ToLower(); // Assuming ProductsName is your TextBox
+            // Get the search query from the textbox (convert to lowercase for case-insensitive search)
+            string searchQuery = ProductsName.Text.ToLower();
+            Debug.WriteLine("Search:" + searchQuery);
 
-            // Clear the current display
+            // Clear the current display (reset the flowLayoutPanel)
             flowLayoutPanel.Controls.Clear();
 
-            int cardCount = 0; // Reset the card count
+            int cardCount = 0; // Reset the card count to limit the number of displayed cards
 
             // Loop through the video data and display cards based on search query
             foreach (KeyValuePair<string, object> entry in videoData)
             {
-                if (cardCount >= 8) break; // Limit to 8 cards
+                if (cardCount >= 8) break; // Limit to 8 cards (or as per your need)
 
                 if (entry.Value is CustomHashTable videoInfo)
                 {
-                    // Get the video title and check if it starts with the search query
+                    // Get the video title and check if it contains the search query
                     string videoTitle = videoInfo.Get("VideoTitle")?.ToString() ?? "Untitled";
 
-                    // Check if the title starts with the search query letter (case-insensitive)
-                    if (!videoTitle.ToLower().StartsWith(searchQuery)) continue; // Skip if title doesn't start with the search query
+                    // Check if the title contains the search query letter (case-insensitive)
+                    if (!videoTitle.ToLower().StartsWith(searchQuery)) continue; // Skip if title doesn't contain the search query
 
                     // Create a new Panel to represent the video card
                     Panel videoCard = new Panel
@@ -378,11 +379,11 @@ namespace VideoRentalSystem
 
                     // Access the video image path
                     string videoImageObj = videoInfo.Get("VideoPath")?.ToString() ?? "";
-                    if (IsValidPath(videoImageObj))
+                    if (IsValidPath(videoImageObj)) // Make sure you have a valid path
                     {
                         try
                         {
-                            videoImageControl.Image = Image.FromFile(videoImageObj);
+                            videoImageControl.Image = Image.FromFile(videoImageObj); // Load image from file
                         }
                         catch (Exception ex)
                         {
@@ -414,10 +415,11 @@ namespace VideoRentalSystem
                     // Add the video card to the FlowLayoutPanel
                     flowLayoutPanel.Controls.Add(videoCard);
 
-                    cardCount++; // Increment the card count
+                    cardCount++; // Increment the card count for each added video
                 }
             }
         }
+
 
 
         public class VideoRentalManager
@@ -758,5 +760,63 @@ namespace VideoRentalSystem
         }
 
 
+        private void InformationButton_Click(object sender, EventArgs e)
+        {
+            //SearchForm search = new SearchForm(videoData);
+            //search.Show();
+            //this.Hide();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            // Retrieve the byte array for the profile picture from userInfo hashtable
+            byte[] profilePicBytes = userInfo.Get("ProfilePic") as byte[];
+
+            // Check if the byte array is valid
+            if (profilePicBytes != null && profilePicBytes.Length > 0)
+            {
+                try
+                {
+                    // Convert byte array to Image
+                    using (MemoryStream ms = new MemoryStream(profilePicBytes))
+                    {
+                        Image profileImage = Image.FromStream(ms);
+
+                        // Set the profile picture to the PictureBox
+                        pictureBox1.Image = profileImage;
+
+                        // Ensure the image fits the PictureBox
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+
+                    // Optionally, retrieve and display other user profile information
+                    string userName = userInfo.Get("Username")?.ToString() ?? "No name found";
+                    string userEmail = userInfo.Get("Email")?.ToString() ?? "No email found";
+
+                    // Display the user profile info in a message box
+                    MessageBox.Show($"User Profile:\n\nName: {userName}\nEmail: {userEmail}\n",
+                                    "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    // Handle any error that occurs while converting the byte array to an image
+                    MessageBox.Show("Error displaying the profile picture: " + ex.Message,
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                // If no profile picture is found in the hashtable
+                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void pictureBox2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
+

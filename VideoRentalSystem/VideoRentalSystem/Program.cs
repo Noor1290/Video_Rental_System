@@ -12,7 +12,7 @@ namespace VideoRentalSystem
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new ProfilePage());
+            Application.Run(new WelcomeForm());
             
         }
     }

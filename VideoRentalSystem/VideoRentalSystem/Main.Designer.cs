@@ -122,6 +122,7 @@ namespace VideoRentalSystem
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 36;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // button5
             // 
@@ -211,6 +212,7 @@ namespace VideoRentalSystem
             ProductsName.Name = "ProductsName";
             ProductsName.Size = new Size(281, 27);
             ProductsName.TabIndex = 49;
+            ProductsName.TextChanged += ProductsName_TextChanged;
             // 
             // Categories
             // 
