@@ -5,6 +5,7 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections; // for hash table
+using System.Collections.Generic;
 using VideoRentalSystem;
 //for database connection
 using Microsoft.Data.SqlClient;
@@ -214,7 +215,7 @@ namespace VideoRentalSystem
         }
 
         //add video data  in hashtable
-        private void AddVideo(int VID, int UID, string VideoName, int duration, DateTime date, decimal price, int timelimit, string genre)
+        private void AddVideo(int VID, int UID, string VideoName,  DateTime date, int duration, int timelimit, decimal price,  string genre)
         {
             DataRow row = DataTable.NewRow();
             row["VideoID"] = VID;
@@ -227,7 +228,7 @@ namespace VideoRentalSystem
             row["Genre"] = genre;
 
             DataTable.Rows.Add(row);
-            videoData.Add(VID, row);
+            videoData.Add(VID.ToString(), row);
         }
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
