@@ -422,7 +422,7 @@ namespace VideoRentalSystem
             private CustomHashTable userInfo;
             private CustomHashTable rentalTimers = new CustomHashTable(10000);
 
-            private string connectionString = "Server=VANSHIKA;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
+            private string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
 
             public VideoRentalManager(CustomHashTable VideoRentals, CustomHashTable userInfo)
             {
@@ -483,7 +483,6 @@ namespace VideoRentalSystem
                     using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                     {
                         int affectedRows = cmd.ExecuteNonQuery();
-                        MessageBox.Show($"{affectedRows} rentals updated in the database.");
                     }
                 }
 
@@ -503,7 +502,6 @@ namespace VideoRentalSystem
                         object userIDObj = int.Parse(rentalDetails["UserID"].ToString());
                         object rentalDateObj = DateTime.Parse(rentalDetails["RentalDate"].ToString());
                         object timeLimitObj = int.Parse(rentalDetails["TimeLimit"].ToString());
-                        // We remove returnDateObj from the insert/update because ReturnDate is computed.
                         string status = rentalDetails["Status"].ToString();
                         string videoTitle = rentalDetails["VideoTitle"].ToString();
 
@@ -566,8 +564,6 @@ namespace VideoRentalSystem
                         }
                     }
                 }
-
-                MessageBox.Show("Rentals synchronized with database successfully!");
             }
 
             private object GetNullableInt(object val)
@@ -660,10 +656,6 @@ namespace VideoRentalSystem
                 {
                     conn.Open();
 
-                    // This query calculates how many seconds remain until ReturnDate
-                    // and updates TimeLimit + Status accordingly.
-                    // If ReturnDate is in the future, TimeLimit = DATEDIFF(SECOND, GETDATE(), ReturnDate)
-                    // If ReturnDate has passed, TimeLimit = 0 and Status = 'expired'
                     string updateQuery = @"
                                             UPDATE VideoRentals
                                             SET TimeLimit = CASE 
@@ -701,23 +693,21 @@ namespace VideoRentalSystem
                         string unlinkQuery = @"
                                                 UPDATE VR
                                                 SET VR.VideoID = NULL
-                                                FROM [VideoRental1].[dbo].[VideoRentals] VR
-                                                INNER JOIN [VideoRental1].[dbo].[VideoDatabase] VD
+                                                FROM [VideoRentalSystem].[dbo].[VideoRentals] VR
+                                                INNER JOIN [VideoRentalSystem].[dbo].[VideoDatabase] VD
                                                     ON VR.VideoID = VD.VideoID;
                                             ";
 
                         using (SqlCommand unlinkCmd = new SqlCommand(unlinkQuery, conn))
                         {
                             int unlinkRows = unlinkCmd.ExecuteNonQuery();
-                            MessageBox.Show($"Child table updated. {unlinkRows} rows unlinked from VideoDatabase.");
                         }
 
                         // Now clear the VideoDatabase table.
-                        string clearQuery = "DELETE FROM [VideoRental1].[dbo].[VideoDatabase];";
+                        string clearQuery = "DELETE FROM [VideoRentalSystem].[dbo].[VideoDatabase];";
                         using (SqlCommand clearCmd = new SqlCommand(clearQuery, conn))
                         {
                             int rowsAffected = clearCmd.ExecuteNonQuery();
-                            MessageBox.Show($"Cleared VideoDatabase. {rowsAffected} rows deleted.");
                         }
                     }
                 }

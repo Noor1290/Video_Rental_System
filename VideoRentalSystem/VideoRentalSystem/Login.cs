@@ -50,7 +50,7 @@ namespace VideoRentalSystem
 
         private async void Login_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=VANSHIKA;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
+            string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
 
             await using var conn = new SqlConnection(connectionString);
             try
@@ -89,15 +89,9 @@ namespace VideoRentalSystem
                 }
 
                 string videoDataFilePath = "database.txt";
-                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt1");
-                //if (!File.Exists(videoDataFilePath))
-                //{
-                //    Console.WriteLine($"File {videoDataFilePath} not found in {Environment.CurrentDirectory}");
-                //    return;
-                //}
-                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt2");
+
                 await ImportVideoDatabaseFromTxt(videoDataFilePath, connectionString);
-                Debug.WriteLine("Entered into ImportVideoDatabaseFromTxt3");
+
 
                 var (videoData, videoRentals) = await LoadVideoDataAsync(userInfo["UserID"].ToString(), connectionString);
 
@@ -139,31 +133,27 @@ namespace VideoRentalSystem
         // Helper method to check if the string looks like a valid file path
         public static bool IsValidPath(string path)
         {
-            // Check if the path contains typical file path characters
-            // such as directory separators or drive letters (e.g., C:\)
+
             return path.Contains("\\") || path.Contains("/");
         }
 
 
         private async Task ImportVideoDatabaseFromTxt(string filePath, string connectionString)
         {
-            Debug.WriteLine("=== Starting ImportVideoDatabaseFromTxt ===");
-            Debug.WriteLine($"Current Directory: {Environment.CurrentDirectory}");
-            Debug.WriteLine($"Looking for file: {filePath}");
+
 
             if (!File.Exists(filePath))
             {
-                Debug.WriteLine($"File {filePath} not found in {Environment.CurrentDirectory}");
+
                 return;
             }
 
             // Read all lines from the text file.
             string[] lines = await File.ReadAllLinesAsync(filePath);
-            Debug.WriteLine($"File read successfully. Total lines: {lines.Length}");
+
 
             if (lines.Length < 4)
             {
-                Debug.WriteLine("The file is empty or missing required header/data lines.");
                 return;
             }
 
@@ -173,7 +163,7 @@ namespace VideoRentalSystem
                 try
                 {
                     await conn.OpenAsync();
-                    Debug.WriteLine("Database connection opened successfully.");
+
                 }
                 catch (Exception ex)
                 {
@@ -181,33 +171,22 @@ namespace VideoRentalSystem
                     return;
                 }
 
-                // File layout:
-                // Line 0: Header row (column names)
-                // Line 1: Separator (dashed line)
-                // Lines 2 to (n-2): Data rows
-                // Last line: Summary (e.g., "(5 rows affected)")
                 for (int i = 2; i < lines.Length - 1; i++)
                 {
-                    Debug.WriteLine("---------------------------------------------------");
+
                     string line = lines[i].Trim();
-                    Debug.WriteLine($"Processing line {i}: '{line}'");
+
                     if (string.IsNullOrWhiteSpace(line))
                     {
-                        Debug.WriteLine($"Line {i} is empty or whitespace. Skipping.");
                         continue;
                     }
 
                     // Split on two or more whitespace characters.
                     string[] tokens = System.Text.RegularExpressions.Regex.Split(line, @"\s{2,}");
-                    Debug.WriteLine($"Line {i} split into {tokens.Length} tokens.");
-                    for (int j = 0; j < tokens.Length; j++)
-                    {
-                        Debug.WriteLine($"  Token[{j}]: '{tokens[j]}'");
-                    }
 
                     if (tokens.Length != 8)  // Correct token count should be 8 now
                     {
-                        Debug.WriteLine($"Skipping malformed line {i} (expected 8 tokens, got {tokens.Length}): '{line}'");
+
                         continue;
                     }
 
@@ -237,16 +216,6 @@ namespace VideoRentalSystem
 
 
                     string videoPath = tokens[7].Trim();
-
-                    //Debug.WriteLine("Parsed values:");
-                    //Debug.WriteLine($"  UserId: {userId}");
-                    //Debug.WriteLine($"  VideoTitle: {videoTitle}");
-                    //Debug.WriteLine($"  UploadDateStr: {uploadDateStr}");
-                    //Debug.WriteLine($"  TimeLimitStr: {timeLimitStr}");
-                    //Debug.WriteLine($"  DurationStr: {DurationStr}");
-                    //Debug.WriteLine($"  PriceStr: {priceStr}");
-                    //Debug.WriteLine($"  Genre: {genre}");
-                    //Debug.WriteLine($"  VideoPath: {videoPath}");
 
                     string insertQuery = @"
                                             INSERT INTO VideoDatabase
@@ -307,7 +276,6 @@ namespace VideoRentalSystem
                             cmd.Parameters.AddWithValue("@videoPath", videoPath);
 
                             int rowsAffected = await cmd.ExecuteNonQueryAsync();
-                            Debug.WriteLine($"Inserted video '{videoTitle}'. Rows affected: {rowsAffected}");
                         }
                     }
                     catch (Exception ex)
