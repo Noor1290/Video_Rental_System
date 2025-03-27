@@ -24,7 +24,7 @@ namespace VideoRentalSystem
         //data storage
         private readonly CustomHashTable videoData;
         //database connection string
-        private string ConnectionString = "Data Source=VANSHIKA;Initial Catalog=VideoRentalSystem;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        private string ConnectionString = "Data Source=VANSHIKA;Initial Catalog=VideoTestDatabase;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
 
 
         public SearchForm(CustomHashTable videoData)
