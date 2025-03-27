@@ -38,7 +38,7 @@ namespace VideoRentalSystem
             button6 = new Button();
             pictureBox1 = new PictureBox();
             button5 = new Button();
-            button3 = new Button();
+            SearchButton = new Button();
             label4 = new Label();
             label1 = new Label();
             button8 = new Button();
@@ -135,17 +135,18 @@ namespace VideoRentalSystem
             button5.Text = "Products";
             button5.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // SearchButton
             // 
-            button3.BackColor = SystemColors.ActiveCaption;
-            button3.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(1126, -1);
-            button3.Margin = new Padding(2, 3, 2, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(105, 50);
-            button3.TabIndex = 39;
-            button3.Text = "🔍";
-            button3.UseVisualStyleBackColor = false;
+            SearchButton.BackColor = SystemColors.ActiveCaption;
+            SearchButton.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SearchButton.Location = new Point(1126, -1);
+            SearchButton.Margin = new Padding(2, 3, 2, 3);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(105, 50);
+            SearchButton.TabIndex = 39;
+            SearchButton.Text = "🔍";
+            SearchButton.UseVisualStyleBackColor = false;
+            SearchButton.Click += button3_Click;
             // 
             // label4
             // 
@@ -233,7 +234,7 @@ namespace VideoRentalSystem
             Controls.Add(button8);
             Controls.Add(label1);
             Controls.Add(label4);
-            Controls.Add(button3);
+            Controls.Add(SearchButton);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2, 3, 2, 3);
@@ -253,7 +254,7 @@ namespace VideoRentalSystem
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;

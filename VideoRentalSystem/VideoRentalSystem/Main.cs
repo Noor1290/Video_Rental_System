@@ -34,8 +34,6 @@ namespace VideoRentalSystem
 
         }
 
-
-
         private void button2_Click(object sender, EventArgs e)
         {
         }
@@ -60,7 +58,6 @@ namespace VideoRentalSystem
         private void label4_Click(object sender, EventArgs e)
         {
         }
-
         private void Order_Click(object sender, EventArgs e)
         {
         }
@@ -212,9 +209,6 @@ namespace VideoRentalSystem
                 }
             }
         }
-
-
-
 
         private void ShowVideoPopup(CustomHashTable videoData)
         {
@@ -816,7 +810,13 @@ namespace VideoRentalSystem
 
         }
 
-
+        //search button to display another window that displays the list 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SearchForm search = new SearchForm(videoData);
+            search.Show();
+            this.Hide();
+        }
     }
 }
 
