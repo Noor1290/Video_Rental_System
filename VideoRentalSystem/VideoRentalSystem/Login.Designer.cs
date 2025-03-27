@@ -33,7 +33,7 @@ namespace VideoRentalSystem
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
-            button2 = new Button();
+            Reset_button = new Button();
             button1 = new Button();
             txtUsername = new TextBox();
             label1 = new Label();
@@ -52,7 +52,7 @@ namespace VideoRentalSystem
             // 
             panel1.BackColor = Color.LightBlue;
             panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(Reset_button);
             panel1.Controls.Add(button1);
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(2, 3, 2, 3);
@@ -72,17 +72,17 @@ namespace VideoRentalSystem
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // button2
+            // Reset_button
             // 
-            button2.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(22, 393);
-            button2.Margin = new Padding(2, 3, 2, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(134, 50);
-            button2.TabIndex = 13;
-            button2.Text = "Reset";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += Reset_Click;
+            Reset_button.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Reset_button.Location = new Point(22, 393);
+            Reset_button.Margin = new Padding(2, 3, 2, 3);
+            Reset_button.Name = "Reset_button";
+            Reset_button.Size = new Size(134, 50);
+            Reset_button.TabIndex = 13;
+            Reset_button.Text = "Reset";
+            Reset_button.UseVisualStyleBackColor = true;
+            Reset_button.Click += Reset_Click;
             // 
             // button1
             // 
@@ -222,7 +222,7 @@ namespace VideoRentalSystem
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Reset_button;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label1;

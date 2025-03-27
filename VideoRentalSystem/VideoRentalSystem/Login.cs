@@ -50,7 +50,7 @@ namespace VideoRentalSystem
 
         private async void Login_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=NOOR\\SQLEXPRESS;Database=VideoRental1;Integrated Security=True;TrustServerCertificate=True;";
+            string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
 
             await using var conn = new SqlConnection(connectionString);
             try

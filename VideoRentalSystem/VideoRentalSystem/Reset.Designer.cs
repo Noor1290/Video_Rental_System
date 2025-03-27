@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reset));
             button4 = new Button();
             label3 = new Label();
-            button3 = new Button();
+            Reset_button = new Button();
             label2 = new Label();
             txtNewPassword = new TextBox();
             label1 = new Label();
@@ -43,6 +43,9 @@
             label4 = new Label();
             label5 = new Label();
             txtUsername = new TextBox();
+            lblUsernameValidation = new Label();
+            lblPasswordValidation = new Label();
+            lblPasswordMatchValidation = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -70,18 +73,18 @@
             label3.TabIndex = 20;
             label3.Text = "VideoRental Shop";
             // 
-            // button3
+            // Reset_button
             // 
-            button3.BackColor = SystemColors.ActiveCaption;
-            button3.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(292, 591);
-            button3.Margin = new Padding(2, 3, 2, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(210, 50);
-            button3.TabIndex = 27;
-            button3.Text = "Enter";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            Reset_button.BackColor = SystemColors.ActiveCaption;
+            Reset_button.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Reset_button.Location = new Point(292, 591);
+            Reset_button.Margin = new Padding(2, 3, 2, 3);
+            Reset_button.Name = "Reset_button";
+            Reset_button.Size = new Size(210, 50);
+            Reset_button.TabIndex = 27;
+            Reset_button.Text = "Enter";
+            Reset_button.UseVisualStyleBackColor = false;
+            Reset_button.Click += Reset_button_Click;
             // 
             // label2
             // 
@@ -102,6 +105,7 @@
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.Size = new Size(347, 32);
             txtNewPassword.TabIndex = 25;
+            txtNewPassword.TextChanged += txtNewPassword_TextChanged;
             // 
             // label1
             // 
@@ -122,6 +126,7 @@
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(347, 32);
             txtPassword.TabIndex = 23;
+            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // button1
             // 
@@ -200,18 +205,52 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(347, 32);
             txtUsername.TabIndex = 33;
+            txtUsername.TextChanged += txtUsername_TextChanged;
+            // 
+            // lblUsernameValidation
+            // 
+            lblUsernameValidation.AutoSize = true;
+            lblUsernameValidation.ForeColor = SystemColors.ButtonFace;
+            lblUsernameValidation.Location = new Point(229, 197);
+            lblUsernameValidation.Name = "lblUsernameValidation";
+            lblUsernameValidation.Size = new Size(12, 20);
+            lblUsernameValidation.TabIndex = 35;
+            lblUsernameValidation.Text = ".";
+            // 
+            // lblPasswordValidation
+            // 
+            lblPasswordValidation.AutoSize = true;
+            lblPasswordValidation.ForeColor = SystemColors.ButtonFace;
+            lblPasswordValidation.Location = new Point(227, 337);
+            lblPasswordValidation.Name = "lblPasswordValidation";
+            lblPasswordValidation.Size = new Size(12, 20);
+            lblPasswordValidation.TabIndex = 36;
+            lblPasswordValidation.Text = ".";
+            // 
+            // lblPasswordMatchValidation
+            // 
+            lblPasswordMatchValidation.AutoSize = true;
+            lblPasswordMatchValidation.ForeColor = SystemColors.ButtonFace;
+            lblPasswordMatchValidation.Location = new Point(231, 515);
+            lblPasswordMatchValidation.Name = "lblPasswordMatchValidation";
+            lblPasswordMatchValidation.Size = new Size(12, 20);
+            lblPasswordMatchValidation.TabIndex = 37;
+            lblPasswordMatchValidation.Text = ".";
             // 
             // Reset
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(722, 647);
+            Controls.Add(lblPasswordMatchValidation);
+            Controls.Add(lblPasswordValidation);
+            Controls.Add(lblUsernameValidation);
             Controls.Add(label5);
             Controls.Add(txtUsername);
             Controls.Add(label4);
             Controls.Add(panel1);
             Controls.Add(button1);
-            Controls.Add(button3);
+            Controls.Add(Reset_button);
             Controls.Add(label2);
             Controls.Add(txtNewPassword);
             Controls.Add(label1);
@@ -232,7 +271,7 @@
 
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button Reset_button;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.Label label1;
@@ -244,5 +283,8 @@
         private System.Windows.Forms.Label label4;
         private Label label5;
         private TextBox txtUsername;
+        private Label lblUsernameValidation;
+        private Label lblPasswordValidation;
+        private Label lblPasswordMatchValidation;
     }
 }
