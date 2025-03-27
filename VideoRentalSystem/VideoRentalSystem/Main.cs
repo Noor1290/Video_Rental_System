@@ -811,7 +811,7 @@ namespace VideoRentalSystem
         }
 
         //search button to display another window that displays the list 
-        private void button3_Click(object sender, EventArgs e)
+        private void SearchButtonFunction(object sender, EventArgs e)
         {
             SearchForm search = new SearchForm(videoData);
             search.Show();

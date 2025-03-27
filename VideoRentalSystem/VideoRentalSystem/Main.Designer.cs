@@ -146,7 +146,7 @@ namespace VideoRentalSystem
             SearchButton.TabIndex = 39;
             SearchButton.Text = "🔍";
             SearchButton.UseVisualStyleBackColor = false;
-            SearchButton.Click += button3_Click;
+            SearchButton.Click += SearchButtonFunction;
             // 
             // label4
             // 
