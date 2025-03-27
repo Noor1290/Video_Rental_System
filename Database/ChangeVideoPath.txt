@@ -1,0 +1,81 @@
+--Update image path for each genre
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Action.jpeg'
+WHERE Genre ='Action';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Adventure.jpeg'
+WHERE Genre ='Adventure';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Animation.jpeg'
+WHERE Genre ='Animation';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Apocalyptic.jpeg'
+WHERE Genre ='Apocalyptic';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Biopic.jpeg'
+WHERE Genre ='Biopic';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Comedy.jpeg'
+WHERE Genre ='Comedy';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Crime.jpeg'
+WHERE Genre ='Crime';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Cyborg.jpeg'
+WHERE Genre ='Cyborg';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Documentary.jpeg'
+WHERE Genre ='Documentary.';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Drama.jpeg'
+WHERE Genre ='Drama';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Fantasy.jpeg'
+WHERE Genre ='Fantasy';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Fiction.jpeg'
+WHERE Genre ='Fiction';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Horror.jpeg'
+WHERE Genre ='Horror';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Mindbender.jpeg'
+WHERE Genre ='Mindbender';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Mystery.jpeg'
+WHERE Genre ='Mystery';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Outlaw.jpeg'
+WHERE Genre ='Outlaw';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Political.jpg'
+WHERE Genre ='Political';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Psychological.jpeg'
+WHERE Genre ='Psychological';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Romance.jpeg'
+WHERE Genre ='Romance';
+
+UPDATE VideoDatabase
+SET VideoPath = 'Image/Thriller.jpeg'
+WHERE Genre ='Thriller';
+
