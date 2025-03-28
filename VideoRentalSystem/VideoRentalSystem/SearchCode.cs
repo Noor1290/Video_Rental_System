@@ -194,7 +194,7 @@ namespace VideoRentalSystem
                 try
                 {
                     conn.Open();
-                    string query = "SELECT VideoID, UserID, VideoTitle, Duration, TimeLimit,Price, Genre FROM VideoDatabase";
+                    string query = "SELECT VideoID, UserID, VideoTitle, Duration, TimeLimit, Price, Genre FROM VideoDatabase";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
