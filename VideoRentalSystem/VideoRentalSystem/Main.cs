@@ -422,7 +422,7 @@ namespace VideoRentalSystem
             private CustomHashTable userInfo;
             private CustomHashTable rentalTimers = new CustomHashTable(10000);
 
-            private string connectionString = "Server=VANSHIKA;Database=VideoTestDatabase;Integrated Security=True;TrustServerCertificate=True;";
+            private string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
 
             public VideoRentalManager(CustomHashTable VideoRentals, CustomHashTable userInfo)
             {

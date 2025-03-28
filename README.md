@@ -91,5 +91,20 @@ git init
   
 3.***VideoRentals***: This table is used to store all the videos rented by specific users.
 
+### Location of Sever Name in the Project
+1. In Register, the server name and database name should be changed unless the same database name is used which is recommended.
+The database name is ***VideoRentalSystem***
+2. In Login, they are located on ***Line 53***
+3. In Main Page, they are located on ***Line 429***
+
+### Additional change needed to make (if database name is different)
+In Main Page:
+
+1.The Unlink Query on ***Line 700*** and ***Line 701*** needs to be changed.
+
+2.The Clear Query on ***Line 712*** needs to be changed.
+
+
+
 
 
