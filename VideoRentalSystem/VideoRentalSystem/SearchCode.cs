@@ -7,8 +7,6 @@ using System.Windows.Forms;
 using System.Collections; // for hash table
 using System.Collections.Generic;
 using VideoRentalSystem;
-//for database connection
-using Microsoft.Data.SqlClient;
 
 namespace VideoRentalSystem
 {
@@ -22,9 +20,7 @@ namespace VideoRentalSystem
         private DataTable DataTable; // temporarily video data
         private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel, SearchLabel;
         //data storage
-        private readonly CustomHashTable videoData;
-        //database connection string
-        private string ConnectionString = "Data Source=VANSHIKA;Initial Catalog=VideoTestDatabase;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        private  CustomHashTable videoData;
 
 
         public SearchForm(CustomHashTable videoData)
@@ -184,34 +180,31 @@ namespace VideoRentalSystem
             DataTable.Columns.Add("Genre", typeof(string));
 
             //load data from sql server
-            LoadDataFromDatabase();
+            LoadDataFromHashTable();
         }
 
-        private void LoadDataFromDatabase()
+        private void LoadDataFromHashTable()
         {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            foreach (KeyValuePair<string, object> entry in videoData)
             {
-                try
+                if (entry.Value is CustomHashTable videoInfo)
                 {
-                    conn.Open();
-                    string query = "SELECT VideoID, UserID, VideoTitle, Duration, TimeLimit, Price, Genre FROM VideoDatabase";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            AddVideo(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDecimal(6), reader.GetString(7));
+                    DataRow row= DataTable.NewRow();
+                    row["VideoID"] = entry.Key.ToString();
+                    row["UserID"] = Convert.ToInt32(videoInfo.Get("UserID")).ToString();
+                    row["VideoTitle"] = videoInfo.Get("VideoTitle").ToString() ?? "No title";
+                    row["UploadDate"] = Convert.ToDateTime(videoInfo.Get("UploadDate") ?? DateTime.Now);
+                    row["Duration"] = Convert.ToInt32(videoInfo.Get("Duration") ?? 0);
+                    row["TimeLimit"] = Convert.ToInt32(videoInfo.Get("TimeLimit") ?? 0);
+                    row["Price"] = Convert.ToDecimal(videoInfo.Get("Price") ?? 0);
+                    row["Genre"] = videoInfo.Get("Genre").ToString() ?? "unknown";
 
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Database error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    DataTable.Rows.Add(row);
 
-                DataGridView.DataSource = DataTable;
+                }
             }
+
+            DataGridView.DataSource = DataTable;
         }
 
         //add video data  in hashtable
