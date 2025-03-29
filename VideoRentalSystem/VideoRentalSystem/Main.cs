@@ -422,7 +422,7 @@ namespace VideoRentalSystem
             private CustomHashTable userInfo;
             private CustomHashTable rentalTimers = new CustomHashTable(10000);
 
-            private string connectionString = "Server=VANSHIKA;Database=VideoTestDatabase;Integrated Security=True;TrustServerCertificate=True;";
+            private string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
 
             public VideoRentalManager(CustomHashTable VideoRentals, CustomHashTable userInfo)
             {
@@ -687,9 +687,6 @@ namespace VideoRentalSystem
                     {
                         conn.Open();
 
-                        // First, update the child table (VideoRentals) to set VideoID to NULL
-                        // for rows that reference rows in VideoDatabase.
-                        // Using a JOIN rather than "IN" can be more reliable if data types match.
                         string unlinkQuery = @"
                                                 UPDATE VR
                                                 SET VR.VideoID = NULL
