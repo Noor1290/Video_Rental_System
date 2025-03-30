@@ -119,7 +119,7 @@ namespace VideoRentalSystem
             }
             else
             {
-                EmailErrorMessage.Text = "Invalid Email";
+                EmailErrorMessage.Text = "Email should be unique, contains @ and . symbols";
                 EmailErrorMessage.ForeColor = Color.Red;
                 isValid = false;
             }
