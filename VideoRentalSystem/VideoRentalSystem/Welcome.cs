@@ -79,7 +79,7 @@ namespace VideoRentalSystem
                 Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 Anchor = AnchorStyles.Top,
             };
-        
+
             btnRegister.Click += BtnRegister_Click; // Attach click event
             this.Controls.Add(btnRegister);
         }

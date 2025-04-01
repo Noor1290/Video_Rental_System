@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.IO;
+using System.Diagnostics;
 
 
 namespace VideoRentalSystem
@@ -21,7 +22,7 @@ namespace VideoRentalSystem
             EmailErrorMessage.Text = "";
             PasswordErrorMessage.Text = "";
             UsernameErrorMessage.Text = "";
-            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS", "VideoRentingSystem");
+            dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS01", "VideoRentalSystem");
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace VideoRentalSystem
         {
             try
             {
+
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
@@ -117,7 +119,7 @@ namespace VideoRentalSystem
             }
             else
             {
-                EmailErrorMessage.Text = "Invalid Email";
+                EmailErrorMessage.Text = "Email should be unique, contains @ and . symbols";
                 EmailErrorMessage.ForeColor = Color.Red;
                 isValid = false;
             }
@@ -130,7 +132,7 @@ namespace VideoRentalSystem
             }
             else
             {
-                PasswordErrorMessage.Text = "Invalid Password";
+                PasswordErrorMessage.Text = "Password should contain\n 1 Uppercase, 1 Lowercase,\n a decimal digit and\n be 5 - 10 characters long";
                 PasswordErrorMessage.ForeColor = Color.Red;
                 isValid = false;
             }
@@ -277,10 +279,14 @@ namespace VideoRentalSystem
                     }
 
                     transaction.Commit();
-                    Console.WriteLine("User registered successfully!");
+                    Debug.WriteLine("User registered successfully!");
                 }
                 catch (SqlException sqlEx)
                 {
+                    Debug.WriteLine("SQL Error: " + sqlEx.Message);
+                    Debug.WriteLine("SQL Error Number: " + sqlEx.Number);
+                    Debug.WriteLine("SQL Error Line Number: " + sqlEx.LineNumber);
+
                     transaction.Rollback();
                     throw new Exception("Database insert failed: " + sqlEx.Message);
                 }

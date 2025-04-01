@@ -5,6 +5,8 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections; // for hash table
+using System.Collections.Generic;
+using VideoRentalSystem;
 
 namespace VideoRentalSystem
 {
@@ -18,10 +20,12 @@ namespace VideoRentalSystem
         private DataTable DataTable; // temporarily video data
         private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel, SearchLabel;
         //data storage
-        private Dictionary<int, DataRow> VideoHashTable;
+        private  CustomHashTable videoData;
 
-        public SearchForm()
+
+        public SearchForm(CustomHashTable videoData)
         {
+            this.videoData = videoData;
             InitialiseUI(); // setup UI components
             InitialiseDataTable(); // Load sample data
         }
@@ -166,37 +170,58 @@ namespace VideoRentalSystem
         {
             //temporary data
             DataTable = new DataTable();
-            DataTable.Columns.Add("ID", typeof(int));
-            DataTable.Columns.Add("Video", typeof(string));
+            DataTable.Columns.Add("VideoID", typeof(int));
+            DataTable.Columns.Add("UserID", typeof(int));
+            DataTable.Columns.Add("VideoTitle", typeof(string));
+            DataTable.Columns.Add("UploadDate", typeof(DateTime));
+            DataTable.Columns.Add("Duration", typeof(int));
+            DataTable.Columns.Add("TimeLimit", typeof(int));
+            DataTable.Columns.Add("Price", typeof(decimal));
             DataTable.Columns.Add("Genre", typeof(string));
-            DataTable.Columns.Add("Duration (min)", typeof(int));
-            DataTable.Columns.Add("Price ($)", typeof(decimal));
 
-            //initialise hash table
-            VideoHashTable = new Dictionary<int, DataRow>();
+            //load data from sql server
+            LoadDataFromHashTable();
+        }
 
-            //add sample video
-            AddVideo(1, "aaa", "Horror", 148, 5.99m);
-            AddVideo(2, "bbb", "Romance", 451, 7.48m);
-            AddVideo(3, "ccc", "Horror", 110, 7.23m);
-            AddVideo(4, "dd", "Horror", 98, 4.56m);
+        private void LoadDataFromHashTable()
+        {
+            foreach (KeyValuePair<string, object> entry in videoData)
+            {
+                if (entry.Value is CustomHashTable videoInfo)
+                {
+                    DataRow row= DataTable.NewRow();
+                    row["VideoID"] = entry.Key.ToString();
+                    row["UserID"] = Convert.ToInt32(videoInfo.Get("UserID")).ToString();
+                    row["VideoTitle"] = videoInfo.Get("VideoTitle").ToString() ?? "No title";
+                    row["UploadDate"] = Convert.ToDateTime(videoInfo.Get("UploadDate") ?? DateTime.Now);
+                    row["Duration"] = Convert.ToInt32(videoInfo.Get("Duration") ?? 0);
+                    row["TimeLimit"] = Convert.ToInt32(videoInfo.Get("TimeLimit") ?? 0);
+                    row["Price"] = Convert.ToDecimal(videoInfo.Get("Price") ?? 0);
+                    row["Genre"] = videoInfo.Get("Genre").ToString() ?? "unknown";
+
+                    DataTable.Rows.Add(row);
+
+                }
+            }
 
             DataGridView.DataSource = DataTable;
-
         }
 
         //add video data  in hashtable
-        private void AddVideo(int id, string name, string genre, int duration, decimal price)
+        private void AddVideo(int VID, int UID, string VideoName,  DateTime date, int duration, int timelimit, decimal price,  string genre)
         {
             DataRow row = DataTable.NewRow();
-            row["ID"] = id;
-            row["Video"] = name;
+            row["VideoID"] = VID;
+            row["UserID"] = UID;
+            row["VideoTitle"] = VideoName;
+            row["UploadDate"] = date;
+            row["Duration"] = duration;
+            row["TimeLimit"] = timelimit;
+            row["Price"] = price;
             row["Genre"] = genre;
-            row["Duration (min)"] = duration;
-            row["Price ($)"] = price;
 
             DataTable.Rows.Add(row);
-            VideoHashTable[id] = row; // store in hashtable
+            videoData.Add(VID.ToString(), row);
         }
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -205,15 +230,15 @@ namespace VideoRentalSystem
             decimal MinPrice = MinPriceBox.Value;
             decimal MaxPrice = MaxPriceBox.Value == 0 ? 1000 : MaxPriceBox.Value;
 
+            //perform live search and filter results
 
-
-            var FilteredRows = VideoHashTable.Values
+            var FilteredRows = videoData.Cast<DataRow>()
                 .Where(row =>
                 {
-                    decimal price = row.Field<decimal>("Price ($)");
-                    bool MatchSearch = row.Field<string>("Video").ToLower().Contains(SearchText) ||
+                    decimal price = row.Field<decimal>("Price");
+                    bool MatchSearch = row.Field<string>("VideoTitle").ToLower().Contains(SearchText) ||
                                        row.Field<string>("Genre").ToLower().Contains(SearchText) ||
-                                       row.Field<int>("Duration (min)").ToString().Contains(SearchText);
+                                       row.Field<int>("Duration").ToString().Contains(SearchText);
                     bool MatchPrice = price >= MinPrice && price <= MaxPrice;
                     return MatchSearch && MatchPrice;
 
