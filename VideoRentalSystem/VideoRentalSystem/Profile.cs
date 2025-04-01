@@ -102,6 +102,7 @@ namespace VideoRentalSystem
             {
                 new Video { Title = "Fast and Furious", RentedDate = DateTime.Now.AddDays(-2) },
                 new Video { Title = "BattleField", RentedDate = DateTime.Now.AddDays(-5) },
+                new Video { Title = "Transformers", RentedDate = DateTime.Now.AddDays(-6) },
             };
             rentedVideosGridView.DataSource = null;
             rentedVideosGridView.DataSource = rentedVideos;
