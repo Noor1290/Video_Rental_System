@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections; // for hash table
+// for hash table
 using System.Collections.Generic;
 using VideoRentalSystem;
 
@@ -168,7 +168,7 @@ namespace VideoRentalSystem
         }
         private void InitialiseDataTable()
         {
-            //temporary data
+            //columns from table VideoDatabase
             DataTable = new DataTable();
             DataTable.Columns.Add("VideoID", typeof(int));
             DataTable.Columns.Add("UserID", typeof(int));
@@ -185,19 +185,22 @@ namespace VideoRentalSystem
 
         private void LoadDataFromHashTable()
         {
+
+            //clear existing data
+            DataTable.Rows.Clear();
             foreach (KeyValuePair<string, object> entry in videoData)
             {
                 if (entry.Value is CustomHashTable videoInfo)
                 {
                     DataRow row= DataTable.NewRow();
-                    row["VideoID"] = entry.Key.ToString();
-                    row["UserID"] = Convert.ToInt32(videoInfo.Get("UserID")).ToString();
-                    row["VideoTitle"] = videoInfo.Get("VideoTitle").ToString() ?? "No title";
-                    row["UploadDate"] = Convert.ToDateTime(videoInfo.Get("UploadDate") ?? DateTime.Now);
-                    row["Duration"] = Convert.ToInt32(videoInfo.Get("Duration") ?? 0);
-                    row["TimeLimit"] = Convert.ToInt32(videoInfo.Get("TimeLimit") ?? 0);
-                    row["Price"] = Convert.ToDecimal(videoInfo.Get("Price") ?? 0);
-                    row["Genre"] = videoInfo.Get("Genre").ToString() ?? "unknown";
+                    row["VideoID"] = videoInfo.Get("VideoID");
+                    row["UserID"] = videoInfo.Get("UserID") is int userId ? userId: 0;
+                    row["VideoTitle"] = videoInfo.Get("VideoTitle")?.ToString() ?? "No title";
+                    row["UploadDate"] = videoInfo.Get("UploadDate");
+                    row["Duration"] = videoInfo.Get("Duration");
+                    row["TimeLimit"] = videoInfo.Get("TimeLimit");
+                    row["Price"] = videoInfo.Get("Price") ;
+                    row["Genre"] = videoInfo.Get("Genre")?.ToString() ?? "unknown";
 
                     DataTable.Rows.Add(row);
 
@@ -232,16 +235,19 @@ namespace VideoRentalSystem
 
             //perform live search and filter results
 
-            var FilteredRows = videoData.Cast<DataRow>()
-                .Where(row =>
-                {
+            var FilteredRows = DataTable.AsEnumerable()
+                .Where (row => {
+                    string title = row.Field<string>("VideoTitle")?.ToLower() ?? "";
+                    string genre = row.Field<string>("Genre")?.ToLower() ?? "";
                     decimal price = row.Field<decimal>("Price");
-                    bool MatchSearch = row.Field<string>("VideoTitle").ToLower().Contains(SearchText) ||
-                                       row.Field<string>("Genre").ToLower().Contains(SearchText) ||
-                                       row.Field<int>("Duration").ToString().Contains(SearchText);
-                    bool MatchPrice = price >= MinPrice && price <= MaxPrice;
-                    return MatchSearch && MatchPrice;
 
+                    bool matchesSearch = title.Contains(SearchText) ||
+                    genre.Contains(SearchText)||
+                    row.Field<int>("Duration").ToString().Contains(SearchText);
+
+                    bool matchesPrice = price >= MinPrice && price <= MaxPrice;
+
+                    return matchesSearch && matchesPrice;
                 })
                 .ToList();
 

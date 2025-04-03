@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\Testing\\Testing.csproj": {}
+    "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\Testing\\Testing.csproj": {}
   },
   "projects": {
-    "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\Testing\\Testing.csproj": {
+    "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\Testing\\Testing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\Testing\\Testing.csproj",
+        "projectUniqueName": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\Testing\\Testing.csproj",
         "projectName": "Testing",
-        "projectPath": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\Testing\\Testing.csproj",
-        "packagesPath": "C:\\Users\\noorp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\Testing\\obj\\",
+        "projectPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\Testing\\Testing.csproj",
+        "packagesPath": "C:\\Users\\DVanT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\Testing\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\noorp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DVanT\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows7.0",
             "projectReferences": {
-              "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj": {
-                "projectPath": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj"
+              "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj": {
+                "projectPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj"
               }
             }
           }
@@ -87,20 +87,20 @@
         }
       }
     },
-    "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj": {
+    "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
+        "projectUniqueName": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
         "projectName": "VideoRentalSystem",
-        "projectPath": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
-        "packagesPath": "C:\\Users\\noorp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\noorp\\OneDrive\\Desktop\\testi10\\VideoRentalSystem\\VideoRentalSystem\\obj\\",
+        "projectPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\VideoRentalSystem.csproj",
+        "packagesPath": "C:\\Users\\DVanT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DVanT\\OneDrive\\Desktop\\CW\\Video_Rental_System\\VideoRentalSystem\\VideoRentalSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\noorp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DVanT\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
