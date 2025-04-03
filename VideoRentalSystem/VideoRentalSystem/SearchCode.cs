@@ -20,7 +20,7 @@ namespace VideoRentalSystem
         private DataTable DataTable; // temporarily video data
         private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel, SearchLabel;
         //data storage
-        private  CustomHashTable videoData;
+        private CustomHashTable videoData;
 
 
         public SearchForm(CustomHashTable videoData)
@@ -192,14 +192,14 @@ namespace VideoRentalSystem
             {
                 if (entry.Value is CustomHashTable videoInfo)
                 {
-                    DataRow row= DataTable.NewRow();
+                    DataRow row = DataTable.NewRow();
                     row["VideoID"] = videoInfo.Get("VideoID");
-                    row["UserID"] = videoInfo.Get("UserID") is int userId ? userId: 0;
+                    row["UserID"] = videoInfo.Get("UserID") is int userId ? userId : 0;
                     row["VideoTitle"] = videoInfo.Get("VideoTitle")?.ToString() ?? "No title";
                     row["UploadDate"] = videoInfo.Get("UploadDate");
                     row["Duration"] = videoInfo.Get("Duration");
                     row["TimeLimit"] = videoInfo.Get("TimeLimit");
-                    row["Price"] = videoInfo.Get("Price") ;
+                    row["Price"] = videoInfo.Get("Price");
                     row["Genre"] = videoInfo.Get("Genre")?.ToString() ?? "unknown";
 
                     DataTable.Rows.Add(row);
@@ -211,7 +211,7 @@ namespace VideoRentalSystem
         }
 
         //add video data  in hashtable
-        private void AddVideo(int VID, int UID, string VideoName,  DateTime date, int duration, int timelimit, decimal price,  string genre)
+        private void AddVideo(int VID, int UID, string VideoName, DateTime date, int duration, int timelimit, decimal price, string genre)
         {
             DataRow row = DataTable.NewRow();
             row["VideoID"] = VID;
@@ -236,13 +236,14 @@ namespace VideoRentalSystem
             //perform live search and filter results
 
             var FilteredRows = DataTable.AsEnumerable()
-                .Where (row => {
+                .Where(row =>
+                {
                     string title = row.Field<string>("VideoTitle")?.ToLower() ?? "";
                     string genre = row.Field<string>("Genre")?.ToLower() ?? "";
                     decimal price = row.Field<decimal>("Price");
 
                     bool matchesSearch = title.Contains(SearchText) ||
-                    genre.Contains(SearchText)||
+                    genre.Contains(SearchText) ||
                     row.Field<int>("Duration").ToString().Contains(SearchText);
 
                     bool matchesPrice = price >= MinPrice && price <= MaxPrice;

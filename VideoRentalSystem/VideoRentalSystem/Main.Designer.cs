@@ -45,7 +45,7 @@ namespace VideoRentalSystem
             label2 = new Label();
             button4 = new Button();
             ProductsName = new TextBox();
-            Categories = new TextBox();
+            Categories = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -63,7 +63,7 @@ namespace VideoRentalSystem
             panel1.Location = new Point(0, -1);
             panel1.Margin = new Padding(2, 3, 2, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(208, 921);
+            panel1.Size = new Size(208, 987);
             panel1.TabIndex = 32;
             // 
             // button1
@@ -91,7 +91,7 @@ namespace VideoRentalSystem
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(2, 858);
+            pictureBox2.Location = new Point(11, 925);
             pictureBox2.Margin = new Padding(2, 3, 2, 3);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(46, 51);
@@ -103,7 +103,7 @@ namespace VideoRentalSystem
             // 
             button6.BackColor = SystemColors.ActiveCaption;
             button6.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.Location = new Point(0, 844);
+            button6.Location = new Point(2, 915);
             button6.Margin = new Padding(2, 3, 2, 3);
             button6.Name = "button6";
             button6.Size = new Size(206, 74);
@@ -217,16 +217,19 @@ namespace VideoRentalSystem
             // 
             // Categories
             // 
-            Categories.Location = new Point(786, 144);
+            Categories.FormattingEnabled = true;
+            Categories.Items.AddRange(new object[] { "Action", "Adventure", "Animation", "Apocalyptic", "Biopic", "Comedy", "Crime", "Cyborg", "Default", "Documentary", "Drama", "Fantasy", "Fiction", "Horror", "Mindbearer", "Mystery", "Outlaw", "Political", "Psychological", "Romance", "Thriller" });
+            Categories.Location = new Point(786, 155);
             Categories.Name = "Categories";
-            Categories.Size = new Size(281, 27);
+            Categories.Size = new Size(278, 28);
             Categories.TabIndex = 50;
+            Categories.SelectedIndexChanged += Categories_SelectedIndexChanged;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1230, 920);
+            ClientSize = new Size(1230, 987);
             Controls.Add(Categories);
             Controls.Add(ProductsName);
             Controls.Add(button4);
@@ -265,6 +268,6 @@ namespace VideoRentalSystem
         private System.Windows.Forms.Button button4;
         private Button button1;
         private TextBox ProductsName;
-        private TextBox Categories;
+        private ComboBox Categories;
     }
 }

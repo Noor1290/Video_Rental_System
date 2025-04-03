@@ -23,6 +23,7 @@ namespace VideoRentalSystem
         private CustomHashTable videoData;
         private CustomHashTable videoRentals;
         private FlowLayoutPanel flowLayoutPanel;
+        private ListBox categorySuggestionsListBox;
 
         public Main(CustomHashTable userInfo, CustomHashTable videoData, CustomHashTable videoRentals)
         {
@@ -124,7 +125,7 @@ namespace VideoRentalSystem
                     AutoScroll = true, // Allow scrolling if content exceeds the panel size
                     Padding = new Padding(10),
                     MaximumSize = new Size(Width, 600), // Set the max height to control overflow
-                    Size = new Size(1000, 900) // Example size, adjust based on your design
+                    Size = new Size(1000, 1000) // Example size, adjust based on your design
                 };
                 // Adjust the height to accommodate rows dynamically if required
                 int rowHeight = 1320; // Assuming the height of each video card including padding
@@ -413,6 +414,102 @@ namespace VideoRentalSystem
                 }
             }
         }
+        private void Categories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Get the selected category from the ComboBox
+            string selectedCategory = Categories.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(selectedCategory)) return;
+
+            // Filter and display videos based on the selected category
+            DisplayVideosByCategory(selectedCategory);
+        }
+        private void DisplayVideosByCategory(string selectedCategory)
+        {
+            // Clear the current display (reset the flowLayoutPanel)
+            flowLayoutPanel.Controls.Clear();
+
+            int cardCount = 0; // Reset the card count to limit the number of displayed cards
+
+            // Loop through the video data and display cards based on the selected category
+            foreach (KeyValuePair<string, object> entry in videoData)
+            {
+                if (cardCount >= 8) break; // Limit to 8 cards (or as per your need)
+
+                if (entry.Value is CustomHashTable videoInfo)
+                {
+                    // Get the video category
+                    string videoCategory = videoInfo.Get("Genre")?.ToString() ?? "";
+
+                    // Check if the video category matches the selected category
+                    if (videoCategory.Equals(selectedCategory, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Create and add the video card (same as before)
+                        CreateVideoCard(videoInfo);
+                        cardCount++; // Increment the card count for each added video
+                    }
+                }
+            }
+        }
+        private void CreateVideoCard(CustomHashTable videoInfo)
+        {
+            // Create a new Panel to represent the video card
+            Panel videoCard = new Panel
+            {
+                Size = new Size(200, 300),
+                BackColor = Color.LightBlue,
+                Margin = new Padding(10),
+                Cursor = Cursors.Hand
+            };
+
+            // Create the PictureBox for the video image
+            PictureBox videoImageControl = new PictureBox
+            {
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Size = new Size(180, 250),
+                Location = new Point(10, 10),
+                Tag = videoInfo
+            };
+
+            // Access the video image path
+            string videoImageObj = videoInfo.Get("VideoPath")?.ToString() ?? "";
+            if (IsValidPath(videoImageObj))
+            {
+                try
+                {
+                    videoImageControl.Image = Image.FromFile(videoImageObj);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Error loading image: " + ex.Message);
+                }
+            }
+
+            // Add Click event to show the video popup when clicked
+            videoImageControl.Click += (s, e) => ShowVideoPopup(videoInfo);
+
+            // Create a label for the video title
+            Label lblTitle = new Label
+            {
+                Text = videoInfo.Get("VideoTitle")?.ToString() ?? "Untitled",
+                ForeColor = Color.White,
+                Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                AutoSize = true,
+                Location = new Point(10, 270),
+                Tag = videoInfo
+            };
+
+            // Add Click event for the label as well
+            lblTitle.Click += (s, e) => ShowVideoPopup(videoInfo);
+
+            // Add the PictureBox and Label to the video card (Panel)
+            videoCard.Controls.Add(videoImageControl);
+            videoCard.Controls.Add(lblTitle);
+
+            // Add the video card to the FlowLayoutPanel
+            flowLayoutPanel.Controls.Add(videoCard);
+        }
+
 
 
 
@@ -422,7 +519,7 @@ namespace VideoRentalSystem
             private CustomHashTable userInfo;
             private CustomHashTable rentalTimers = new CustomHashTable(10000);
 
-            private string connectionString = "Server=VANSHIKA;Database=VideoTestDatabase;Integrated Security=True;TrustServerCertificate=True;";
+            private string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
 
             public VideoRentalManager(CustomHashTable VideoRentals, CustomHashTable userInfo)
             {
@@ -740,14 +837,6 @@ namespace VideoRentalSystem
 
         }
 
-
-        private void InformationButton_Click(object sender, EventArgs e)
-        {
-            //SearchForm search = new SearchForm(videoData);
-            //search.Show();
-            //this.Hide();
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             // Retrieve the byte array for the profile picture from userInfo hashtable
@@ -804,6 +893,8 @@ namespace VideoRentalSystem
             search.Show();
             this.Hide();
         }
+
+
     }
 }
 
