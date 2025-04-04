@@ -49,7 +49,18 @@ namespace VideoRentalSystem
             };
             this.Controls.Add(mainPanel);
 
-           
+            // Title Label
+            lblTitle = new Label()
+            {
+                Text = "MY PROFILE",
+                Location = new Point(20, 20),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 16, FontStyle.Bold),
+                ForeColor = Color.FromArgb(70, 130, 180)
+            };
+
+
+
             profilePictureBox = new PictureBox()
             {
                 Location = new Point(20, 80),
