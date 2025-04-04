@@ -4,12 +4,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace VideoRentalSystem
 {
     public class ProfilePage : Form
     {
+        private Label lblTitle;
         private Label lblName;
         private Label lblEmail;
         private PictureBox profilePictureBox;
