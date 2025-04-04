@@ -39,11 +39,17 @@ namespace VideoRentalSystem
             this.Size = new Size(700, 600);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.FromArgb(240, 240, 240);
+            this.Font = new Font("Segoe UI", 9);
 
-            //Initialize UI components
-            lblName = new Label() { Location = new Point(20, 20), AutoSize = true, Font = new Font("Arial", 10, FontStyle.Bold) };
-            lblEmail = new Label() { Location = new Point(20, 50), AutoSize = true, Font = new Font("Arial", 10) };
+            // Main Panel for better layout control
+            mainPanel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(20)
+            };
+            this.Controls.Add(mainPanel);
 
+           
             profilePictureBox = new PictureBox()
             {
                 Location = new Point(20, 80),
