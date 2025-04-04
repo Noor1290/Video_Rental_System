@@ -64,12 +64,16 @@ namespace VideoRentalSystem
             profilePictureBox = new PictureBox()
             {
                 Location = new Point(20, 80),
-                Size = new Size(100, 100),
-                BorderStyle = BorderStyle.Fixed3D,
-                SizeMode = PictureBoxSizeMode.StretchImage
+                Size = new Size(120, 120),
+                BorderStyle = BorderStyle.FixedSingle,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                BackColor = Color.White
 
             };
+            mainPanel.Controls.Add(profilePictureBox);
 
+
+            // Upload Image Button
             btnUploadImage = new Button()
             {
                 Text = "Upload Image",
