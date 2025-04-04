@@ -17,9 +17,11 @@ namespace VideoRentalSystem
         private Label lblEmail;
         private PictureBox profilePictureBox;
         private Button btnUploadImage;
+        private Button btnEditProfile;
         private DataGridView rentedVideosGridView;
         private User currentUser;
         private List<Video> rentedVideos;
+        private Panel mainPanel;
 
         public ProfilePage()
         {
