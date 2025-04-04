@@ -28,12 +28,13 @@ namespace VideoRentalSystem
             InitializeComponent();
             LoadUserProfile();
             LoadRentedVideos();
+            ApplyTheme();
 
         }
 
         private void InitializeComponent()
         {
-            this.Text = "User profile";
+            this.Text = "My Profile - Video Rental System";
             this.Size = new Size(500, 400);
             this.StartPosition = FormStartPosition.CenterScreen;
 
