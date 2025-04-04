@@ -34,9 +34,11 @@ namespace VideoRentalSystem
 
         private void InitializeComponent()
         {
+            // Main Form Settings
             this.Text = "My Profile - Video Rental System";
-            this.Size = new Size(500, 400);
+            this.Size = new Size(700, 600);
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.BackColor = Color.FromArgb(240, 240, 240);
 
             //Initialize UI components
             lblName = new Label() { Location = new Point(20, 20), AutoSize = true, Font = new Font("Arial", 10, FontStyle.Bold) };
