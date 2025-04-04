@@ -58,9 +58,9 @@ namespace VideoRentalSystem
                 Font = new Font("Segoe UI", 16, FontStyle.Bold),
                 ForeColor = Color.FromArgb(70, 130, 180)
             };
+            mainPanel.Controls.Add(lblTitle);
 
-
-
+            // Profile Picture Box
             profilePictureBox = new PictureBox()
             {
                 Location = new Point(20, 80),
