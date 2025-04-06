@@ -188,10 +188,12 @@ namespace VideoRentalSystem
 
             //clear existing data
             DataTable.Rows.Clear();
+            //loop through the hash tables
             foreach (KeyValuePair<string, object> entry in videoData)
             {
                 if (entry.Value is CustomHashTable videoInfo)
                 {
+                    //retrieve column values
                     DataRow row = DataTable.NewRow();
                     row["VideoID"] = videoInfo.Get("VideoID");
                     row["UserID"] = videoInfo.Get("UserID") is int userId ? userId : 0;
