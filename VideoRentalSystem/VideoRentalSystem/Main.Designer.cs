@@ -87,6 +87,7 @@ namespace VideoRentalSystem
             button7.TabIndex = 42;
             button7.Text = "Profile";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // pictureBox2
             // 

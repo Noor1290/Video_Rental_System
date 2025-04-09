@@ -65,7 +65,7 @@ namespace VideoRentalSystem
 
         private void Profile_Click(object sender, EventArgs e)
         {
-            ProfilePage profile = new ProfilePage();
+            ProfilePage profile = new ProfilePage(userInfo, videoData, videoRentals);
             profile.Show();
             this.Hide();
         }
@@ -894,7 +894,12 @@ namespace VideoRentalSystem
             this.Hide();
         }
 
-
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ProfilePage profile = new ProfilePage(userInfo, videoData, videoRentals);
+            profile.Show();
+            this.Hide();
+        }
     }
 }
 
