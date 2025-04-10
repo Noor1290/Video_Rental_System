@@ -1,4 +1,4 @@
-# Video Renting System
+﻿# Video Renting System
 
 This is a **Video Renting System** that allows users to browse, search, and rent videos. The system uses an **SQL database** to store and manage video data and user rental information. Upon login, the SQL database is transferred to a **hash table**, and all modifications are made to the hash table. When the user logs out, the updated hash table is then synced back to the SQL database.
 
@@ -18,7 +18,7 @@ This is a **Video Renting System** that allows users to browse, search, and rent
 
 Before getting started, ensure you have the following:
 
-- **SQL Database**: You must have an **SQL database** for storing user and video data. (We have used **SSMS** � SQL Server Management Studio).
+- **SQL Database**: You must have an **SQL database** for storing user and video data. (We have used **SSMS** – SQL Server Management Studio).
 - **.NET Framework**: The project uses one of the latest **.NET Framework** versions.
 - **Git**: Version control for collaboration.
 
@@ -82,6 +82,18 @@ git init
  git pull origin main
 
  ```
+ ##  Running the Application
+
+### **1. Open Project in Visual Studio**
+- Navigate to the project folder and open **`VideoRentalSystem.sln`** in **Visual Studio**.
+
+### **2. Build & Compile**
+- In **Visual Studio**, go to:
+  - `Build` → `Build Solution` (`Ctrl + Shift + B`).
+
+### **3. Run the Application**
+- Press on the run button or press F5
+
   ### Creation of the tables in SQL
   Please find the folder named ***Database*** in the remote repository. This folder contains the SQL statements for the craetion of the 3 tables named:
 
@@ -103,6 +115,32 @@ In Main Page:
 1.The Unlink Query on ***Line 700*** and ***Line 701*** needs to be changed.
 
 2.The Clear Query on ***Line 712*** needs to be changed.
+
+##  How to Use
+
+### **1. Welcome Section**
+- The application opens to a **welcome page** whith 2 options:
+  - **Login**
+  - **Register**
+
+### **2. Login Section**
+- Enter the previously registered user information such as **Name and Pssword**.
+
+
+### **3. Register Section**
+- Register new packages with sender and receiver details.
+- Assign a delivery officer.
+- Track package delivery.
+
+### **4. Main Page**
+- Handle postal money transfers.
+- Keep records of sender/receiver information.
+
+### **5. Logout**
+- Clicking **Logout** will **clear session data** and **exit the program**.
+- It will save everything in SQL
+
+---
 
 
 

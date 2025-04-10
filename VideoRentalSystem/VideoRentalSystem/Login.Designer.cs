@@ -44,6 +44,9 @@ namespace VideoRentalSystem
             button4 = new Button();
             lblMessage = new Label();
             lblPassword = new Label();
+            lblTextFile = new Label();
+            label5 = new Label();
+            TextFile = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -99,7 +102,7 @@ namespace VideoRentalSystem
             // txtUsername
             // 
             txtUsername.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsername.Location = new Point(230, 238);
+            txtUsername.Location = new Point(230, 211);
             txtUsername.Margin = new Padding(2, 3, 2, 3);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(347, 32);
@@ -119,7 +122,7 @@ namespace VideoRentalSystem
             // txtPassword
             // 
             txtPassword.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPassword.Location = new Point(230, 424);
+            txtPassword.Location = new Point(230, 342);
             txtPassword.Margin = new Padding(2, 3, 2, 3);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(347, 32);
@@ -129,7 +132,7 @@ namespace VideoRentalSystem
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(225, 370);
+            label2.Location = new Point(225, 315);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(116, 24);
@@ -151,7 +154,7 @@ namespace VideoRentalSystem
             // 
             button3.BackColor = SystemColors.ActiveCaption;
             button3.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(298, 541);
+            button3.Location = new Point(300, 588);
             button3.Margin = new Padding(2, 3, 2, 3);
             button3.Name = "button3";
             button3.Size = new Size(210, 50);
@@ -177,7 +180,7 @@ namespace VideoRentalSystem
             // 
             lblMessage.AutoSize = true;
             lblMessage.ForeColor = SystemColors.ButtonHighlight;
-            lblMessage.Location = new Point(271, 289);
+            lblMessage.Location = new Point(271, 258);
             lblMessage.Name = "lblMessage";
             lblMessage.Size = new Size(50, 20);
             lblMessage.TabIndex = 16;
@@ -187,17 +190,52 @@ namespace VideoRentalSystem
             // 
             lblPassword.AutoSize = true;
             lblPassword.ForeColor = SystemColors.ButtonHighlight;
-            lblPassword.Location = new Point(271, 472);
+            lblPassword.Location = new Point(271, 393);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(50, 20);
             lblPassword.TabIndex = 17;
             lblPassword.Text = "label4";
+            // 
+            // lblTextFile
+            // 
+            lblTextFile.AutoSize = true;
+            lblTextFile.ForeColor = SystemColors.ButtonHighlight;
+            lblTextFile.Location = new Point(271, 520);
+            lblTextFile.Name = "lblTextFile";
+            lblTextFile.Size = new Size(50, 20);
+            lblTextFile.TabIndex = 20;
+            lblTextFile.Text = "label4";
+  
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Lucida Handwriting", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(230, 440);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(115, 24);
+            label5.TabIndex = 19;
+            label5.Text = "Text File ";
+            // 
+            // TextFile
+            // 
+            TextFile.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextFile.Location = new Point(230, 467);
+            TextFile.Margin = new Padding(2, 3, 2, 3);
+            TextFile.Name = "TextFile";
+            TextFile.Size = new Size(347, 32);
+            TextFile.TabIndex = 18;
+            TextFile.TextChanged += TextFile_TextChanged;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(711, 650);
+            Controls.Add(lblTextFile);
+            Controls.Add(label5);
+            Controls.Add(TextFile);
             Controls.Add(lblPassword);
             Controls.Add(lblMessage);
             Controls.Add(button4);
@@ -233,6 +271,9 @@ namespace VideoRentalSystem
         private System.Windows.Forms.Button button4;
         private Label lblMessage;
         private Label lblPassword;
+        private Label lblTextFile;
+        private Label label5;
+        private TextBox TextFile;
     }
 }
 

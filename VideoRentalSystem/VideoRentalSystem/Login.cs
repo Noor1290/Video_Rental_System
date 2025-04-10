@@ -140,18 +140,13 @@ namespace VideoRentalSystem
 
         private async Task ImportVideoDatabaseFromTxt(string filePath, string connectionString)
         {
-
-
             if (!File.Exists(filePath))
             {
-
                 return;
             }
 
             // Read all lines from the text file.
             string[] lines = await File.ReadAllLinesAsync(filePath);
-
-
             if (lines.Length < 4)
             {
                 return;
@@ -163,7 +158,6 @@ namespace VideoRentalSystem
                 try
                 {
                     await conn.OpenAsync();
-
                 }
                 catch (Exception ex)
                 {
@@ -171,11 +165,11 @@ namespace VideoRentalSystem
                     return;
                 }
 
+                int totalExistingRows = 0; // Counter for existing rows
+
                 for (int i = 2; i < lines.Length - 1; i++)
                 {
-
                     string line = lines[i].Trim();
-
                     if (string.IsNullOrWhiteSpace(line))
                     {
                         continue;
@@ -183,21 +177,18 @@ namespace VideoRentalSystem
 
                     // Split on two or more whitespace characters.
                     string[] tokens = System.Text.RegularExpressions.Regex.Split(line, @"\s{2,}");
-
                     if (tokens.Length != 8)  // Correct token count should be 8 now
                     {
-
                         continue;
                     }
 
                     string userId = tokens[1].Trim(); // may be "NULL"
                     string videoTitle = tokens[2].Trim();
-
-                    // Process the combined UploadDate and TimeLimit in token[3].
                     string combinedDateTime = tokens[3].Trim();
                     string uploadDateStr;
                     string DurationStr;
                     int lastSpaceInDate = combinedDateTime.LastIndexOf(' ');
+
                     if (lastSpaceInDate > 0)
                     {
                         uploadDateStr = combinedDateTime.Substring(0, lastSpaceInDate);
@@ -208,85 +199,129 @@ namespace VideoRentalSystem
                         uploadDateStr = combinedDateTime;
                         DurationStr = "";
                     }
+
                     string timeLimitStr = tokens[4].Trim();
                     string priceStr = tokens[5].Trim();
-
-                    // Token[5] contains Genre
                     string genre = tokens[6].Trim();
-
-
                     string videoPath = tokens[7].Trim();
 
-                    string insertQuery = @"
-                                            INSERT INTO VideoDatabase
-                                                (UserID, VideoTitle, UploadDate, Duration, TimeLimit, Price, Genre, VideoPath)
-                                            VALUES
-                                                (@UserID, @VideoTitle, @UploadDate, @Duration, @TimeLimit, @Price, @Genre, @VideoPath);
-                                        ";
+                    // Log the values to check for consistency in format
+                    Debug.WriteLine($"Checking for duplicate: VideoTitle={videoTitle}, Duration={DurationStr}");
+
+                    // Check if the data already exists (excluding UserID, checking VideoTitle and Duration)
+                    string checkQuery = @"
+                                    SELECT COUNT(1) 
+                                    FROM VideoDatabase 
+                                    WHERE VideoTitle = @VideoTitle AND Duration = @Duration;
+                                ";
 
                     try
                     {
-                        await using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                        await using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
                         {
-                            // Handle UserID: if the token is "NULL" (or empty), use DBNull.Value.
-                            if (string.Equals(userId, "NULL", StringComparison.OrdinalIgnoreCase) || string.IsNullOrWhiteSpace(userId))
-                            {
-                                cmd.Parameters.AddWithValue("@UserID", DBNull.Value);
-                            }
-                            else if (int.TryParse(userId, out int userIdInt))
-                            {
-                                cmd.Parameters.AddWithValue("@UserID", userIdInt);
-                            }
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@UserID", DBNull.Value);
-                            }
+                            checkCmd.Parameters.AddWithValue("@VideoTitle", videoTitle.Trim().ToLower()); // Case-insensitive comparison
+                            checkCmd.Parameters.AddWithValue("@Duration", DurationStr);
 
-                            cmd.Parameters.AddWithValue("@VideoTitle", videoTitle);
+                            // Execute the query and retrieve the count
+                            var result = await checkCmd.ExecuteScalarAsync();
 
-                            if (DateTime.TryParse(uploadDateStr, out DateTime uploadDate))
-                            {
-                                cmd.Parameters.AddWithValue("@UploadDate", uploadDate);
-                            }
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@UploadDate", DBNull.Value);
-                            }
+                            // If result is DBNull, treat it as 0
+                            int existingRecords = result != DBNull.Value ? Convert.ToInt32(result) : 0;
 
-                            if (int.TryParse(timeLimitStr, out int timeLimit))
-                            {
-                                cmd.Parameters.AddWithValue("@TimeLimit", timeLimit);
-                            }
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@TimeLimit", DBNull.Value);
-                            }
+                            // Debug statement to show how many duplicates are found
+                            Debug.WriteLine($"Found {existingRecords} duplicate(s) for VideoTitle={videoTitle} with Duration={DurationStr}.");
 
-                            if (decimal.TryParse(priceStr, out decimal price))
+                            if (existingRecords > 0)  // Data exists, display a message
                             {
-                                cmd.Parameters.AddWithValue("@Price", price);
+                                totalExistingRows += existingRecords; // Increment the counter
+                                Debug.WriteLine($"Record(s) already exists for VideoTitle={videoTitle} with Duration={DurationStr}. Skipping insertion.");
                             }
-                            else
+                            else  // Data does not exist, proceed to insert
                             {
-                                cmd.Parameters.AddWithValue("@Price", DBNull.Value);
+                                string insertQuery = @"
+                            INSERT INTO VideoDatabase
+                                (UserID, VideoTitle, UploadDate, Duration, TimeLimit, Price, Genre, VideoPath)
+                            VALUES
+                                (@UserID, @VideoTitle, @UploadDate, @Duration, @TimeLimit, @Price, @Genre, @VideoPath);
+                        ";
+
+                                await using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                                {
+                                    // Handle UserID: if the token is "NULL" (or empty), use DBNull.Value.
+                                    if (string.Equals(userId, "NULL", StringComparison.OrdinalIgnoreCase) || string.IsNullOrWhiteSpace(userId))
+                                    {
+                                        cmd.Parameters.AddWithValue("@UserID", DBNull.Value);
+                                    }
+                                    else if (int.TryParse(userId, out int userIdInt))
+                                    {
+                                        cmd.Parameters.AddWithValue("@UserID", userIdInt);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@UserID", DBNull.Value);
+                                    }
+
+                                    cmd.Parameters.AddWithValue("@VideoTitle", videoTitle);
+                                    if (DateTime.TryParse(uploadDateStr, out DateTime uploadDate))
+                                    {
+                                        cmd.Parameters.AddWithValue("@UploadDate", uploadDate);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@UploadDate", DBNull.Value);
+                                    }
+
+                                    if (int.TryParse(timeLimitStr, out int timeLimit))
+                                    {
+                                        cmd.Parameters.AddWithValue("@TimeLimit", timeLimit);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@TimeLimit", DBNull.Value);
+                                    }
+
+                                    if (decimal.TryParse(priceStr, out decimal price))
+                                    {
+                                        cmd.Parameters.AddWithValue("@Price", price);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Price", DBNull.Value);
+                                    }
+
+                                    cmd.Parameters.AddWithValue("@Duration", DurationStr);
+                                    cmd.Parameters.AddWithValue("@Genre", genre);
+                                    cmd.Parameters.AddWithValue("@VideoPath", videoPath);
+
+                                    int rowsAffected = await cmd.ExecuteNonQueryAsync();
+                                }
                             }
-
-                            cmd.Parameters.AddWithValue("@Duration", DurationStr);
-                            cmd.Parameters.AddWithValue("@Genre", genre);
-                            cmd.Parameters.AddWithValue("@videoPath", videoPath);
-
-                            int rowsAffected = await cmd.ExecuteNonQueryAsync();
                         }
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($"Exception during insertion for line {i}: {ex.Message}");
+                        Debug.WriteLine($"Exception during check or insertion for line {i}: {ex.Message}");
                     }
+                }
+
+                // After processing, display how many rows already exist
+                if (totalExistingRows > 0)
+                {
+                    Debug.WriteLine($"{totalExistingRows} row(s) were already present in the database. Skipping those rows.");
+                }
+                else
+                {
+                    Debug.WriteLine("All data was successfully inserted into the database.");
                 }
             }
 
             Debug.WriteLine("=== Import process completed ===");
         }
+
+
+
+
+
 
 
 
@@ -366,7 +401,7 @@ namespace VideoRentalSystem
                 }
             }
 
-            return (videoData, videoRentals); 
+            return (videoData, videoRentals);
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -392,5 +427,35 @@ namespace VideoRentalSystem
         {
 
         }
+
+        private void TextFile_TextChanged(object sender, EventArgs e)
+        {
+            string filePath = TextFile.Text.Trim(); // Get and trim any leading/trailing spaces from the input
+
+            // Clear previous messages in lblTextFile
+            lblTextFile.Text = "";
+            lblTextFile.ForeColor = Color.Black; // Reset text color to black
+
+            if (string.IsNullOrWhiteSpace(filePath)) // Check if the file path is empty or just spaces
+            {
+                lblTextFile.Text = "Please enter a valid file path."; // Error message
+                lblTextFile.ForeColor = Color.Red; // Set text color to red for error
+                return;
+            }
+
+            // Check if the file exists at the specified location
+            if (File.Exists(filePath))
+            {
+                lblTextFile.Text = "File is valid and accessible!"; // Success message
+                lblTextFile.ForeColor = Color.Green; // Set text color to green for success
+            }
+            else
+            {
+                lblTextFile.Text = "File does not exist. Please check the path and try again."; // Error message
+                lblTextFile.ForeColor = Color.Red; // Set text color to red for error
+            }
+        }
+
+
     }
 }

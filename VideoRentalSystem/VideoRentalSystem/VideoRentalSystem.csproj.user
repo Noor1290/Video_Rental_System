@@ -16,6 +16,12 @@
     <Compile Update="Welcome.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="WelcomeAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WelcomeUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Main.resx">

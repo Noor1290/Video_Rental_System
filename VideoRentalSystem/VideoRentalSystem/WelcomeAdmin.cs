@@ -9,12 +9,14 @@ namespace VideoRentalSystem
 {
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     // Main form class for the welcome screen
-    public partial class WelcomeForm : Form
+    public partial class WelcomeAdmin : Form
     {
         // UI elements
         private Label lblWelcome;
-        private Button btnUsers;
+        private Button btnLogin;
+        private Button btnRegister;
         private Button btnAdmin;
+        private Button btnGoBack;
 
         // Timers for animations
         private Timer typingTimer;
@@ -25,7 +27,7 @@ namespace VideoRentalSystem
         private int charIndex = 0;
 
         // Constructor
-        public WelcomeForm()
+        public WelcomeAdmin()
         {
             InitializeComponent(); // Set up form and controls
             StartTypingAnimation(); // Begin typing animation
@@ -55,9 +57,9 @@ namespace VideoRentalSystem
             this.Controls.Add(lblWelcome);
 
             // Login Button
-            btnUsers = new Button
+            btnLogin = new Button
             {
-                Text = "Users",
+                Text = "Login",
                 Size = new Size(175, 90),
                 Location = new Point(360, 230),
                 BackColor = SystemColors.ActiveCaption,
@@ -65,12 +67,27 @@ namespace VideoRentalSystem
                 Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 Anchor = AnchorStyles.Bottom,
             };
-            btnUsers.Click += BtnUsers_Click; // Attach click event
-            this.Controls.Add(btnUsers);
+            btnLogin.Click += BtnLogin_Click; // Attach click event
+            this.Controls.Add(btnLogin);
 
-            btnAdmin = new Button
+            // Register Button
+            btnRegister = new Button
             {
-                Text = "Admin",
+                Text = "Register",
+                Size = new Size(175, 90),
+                Location = new Point(360, 350),
+                BackColor = SystemColors.ActiveCaption,
+                ForeColor = Color.White,
+                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                Anchor = AnchorStyles.Top,
+            };
+
+            btnRegister.Click += BtnRegister_Click; // Attach click event
+            this.Controls.Add(btnRegister);
+
+            btnGoBack = new Button
+            {
+                Text = "Go Back",
                 Size = new Size(175, 90),
                 Location = new Point(360, 450),
                 BackColor = SystemColors.ActiveCaption,
@@ -79,7 +96,7 @@ namespace VideoRentalSystem
                 Anchor = AnchorStyles.Top,
             };
 
-            btnAdmin.Click += BtnAdmin_Click; // Attach click event
+            btnAdmin.Click += BtnRegister_Click; // Attach click event
             this.Controls.Add(btnAdmin);
         }
 
@@ -118,7 +135,7 @@ namespace VideoRentalSystem
                     lblWelcome.Text = ""; // Clear text
                     lblWelcome.ForeColor = Color.White; // Reset color
                     charIndex = 0;
-                    welcomeText = "Please login or register!"; // Update text
+                    welcomeText = "Please login as Admin!"; // Update text
                     StartTypingAnimation(); // Restart typing effect with new text
                 }
             };
@@ -126,18 +143,18 @@ namespace VideoRentalSystem
         }
 
         // Event handler for Login button click
-        private void BtnUsers_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
-            WelcomeUsers users = new WelcomeUsers();
-            users.Show();
+            Login login = new Login();
+            login.Show();
             this.Hide();
         }
 
         // Event handler for Register button click
-        private void BtnAdmin_Click(object sender, EventArgs e)
+        private void BtnRegister_Click(object sender, EventArgs e)
         {
-            WelcomeAdmin admin = new WelcomeAdmin();
-            admin.Show();
+            Register register = new Register();
+            register.Show();
             this.Hide();
 
         }
