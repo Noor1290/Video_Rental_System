@@ -57,51 +57,92 @@ namespace VideoRentalSystem
             {
                 await conn.OpenAsync();
 
-                string userQuery = "SELECT UserID, Username, Email, Password, ProfilePic FROM Users WHERE Username COLLATE Latin1_General_BIN = @Username AND Password = @Password";
+                // First, authenticate the user
+                string userQuery = "SELECT UserID, Username, Email, Password, ProfilePic FROM Users WHERE Username COLLATE Latin1_General_BIN = @Username";
 
+                // Use the 'using' block to ensure resources are disposed properly
                 await using var userCmd = conn.CreateCommand();
                 userCmd.CommandText = userQuery;
                 userCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
-                userCmd.Parameters.AddWithValue("@Password", txtPassword.Text);
 
+                // Execute the query and read the result
                 await using var userReader = await userCmd.ExecuteReaderAsync();
+
+                bool isValidUser = false;
+                string passwordFromDb = string.Empty;
+
                 if (await userReader.ReadAsync())
                 {
-                    // Store user data in the userInfo object (no need for profile_pic here)
-                    userInfo["UserID"] = userReader["UserID"].ToString();
-                    userInfo["Username"] = userReader["Username"].ToString();
-                    userInfo["Email"] = userReader["Email"].ToString();
-                    userInfo["Password"] = userReader["Password"].ToString();
-                    // Optionally store profile_pic in case you need it later
-                    byte[] profilePicData = userReader["ProfilePic"] as byte[];
-                    if (profilePicData != null)
-                    {
-                        // You can store or ignore the profile_pic data here
-                        userInfo["ProfilePic"] = profilePicData; // Store the binary data if needed
-                    }
-
+                    // Check if username exists
+                    isValidUser = true;
+                    passwordFromDb = userReader["Password"].ToString(); // Get the password from the DB
                 }
-                else
+
+                if (!isValidUser)
                 {
-                    lblMessage.Text = "Invalid username or password.";
+                    // If the username is invalid
+                    lblMessage.Text = "Invalid username.";
                     lblMessage.ForeColor = Color.Red;
+                    lblPassword.Text = "";  // Clear the password-related error message
                     return;
                 }
 
-                string videoDataFilePath = "database.txt";
+                // If username exists, now check for password
+                if (txtPassword.Text != passwordFromDb)
+                {
+                    // If the password is invalid
+                    lblPassword.Text = "Invalid password.";
+                    lblPassword.ForeColor = Color.Red;
+                    lblMessage.Text = "";  // Clear the username-related error message
+                    return;
+                }
 
-                await ImportVideoDatabaseFromTxt(videoDataFilePath, connectionString);
+                // If both username and password are valid
+                userInfo["UserID"] = userReader["UserID"].ToString();
+                userInfo["Username"] = userReader["Username"].ToString();
+                userInfo["Email"] = userReader["Email"].ToString();
+                userInfo["Password"] = userReader["Password"].ToString();
 
+                byte[] profilePicData = userReader["ProfilePic"] as byte[];
+                if (profilePicData != null)
+                {
+                    userInfo["ProfilePic"] = profilePicData; // Store the binary data if needed
+                }
 
+                userReader.Close(); // Close the DataReader
+
+                // Now, check if a file path is provided
+                string videoDataFilePath = TextFile.Text.Trim(); // Get the file path entered by the user
+
+                // If no file is uploaded, check if there is data in the database
+                if (string.IsNullOrWhiteSpace(videoDataFilePath)) // No file path provided
+                {
+                    string checkDatabaseQuery = "SELECT COUNT(*) FROM VideoDatabase";
+                    await using var dbCmd = new SqlCommand(checkDatabaseQuery, conn);
+                    int rowsInDatabase = (int)await dbCmd.ExecuteScalarAsync();
+
+                    if (rowsInDatabase == 0)
+                    {
+                        lblTextFile.Text = "The database is empty. Please upload a valid file.";
+                        lblTextFile.ForeColor = Color.Red;
+                        return;
+                    }
+                }
+                else // File path provided, process the uploaded file
+                {
+                    await ImportVideoDatabaseFromTxt(videoDataFilePath, connectionString);
+                }
+
+                // Load video data from the database for the current user
                 var (videoData, videoRentals) = await LoadVideoDataAsync(userInfo["UserID"].ToString(), connectionString);
 
+                // Show main page
                 Main mainPage = new Main(userInfo, videoData, videoRentals);
                 mainPage.Show();
                 this.Hide();
 
                 lblMessage.Text = "Login successful! Redirecting...";
                 lblMessage.ForeColor = Color.Green;
-
             }
             catch (Exception ex)
             {
@@ -109,6 +150,8 @@ namespace VideoRentalSystem
                 lblMessage.ForeColor = Color.Red;
             }
         }
+
+
 
         // Helper method to convert a hex string (e.g. "0xFFD8FFE0...") to a byte array.
         public static byte[] HexStringToByteArray(string hex)

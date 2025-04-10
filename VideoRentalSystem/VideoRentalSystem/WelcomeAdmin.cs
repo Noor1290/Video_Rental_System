@@ -23,7 +23,7 @@ namespace VideoRentalSystem
         private Timer fadeTimer;
 
         // Typing animation variables
-        private string welcomeText = "Welcome To Video Rental Store!";
+        private string welcomeText = "Welcome To the Admin Page!";
         private int charIndex = 0;
 
         // Constructor
@@ -71,9 +71,9 @@ namespace VideoRentalSystem
             this.Controls.Add(btnLogin);
 
             // Register Button
-            btnRegister = new Button
+            btnGoBack = new Button
             {
-                Text = "Register",
+                Text = "Go Back",
                 Size = new Size(175, 90),
                 Location = new Point(360, 350),
                 BackColor = SystemColors.ActiveCaption,
@@ -82,22 +82,8 @@ namespace VideoRentalSystem
                 Anchor = AnchorStyles.Top,
             };
 
-            btnRegister.Click += BtnRegister_Click; // Attach click event
-            this.Controls.Add(btnRegister);
-
-            btnGoBack = new Button
-            {
-                Text = "Go Back",
-                Size = new Size(175, 90),
-                Location = new Point(360, 450),
-                BackColor = SystemColors.ActiveCaption,
-                ForeColor = Color.White,
-                Font = new Font("Lucida Handwriting", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
-                Anchor = AnchorStyles.Top,
-            };
-
-            btnAdmin.Click += BtnRegister_Click; // Attach click event
-            this.Controls.Add(btnAdmin);
+            btnGoBack.Click += BtnGoBack_Click; // Attach click event
+            this.Controls.Add(btnGoBack);
         }
 
         // Start the typing effect for the welcome message
@@ -145,15 +131,15 @@ namespace VideoRentalSystem
         // Event handler for Login button click
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Login login = new Login();
+            LoginAdmin login = new LoginAdmin();
             login.Show();
             this.Hide();
         }
 
         // Event handler for Register button click
-        private void BtnRegister_Click(object sender, EventArgs e)
+        private void BtnGoBack_Click(object sender, EventArgs e)
         {
-            Register register = new Register();
+            WelcomeForm register = new WelcomeForm();
             register.Show();
             this.Hide();
 

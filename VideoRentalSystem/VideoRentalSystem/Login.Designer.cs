@@ -205,7 +205,6 @@ namespace VideoRentalSystem
             lblTextFile.Size = new Size(50, 20);
             lblTextFile.TabIndex = 20;
             lblTextFile.Text = "label4";
-  
             // 
             // label5
             // 
@@ -220,11 +219,11 @@ namespace VideoRentalSystem
             // 
             // TextFile
             // 
-            TextFile.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TextFile.Font = new Font("Verdana", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TextFile.Location = new Point(230, 467);
             TextFile.Margin = new Padding(2, 3, 2, 3);
             TextFile.Name = "TextFile";
-            TextFile.Size = new Size(347, 32);
+            TextFile.Size = new Size(347, 23);
             TextFile.TabIndex = 18;
             TextFile.TextChanged += TextFile_TextChanged;
             // 
