@@ -32,18 +32,14 @@ namespace VideoRentalSystem
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel1 = new Panel();
-            button1 = new Button();
             button7 = new Button();
             pictureBox2 = new PictureBox();
             button6 = new Button();
             pictureBox1 = new PictureBox();
-            button5 = new Button();
             SearchButton = new Button();
             label4 = new Label();
             label1 = new Label();
-            button8 = new Button();
             label2 = new Label();
-            button4 = new Button();
             ProductsName = new TextBox();
             Categories = new ComboBox();
             panel1.SuspendLayout();
@@ -54,28 +50,15 @@ namespace VideoRentalSystem
             // panel1
             // 
             panel1.BackColor = Color.LightBlue;
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(button7);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(button6);
             panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(button5);
             panel1.Location = new Point(0, -1);
             panel1.Margin = new Padding(2, 3, 2, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(208, 987);
             panel1.TabIndex = 32;
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(0, 398);
-            button1.Margin = new Padding(2, 3, 2, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(208, 50);
-            button1.TabIndex = 43;
-            button1.Text = "About Us";
-            button1.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
@@ -125,17 +108,6 @@ namespace VideoRentalSystem
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // button5
-            // 
-            button5.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.Location = new Point(0, 286);
-            button5.Margin = new Padding(2, 3, 2, 3);
-            button5.Name = "button5";
-            button5.Size = new Size(208, 50);
-            button5.TabIndex = 34;
-            button5.Text = "Products";
-            button5.UseVisualStyleBackColor = true;
-            // 
             // SearchButton
             // 
             SearchButton.BackColor = SystemColors.ActiveCaption;
@@ -172,18 +144,6 @@ namespace VideoRentalSystem
             label1.TabIndex = 43;
             label1.Text = "Categories";
             // 
-            // button8
-            // 
-            button8.BackColor = SystemColors.ActiveCaption;
-            button8.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button8.Location = new Point(529, 211);
-            button8.Margin = new Padding(2, 3, 2, 3);
-            button8.Name = "button8";
-            button8.Size = new Size(139, 50);
-            button8.TabIndex = 43;
-            button8.Text = "Enter";
-            button8.UseVisualStyleBackColor = false;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -194,19 +154,6 @@ namespace VideoRentalSystem
             label2.Size = new Size(111, 24);
             label2.TabIndex = 47;
             label2.Text = "Products";
-            // 
-            // button4
-            // 
-            button4.BackColor = SystemColors.ActiveCaption;
-            button4.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(742, 211);
-            button4.Margin = new Padding(2, 3, 2, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(139, 50);
-            button4.TabIndex = 48;
-            button4.Text = "Delete";
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += Order_Click;
             // 
             // ProductsName
             // 
@@ -233,9 +180,7 @@ namespace VideoRentalSystem
             ClientSize = new Size(1230, 987);
             Controls.Add(Categories);
             Controls.Add(ProductsName);
-            Controls.Add(button4);
             Controls.Add(label2);
-            Controls.Add(button8);
             Controls.Add(label1);
             Controls.Add(label4);
             Controls.Add(SearchButton);
@@ -257,17 +202,13 @@ namespace VideoRentalSystem
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button4;
-        private Button button1;
         private TextBox ProductsName;
         private ComboBox Categories;
     }
