@@ -63,7 +63,7 @@ namespace VideoRentalSystem
             // Use videoData for any further operations you need
             Debug.WriteLine("Video data loaded successfully.");
 
-            AdminMain main = new AdminMain();
+            AdminMain main = new AdminMain(videoData);
             main.Show();
             this.Hide();
             Debug.WriteLine("AdminMain form shown, LoginAdmin form hidden.");

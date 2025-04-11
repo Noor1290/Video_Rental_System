@@ -30,9 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMain));
             panel1 = new Panel();
-            RemoveVideo = new Button();
-            ModifyVideo = new Button();
-            AddVideo = new Button();
+            button2 = new Button();
+            button1 = new Button();
             pictureBox2 = new PictureBox();
             button6 = new Button();
             pictureBox1 = new PictureBox();
@@ -44,56 +43,40 @@
             // panel1
             // 
             panel1.BackColor = Color.LightBlue;
-            panel1.Controls.Add(RemoveVideo);
-            panel1.Controls.Add(ModifyVideo);
-            panel1.Controls.Add(AddVideo);
+            panel1.Controls.Add(button2);
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(button6);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(2, -7);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(213, 800);
+            panel1.Size = new Size(209, 800);
             panel1.TabIndex = 51;
             // 
-            // RemoveVideo
+            // button2
             // 
-            RemoveVideo.BackColor = SystemColors.ActiveCaption;
-            RemoveVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RemoveVideo.Location = new Point(5, 300);
-            RemoveVideo.Margin = new Padding(2, 3, 2, 3);
-            RemoveVideo.Name = "RemoveVideo";
-            RemoveVideo.Size = new Size(206, 74);
-            RemoveVideo.TabIndex = 44;
-            RemoveVideo.Text = "Remove";
-            RemoveVideo.UseVisualStyleBackColor = false;
-            RemoveVideo.Click += RemoveVideo_Click;
+            button2.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.Location = new Point(0, 263);
+            button2.Margin = new Padding(2, 3, 2, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(208, 50);
+            button2.TabIndex = 45;
+            button2.Text = "Add";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
-            // ModifyVideo
+            // button1
             // 
-            ModifyVideo.BackColor = SystemColors.ActiveCaption;
-            ModifyVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ModifyVideo.Location = new Point(5, 380);
-            ModifyVideo.Margin = new Padding(2, 3, 2, 3);
-            ModifyVideo.Name = "ModifyVideo";
-            ModifyVideo.Size = new Size(206, 74);
-            ModifyVideo.TabIndex = 43;
-            ModifyVideo.Text = "Modify";
-            ModifyVideo.UseVisualStyleBackColor = false;
-            ModifyVideo.Click += ModifyVideo_Click;
-            // 
-            // AddVideo
-            // 
-            AddVideo.BackColor = SystemColors.ActiveCaption;
-            AddVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            AddVideo.Location = new Point(2, 220);
-            AddVideo.Margin = new Padding(2, 3, 2, 3);
-            AddVideo.Name = "AddVideo";
-            AddVideo.Size = new Size(206, 74);
-            AddVideo.TabIndex = 42;
-            AddVideo.Text = "Add";
-            AddVideo.UseVisualStyleBackColor = false;
-            AddVideo.Click += AddVideo_Click;
+            button1.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(2, 319);
+            button1.Margin = new Padding(2, 3, 2, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(208, 50);
+            button1.TabIndex = 44;
+            button1.Text = "Delete";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pictureBox2
             // 
@@ -110,13 +93,14 @@
             // 
             button6.BackColor = SystemColors.ActiveCaption;
             button6.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.Location = new Point(2, 562);
+            button6.Location = new Point(0, 562);
             button6.Margin = new Padding(2, 3, 2, 3);
             button6.Name = "button6";
             button6.Size = new Size(206, 74);
             button6.TabIndex = 40;
             button6.Text = "Logout";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // pictureBox1
             // 
@@ -133,7 +117,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(865, 641);
+            ClientSize = new Size(865, 630);
             ControlBox = false;
             Controls.Add(panel1);
             Name = "AdminMain";
@@ -149,8 +133,7 @@
         private PictureBox pictureBox2;
         private Button button6;
         private PictureBox pictureBox1;
-        private Button RemoveVideo;
-        private Button ModifyVideo;
-        private Button AddVideo;
+        private Button button2;
+        private Button button1;
     }
 }
