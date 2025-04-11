@@ -106,7 +106,6 @@ namespace VideoRentalSystem
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 36;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // SearchButton
             // 
@@ -131,7 +130,6 @@ namespace VideoRentalSystem
             label4.Size = new Size(111, 24);
             label4.TabIndex = 41;
             label4.Text = "Products";
-            label4.Click += label4_Click;
             // 
             // label1
             // 

@@ -30,15 +30,6 @@ namespace VideoRentalSystem
 
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void Delete_Click(object sender, EventArgs e)
         {
@@ -93,20 +84,6 @@ namespace VideoRentalSystem
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Address_Text(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Submit_Click(object sender, EventArgs e)
         {
@@ -223,21 +200,6 @@ namespace VideoRentalSystem
                         && hasDecimalDigit
                         ;
             return isPasswordStrong;
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UsernameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click_1(object sender, EventArgs e)
-        {
 
         }
         private void DisplayMessage(string message, Color color)

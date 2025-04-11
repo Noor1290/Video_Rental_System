@@ -229,7 +229,7 @@ namespace VideoRentalSystem
         { "Horror", "Image/Horror.jpeg" },
         { "Mindbearer", "Image/Mindbearer.jpeg" },
         { "Mystery", "Image/Mystery.jpeg" },
-        { "Political", "Image/Political.jpeg" },
+        { "Political", "Image/Political.jpg" },
         { "Psychological", "Image/Psychological.jpeg" },
         { "Romance", "Image/Romance.jpeg" },
         { "Thriller", "Image/Thriller.jpeg" }

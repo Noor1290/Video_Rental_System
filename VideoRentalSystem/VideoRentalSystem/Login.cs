@@ -364,12 +364,6 @@ namespace VideoRentalSystem
 
 
 
-
-
-
-
-
-
         private async Task<(CustomHashTable, CustomHashTable)> LoadVideoDataAsync(string userId, string connectionString)
         {
             CustomHashTable videoData = new CustomHashTable(10000);
@@ -448,29 +442,7 @@ namespace VideoRentalSystem
             return (videoData, videoRentals);
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMessage_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void TextFile_TextChanged(object sender, EventArgs e)
         {

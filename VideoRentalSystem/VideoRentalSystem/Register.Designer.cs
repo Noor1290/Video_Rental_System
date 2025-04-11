@@ -126,7 +126,6 @@ namespace VideoRentalSystem
             this.EmailTextBox.Name = "EmailTextBox";
             this.EmailTextBox.Size = new System.Drawing.Size(462, 37);
             this.EmailTextBox.TabIndex = 25;
-            this.EmailTextBox.TextChanged += new System.EventHandler(this.Address_Text);
             // 
             // label4
             // 
@@ -145,7 +144,6 @@ namespace VideoRentalSystem
             this.UsernameTextBox.Name = "UsernameTextBox";
             this.UsernameTextBox.Size = new System.Drawing.Size(313, 37);
             this.UsernameTextBox.TabIndex = 23;
-            this.UsernameTextBox.TextChanged += new System.EventHandler(this.UsernameTextBox_TextChanged);
             // 
             // label5
             // 
@@ -166,7 +164,6 @@ namespace VideoRentalSystem
             this.PasswordTextBox.Size = new System.Drawing.Size(293, 37);
             this.PasswordTextBox.TabIndex = 30;
             this.PasswordTextBox.UseSystemPasswordChar = true;
-            this.PasswordTextBox.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // panel1
             // 
@@ -180,7 +177,6 @@ namespace VideoRentalSystem
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 625);
             this.panel1.TabIndex = 32;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // ErrorTextImage
             // 
@@ -191,7 +187,6 @@ namespace VideoRentalSystem
             this.ErrorTextImage.Size = new System.Drawing.Size(75, 27);
             this.ErrorTextImage.TabIndex = 27;
             this.ErrorTextImage.Text = "Error";
-            this.ErrorTextImage.Click += new System.EventHandler(this.label8_Click);
             // 
             // label6
             // 
@@ -235,7 +230,6 @@ namespace VideoRentalSystem
             this.EmailErrorMessage.Size = new System.Drawing.Size(75, 27);
             this.EmailErrorMessage.TabIndex = 33;
             this.EmailErrorMessage.Text = "Error";
-            this.EmailErrorMessage.Click += new System.EventHandler(this.label7_Click);
             // 
             // UsernameErrorMessage
             // 
@@ -246,7 +240,6 @@ namespace VideoRentalSystem
             this.UsernameErrorMessage.Size = new System.Drawing.Size(75, 27);
             this.UsernameErrorMessage.TabIndex = 28;
             this.UsernameErrorMessage.Text = "Error";
-            this.UsernameErrorMessage.Click += new System.EventHandler(this.label7_Click_1);
             // 
             // PasswordErrorMessage
             // 
@@ -266,7 +259,6 @@ namespace VideoRentalSystem
             this.pictureBox1.Size = new System.Drawing.Size(167, 192);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Register
             // 

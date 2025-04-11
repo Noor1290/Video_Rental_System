@@ -35,15 +35,6 @@ namespace VideoRentalSystem
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Logout_CLick(object sender, EventArgs e)
         {
             var rentalManager = new VideoRentalManager(videoRentals, userInfo);
@@ -56,27 +47,13 @@ namespace VideoRentalSystem
             login.Show();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-        }
-        private void Order_Click(object sender, EventArgs e)
-        {
-        }
-
         private void Profile_Click(object sender, EventArgs e)
         {
             ProfilePage profile = new ProfilePage(userInfo, videoData, videoRentals);
             profile.Show();
             this.Hide();
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
         public static byte[] HexStringToByteArray(string hex)
         {
             if (string.IsNullOrEmpty(hex))
@@ -817,74 +794,6 @@ namespace VideoRentalSystem
 
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            // Retrieve the byte array for the profile picture from userInfo hashtable
-            byte[] profilePicBytes = userInfo.Get("ProfilePic") as byte[];
-
-            // Check if the byte array is valid
-            if (profilePicBytes != null && profilePicBytes.Length > 0)
-            {
-                try
-                {
-                    // Convert byte array to Image
-                    using (MemoryStream ms = new MemoryStream(profilePicBytes))
-                    {
-                        Image profileImage = Image.FromStream(ms);
-
-                        // Set the profile picture to the PictureBox
-                        pictureBox1.Image = profileImage;
-
-                        // Ensure the image fits the PictureBox
-                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                    }
-
-                    // Optionally, retrieve and display other user profile information
-                    string userName = userInfo.Get("Username")?.ToString() ?? "No name found";
-                    string userEmail = userInfo.Get("Email")?.ToString() ?? "No email found";
-
-                    // Display the user profile info in a message box
-                    MessageBox.Show($"User Profile:\n\nName: {userName}\nEmail: {userEmail}\n",
-                                    "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    // Handle any error that occurs while converting the byte array to an image
-                    MessageBox.Show("Error displaying the profile picture: " + ex.Message,
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                // If no profile picture is found in the hashtable
-                MessageBox.Show("No profile picture found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void pictureBox2_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         //search button to display another window that displays the list 
         private void SearchButtonFunction(object sender, EventArgs e)
