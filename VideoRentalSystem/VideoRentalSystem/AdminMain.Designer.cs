@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMain));
             panel1 = new Panel();
+            RemoveVideo = new Button();
+            ModifyVideo = new Button();
+            AddVideo = new Button();
             pictureBox2 = new PictureBox();
             button6 = new Button();
             pictureBox1 = new PictureBox();
-            AddVideo = new Button();
-            ModifyVideo = new Button();
-            RemoveVideo = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -56,10 +56,49 @@
             panel1.Size = new Size(213, 800);
             panel1.TabIndex = 51;
             // 
+            // RemoveVideo
+            // 
+            RemoveVideo.BackColor = SystemColors.ActiveCaption;
+            RemoveVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RemoveVideo.Location = new Point(5, 300);
+            RemoveVideo.Margin = new Padding(2, 3, 2, 3);
+            RemoveVideo.Name = "RemoveVideo";
+            RemoveVideo.Size = new Size(206, 74);
+            RemoveVideo.TabIndex = 44;
+            RemoveVideo.Text = "Remove";
+            RemoveVideo.UseVisualStyleBackColor = false;
+            RemoveVideo.Click += RemoveVideo_Click;
+            // 
+            // ModifyVideo
+            // 
+            ModifyVideo.BackColor = SystemColors.ActiveCaption;
+            ModifyVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ModifyVideo.Location = new Point(5, 380);
+            ModifyVideo.Margin = new Padding(2, 3, 2, 3);
+            ModifyVideo.Name = "ModifyVideo";
+            ModifyVideo.Size = new Size(206, 74);
+            ModifyVideo.TabIndex = 43;
+            ModifyVideo.Text = "Modify";
+            ModifyVideo.UseVisualStyleBackColor = false;
+            ModifyVideo.Click += ModifyVideo_Click;
+            // 
+            // AddVideo
+            // 
+            AddVideo.BackColor = SystemColors.ActiveCaption;
+            AddVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AddVideo.Location = new Point(2, 220);
+            AddVideo.Margin = new Padding(2, 3, 2, 3);
+            AddVideo.Name = "AddVideo";
+            AddVideo.Size = new Size(206, 74);
+            AddVideo.TabIndex = 42;
+            AddVideo.Text = "Add";
+            AddVideo.UseVisualStyleBackColor = false;
+            AddVideo.Click += AddVideo_Click;
+            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(9, 543);
+            pictureBox2.Location = new Point(9, 572);
             pictureBox2.Margin = new Padding(2, 3, 2, 3);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(46, 51);
@@ -71,7 +110,7 @@
             // 
             button6.BackColor = SystemColors.ActiveCaption;
             button6.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.Location = new Point(2, 529);
+            button6.Location = new Point(2, 562);
             button6.Margin = new Padding(2, 3, 2, 3);
             button6.Name = "button6";
             button6.Size = new Size(206, 74);
@@ -90,42 +129,6 @@
             pictureBox1.TabIndex = 36;
             pictureBox1.TabStop = false;
             // 
-            // AddVideo
-            // 
-            AddVideo.BackColor = SystemColors.ActiveCaption;
-            AddVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            AddVideo.Location = new Point(2, 220);
-            AddVideo.Margin = new Padding(2, 3, 2, 3);
-            AddVideo.Name = "AddVideo";
-            AddVideo.Size = new Size(206, 74);
-            AddVideo.TabIndex = 42;
-            AddVideo.Text = "Add";
-            AddVideo.UseVisualStyleBackColor = false;
-            // 
-            // ModifyVideo
-            // 
-            ModifyVideo.BackColor = SystemColors.ActiveCaption;
-            ModifyVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ModifyVideo.Location = new Point(5, 380);
-            ModifyVideo.Margin = new Padding(2, 3, 2, 3);
-            ModifyVideo.Name = "ModifyVideo";
-            ModifyVideo.Size = new Size(206, 74);
-            ModifyVideo.TabIndex = 43;
-            ModifyVideo.Text = "Modify";
-            ModifyVideo.UseVisualStyleBackColor = false;
-            // 
-            // RemoveVideo
-            // 
-            RemoveVideo.BackColor = SystemColors.ActiveCaption;
-            RemoveVideo.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RemoveVideo.Location = new Point(5, 300);
-            RemoveVideo.Margin = new Padding(2, 3, 2, 3);
-            RemoveVideo.Name = "RemoveVideo";
-            RemoveVideo.Size = new Size(206, 74);
-            RemoveVideo.TabIndex = 44;
-            RemoveVideo.Text = "Remove";
-            RemoveVideo.UseVisualStyleBackColor = false;
-            // 
             // AdminMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -134,7 +137,7 @@
             ControlBox = false;
             Controls.Add(panel1);
             Name = "AdminMain";
-            Load += this.AdminMain_Load;
+            Load += AdminMain_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

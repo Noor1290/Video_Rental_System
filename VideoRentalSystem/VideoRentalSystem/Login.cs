@@ -274,6 +274,7 @@ namespace VideoRentalSystem
                             // Debug statement to show how many duplicates are found
                             Debug.WriteLine($"Found {existingRecords} duplicate(s) for VideoTitle={videoTitle} with Duration={DurationStr}.");
 
+
                             if (existingRecords > 0)  // Data exists, display a message
                             {
                                 totalExistingRows += existingRecords; // Increment the counter

@@ -798,11 +798,11 @@ namespace VideoRentalSystem
                         }
 
                         // Now clear the VideoDatabase table.
-                        string clearQuery = "DELETE FROM [VideoRentalSystem].[dbo].[VideoDatabase];";
-                        using (SqlCommand clearCmd = new SqlCommand(clearQuery, conn))
-                        {
-                            int rowsAffected = clearCmd.ExecuteNonQuery();
-                        }
+                        //string clearQuery = "DELETE FROM [VideoRentalSystem].[dbo].[VideoDatabase];";
+                        //using (SqlCommand clearCmd = new SqlCommand(clearQuery, conn))
+                        //{
+                        //    int rowsAffected = clearCmd.ExecuteNonQuery();
+                        //}
                     }
                 }
                 catch (Exception ex)

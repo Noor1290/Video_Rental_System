@@ -16,5 +16,24 @@ namespace VideoRentalSystem
         {
             InitializeComponent();
         }
+        private void AdminMain_Load(object sender, EventArgs e)
+        {
+            // Method implementation
+        }
+
+        private void AddVideo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveVideo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ModifyVideo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
