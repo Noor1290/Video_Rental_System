@@ -39,7 +39,9 @@ namespace VideoRentalSystem
         //close the application
         private void Close_CLick(object sender, EventArgs e)
         {
-            Close();
+            WelcomeForm welcome = new WelcomeForm();
+            welcome.Show();
+            this.Hide();
         }
         //navigates to password reset functionality
         private void Reset_Click(object sender, EventArgs e)
@@ -274,7 +276,6 @@ namespace VideoRentalSystem
                             if (existingRecords > 0)  // Data exists, display a message
                             {
                                 totalExistingRows += existingRecords; // Increment the counter
-                                Debug.WriteLine($"Record(s) already exists for VideoTitle={videoTitle} with Duration={DurationStr}. Skipping insertion.");
                             }
                             else  // Data does not exist, proceed to insert
                             {

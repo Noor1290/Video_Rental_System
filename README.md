@@ -36,7 +36,7 @@ Follow these steps to connect the project to your SQL server:
 6. Click **Test Connection** to ensure it's working.
 
 **Important**:  
-DO NOT forget to change the **server name** and **database name** in the C# program (Refer to the **Location of Server** and **database name** section in the C# code).
+DO NOT forget to change the **server name** and **database name** in the C# program.
 
 ---
 
@@ -149,7 +149,13 @@ This section will prompt new users to enter their persoonal information:
 - Among others
 
 ### **4. Login Section**
-This page is for previously logged in user
+- This page is for previously logged in user
+- Please note that the text file input box will allow the user to upload a text file containing his database for the main table.
+- Validations have been used to 
+	- Verfiry whether the database is empty and to check for duplicates.
+	- The user will have to copy the full path of the text file called ***Database.txt*** using
+	- `Ctrl + Shift + C` or bying right clicking on the text file and looking for copy as path.
+	 - <span style="color:red;">**ERROR**</span> may arise when copying the path with its double quotes, which needs to be removed.
 
 ### **5. Main Page**
 This section allows the user to search for specific video through videoTitle or through Categories.
