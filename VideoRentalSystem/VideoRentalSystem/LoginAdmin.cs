@@ -74,9 +74,10 @@ namespace VideoRentalSystem
 
         private void GoBackBtn_Click(object sender, EventArgs e)
         {
+            //creates welcome admin form
             WelcomeAdmin admin = new WelcomeAdmin();
-            admin.Show();
-            this.Close();
+            admin.Show();//show welcome page
+            this.Close();//close login form
             Debug.WriteLine("GoBackBtn clicked. WelcomeAdmin form shown and LoginAdmin form closed.");
         }
 
@@ -134,7 +135,7 @@ namespace VideoRentalSystem
             }
 
             Debug.WriteLine("Finished loading video data.");
-            return videoData;
+            return videoData;//return populated hash table
         }
     }
 }
