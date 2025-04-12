@@ -103,18 +103,15 @@ git init
   
 3.***VideoRentals***: This table is used to store all the videos rented by specific users.
 
-### Location of Sever Name in the Project
-1. In Register, the server name and database name should be changed unless the same database name is used which is recommended.
-The database name is ***VideoRentalSystem***
-2. In Login, they are located on ***Line 53***
-3. In Main Page, they are located on ***Line 429***
+### Server Name and Database Name
+- Please make sure to change the server name in Login, Register, Main page for users 
+- As well as for Admin Page in LoginAdmin and AdminMain
+- Please Make Sure to use the same database name: <span style="color:lightgreen;">***VideoRentalSystem***</span> since the name VideoRentalSystem is also used in the logout function
 
-### Additional change needed to make (if database name is different)
-In Main Page:
-
-1.The Unlink Query on ***Line 700*** and ***Line 701*** needs to be changed.
-
-2.The Clear Query on ***Line 712*** needs to be changed.
+### How to locate the database name in the above files
+Please press
+-  `Ctrl + F`
+- Then search for the server name
 
 ##  Navigation
 
@@ -160,8 +157,15 @@ This section allows the user to search for specific video through videoTitle or 
 - The user will then press on the rent button which will save it in hashtable which can be viewed in ***profile page***
 - ***Logout Button*** : This button will save everything in all 3 hashtable to SQL permanently.
 - ***Profile Page*** : This button will display all the videos rented by the logged in user
-	 - All rented videos will be dispalyed in orange if timelimit has not been up yet.
-	 -  All expired videos will be displayed in LightBlue.
+	### Video Status:
+
+- **Rented videos** will be displayed in <span style="color:orange;">orange</span> if the time limit has not been reached yet.
+- **Expired videos** will be displayed in <span style="color:cyan;">light blue</span>.
+
+### Instructions:
+
+- When a video is rented, it will show in **orange** until the time limit is up.
+- Once the time limit has passed, the video will be marked as **expired** and displayed in **light blue**.
 ---
 
 
