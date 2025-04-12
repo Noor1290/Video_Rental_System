@@ -1,4 +1,5 @@
-﻿using System;
+﻿//imports
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -126,6 +127,7 @@ namespace VideoRentalSystem
                     }
                 }
             }
+            //error messages
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error loading video data: {ex.Message}");

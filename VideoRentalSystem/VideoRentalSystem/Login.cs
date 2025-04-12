@@ -1,4 +1,5 @@
-﻿#nullable disable
+﻿//imports
+#nullable disable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace VideoRentalSystem
             InitializeComponent();
         }
 
+        //handles user registration navigation
         private void Register_Click(object sender, EventArgs e)
         {
             Register register = new Register();
@@ -34,12 +36,12 @@ namespace VideoRentalSystem
             this.Hide();
 
         }
-
+        //close the application
         private void Close_CLick(object sender, EventArgs e)
         {
             Close();
         }
-
+        //navigates to password reset functionality
         private void Reset_Click(object sender, EventArgs e)
         {
             Reset reset = new Reset();
@@ -47,7 +49,7 @@ namespace VideoRentalSystem
             this.Hide();
 
         }
-
+        //main login authentication handler
         private async void Login_Click(object sender, EventArgs e)
         {
             string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
@@ -180,7 +182,7 @@ namespace VideoRentalSystem
             return path.Contains("\\") || path.Contains("/");
         }
 
-
+        //bulk import video data from formatted text file
         private async Task ImportVideoDatabaseFromTxt(string filePath, string connectionString)
         {
             if (!File.Exists(filePath))
@@ -190,7 +192,7 @@ namespace VideoRentalSystem
 
             // Read all lines from the text file.
             string[] lines = await File.ReadAllLinesAsync(filePath);
-            if (lines.Length < 4)
+            if (lines.Length < 4) // minimum viable data check
             {
                 return;
             }
@@ -441,8 +443,6 @@ namespace VideoRentalSystem
 
             return (videoData, videoRentals);
         }
-
-
 
         private void TextFile_TextChanged(object sender, EventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//imports
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,12 +8,13 @@ namespace VideoRentalSystem
 {
     public partial class AddVideo : Form
     {
+        //Custom hash table to store video data.
         private CustomHashTable videoData;
 
         public AddVideo(CustomHashTable videoData)
         {
             InitializeComponent();
-            this.videoData = videoData;
+            this.videoData = videoData;//store reference to shared video data
             InitializeCustomUI();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//imports
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,10 @@ namespace VideoRentalSystem
 {
     public partial class AdminMain : Form
     {
+        //store video data
         private CustomHashTable videoData;
+
+        //initialises admin main with curretn video data
         public AdminMain(CustomHashTable videoData)
         {
             InitializeComponent();
@@ -25,18 +29,19 @@ namespace VideoRentalSystem
             // Method implementation
         }
 
+        //opens add video form and closes current admin interface
         private void button2_Click(object sender, EventArgs e)
         {
             AddVideo addVideo = new AddVideo(videoData);
             addVideo.Show();
-            this.Close();
+            this.Close(); // release cuurent form resources
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             // Save video data to the database
             SaveVideoDataToDatabase();
-
+            //remove database entires not in current dataset
             LogoutAndDeleteFromDatabase();
 
             // You can also add any other logout logic here (like showing a confirmation message)
@@ -50,6 +55,7 @@ namespace VideoRentalSystem
         // Method to save videos to the database (insert or update)
         private void SaveVideoDataToDatabase()
         {
+            //connection string for SQL server
             string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
             Debug.WriteLine("Starting SaveVideoDataToDatabase method...");
 
@@ -199,7 +205,7 @@ namespace VideoRentalSystem
         {
             DeleteVideo delete = new DeleteVideo(videoData);
             delete.Show();
-            this.Hide();
+            this.Hide(); //keeps admin instance for potential return
         }
     }
 }

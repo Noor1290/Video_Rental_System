@@ -1,4 +1,5 @@
-﻿using System;
+﻿//imports
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,12 @@ namespace VideoRentalSystem
     
     public partial class DeleteVideo : Form
     {
+        //store video data
         private CustomHashTable videoData;
         public DeleteVideo(CustomHashTable videoData)
         {
             InitializeComponent();
-            this.videoData = videoData;
+            this.videoData = videoData; // maintain single instance of video data
         }
 
 
@@ -73,13 +75,12 @@ namespace VideoRentalSystem
             }
         }
 
-
-
-
+        //handles video deletion process
         private void Delete_Click(object sender, EventArgs e)
         {
             string videoTitleToDelete = txtDeleteVideo.Text.Trim(); // Get the video title entered by the user
 
+            // validate empty input
             if (string.IsNullOrEmpty(videoTitleToDelete))
             {
                 MessageBox.Show("Please enter a Video Title to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -89,6 +90,7 @@ namespace VideoRentalSystem
             // Check if the video title exists in the hashtable
             bool videoFound = false;
 
+            // iterate through video entires to find match
             foreach (KeyValuePair<string, object> entry in videoData)
             {
                 CustomHashTable videoDetails = (CustomHashTable)entry.Value;
@@ -109,13 +111,16 @@ namespace VideoRentalSystem
             {
                 MessageBox.Show("No video found with the given title.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            //return to admin interface with updated data
             AdminMain main = new AdminMain(videoData);
             main.Show();
-            this.Close();
+            this.Close();// release delete form resources
 
         }
+        // navigate back to main admin interface
         private void GoBackbutton_Click(object sender, EventArgs e)
         {
+            //maintain same vidoe data instance across forms
             AdminMain main = new AdminMain(videoData);
             main.Show();
             this.Close();
