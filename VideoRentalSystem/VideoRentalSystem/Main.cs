@@ -1,18 +1,7 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Tokens;
 using Timer = System.Windows.Forms.Timer;
-using System.Drawing.Drawing2D;
 
 namespace VideoRentalSystem
 {
@@ -23,7 +12,6 @@ namespace VideoRentalSystem
         private CustomHashTable videoData;
         private CustomHashTable videoRentals;
         private FlowLayoutPanel flowLayoutPanel;
-        private ListBox categorySuggestionsListBox;
 
         public Main(CustomHashTable userInfo, CustomHashTable videoData, CustomHashTable videoRentals)
         {
@@ -47,39 +35,7 @@ namespace VideoRentalSystem
             login.Show();
         }
 
-        private void Profile_Click(object sender, EventArgs e)
-        {
-            ProfilePage profile = new ProfilePage(userInfo, videoData, videoRentals);
-            profile.Show();
-            this.Hide();
-        }
 
-        public static byte[] HexStringToByteArray(string hex)
-        {
-            if (string.IsNullOrEmpty(hex))
-                return null;
-
-            // Remove the surrounding quotes if they exist
-            hex = hex.Trim('"');
-
-            // Remove 0x prefix if present
-            if (hex.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase))
-            {
-                hex = hex.Substring(2);
-            }
-            Debug.WriteLine($"Hex Content: {hex}");  // Prints the content of the hex string
-            Debug.WriteLine($"Hex Type: {hex.GetType().Name}");  // Prints the type of the variable
-            Debug.WriteLine($"Hex Length: {hex.Length}");  // Prints the length of the hex string
-
-            int numberChars = hex.Length;
-            Debug.WriteLine($"Hex Length: {numberChars}");
-            byte[] bytes = new byte[numberChars / 2];
-            for (int i = 0; i < numberChars; i += 2)
-            {
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            }
-            return bytes;
-        }
 
         // Helper method to check if the string looks like a valid file path
         public static bool IsValidPath(string path)

@@ -1,11 +1,7 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
+
 using System.Diagnostics;
-using Last.Properties; // For debugging purposes
+
 
 namespace VideoRentalSystem
 {
@@ -137,9 +133,6 @@ namespace VideoRentalSystem
                 string email = userInfo.Get("Email")?.ToString() ?? "No email available";
 
 
-                // Debugging
-                Debug.WriteLine($"Username: {username}, Email: {email}");
-
                 // Display username and email
                 lblUsername.Text = $"Username: {username}";
                 lblEmail.Text = $"Email: {email}";
@@ -162,8 +155,6 @@ namespace VideoRentalSystem
                         // Attempt to create the image from the stream
                         var loadedImage = Image.FromStream(ms);
 
-                        Debug.WriteLine($"{loadedImage}");
-                        Debug.WriteLine($"Image loaded: Width = {loadedImage.Width}, Height = {loadedImage.Height}");
 
 
                         // Check if the image is valid (not null)
@@ -211,15 +202,12 @@ namespace VideoRentalSystem
 
             foreach (KeyValuePair<string, object> entry in videoRentals)
             {
-                Debug.WriteLine($"Checking video: {entry.Key}");
 
                 if (entry.Value is CustomHashTable videoInfo)
                 {
                     string videoTitle = videoInfo.Get("VideoTitle")?.ToString() ?? "";
                     string videoStatus = videoInfo.Get("Status")?.ToString() ?? ""; // Get status (expired or active)
 
-                    // Debugging the video status
-                    Debug.WriteLine($"Video Title: {videoTitle}, Video Status: {videoStatus}");
 
                     // Truncate title if it's too long
                     if (videoTitle.Length > 15)
