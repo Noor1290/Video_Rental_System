@@ -1,5 +1,5 @@
 ﻿#nullable disable
-
+//imports
 using System.Diagnostics;
 
 
@@ -172,7 +172,7 @@ namespace VideoRentalSystem
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception ex)//error message
                 {
                     Debug.WriteLine($"Error loading image: {ex.Message}");
                     MessageBox.Show($"Error loading image: {ex.Message}");

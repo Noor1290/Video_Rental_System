@@ -12,16 +12,19 @@ namespace VideoRentalSystem
 {
     public partial class Register : Form
     {
+        //database connection handler and profile picture storage
         private DatabaseConnection dbConnection;
         private byte[] profilePictureData;
 
         public Register()
         {
             InitializeComponent();
+            //initialises error messages
             ErrorTextImage.Text = "";
             EmailErrorMessage.Text = "";
             PasswordErrorMessage.Text = "";
             UsernameErrorMessage.Text = "";
+            //create database connection with SQL server
             dbConnection = new DatabaseConnection("NOOR\\SQLEXPRESS01", "VideoRentalSystem");
         }
 
@@ -29,14 +32,13 @@ namespace VideoRentalSystem
         {
 
         }
-
-
+        //clears the profile picture from form
         private void Delete_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
 
         }
-
+        //handles image upload and processing
         private void Upload_Click(object sender, EventArgs e)
         {
             try
@@ -59,23 +61,26 @@ namespace VideoRentalSystem
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) // error message
             {
                 DisplayMessage("Error uploading image: " + ex.Message, Color.Red);
             }
         }
+        //to resize image
         private Image ResizeImage(Image img, int width, int height)
         {
+            //create a new bitmap with target dimensions
             Bitmap resizedImage = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(resizedImage))
             {
+                //high quality image scaling
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.DrawImage(img, 0, 0, width, height);
             }
             return resizedImage;
         }
 
-
+        //close registration and return to welcome screen
         private void Close_Click(object sender, EventArgs e)
         {
             WelcomeForm welcome = new WelcomeForm();
@@ -84,12 +89,13 @@ namespace VideoRentalSystem
 
         }
 
-
+        // main registration submission handler
         private void Submit_Click(object sender, EventArgs e)
         {
             bool isValid = true;
             string email = EmailTextBox.Text;
-
+            
+            //email validation
             if (IsValidEmail(email))
             {
                 EmailErrorMessage.Text = "";
@@ -102,7 +108,7 @@ namespace VideoRentalSystem
             }
 
             string password = PasswordTextBox.Text;
-
+            //password complexity validation
             if (IsPasswordValid(password))
             {
                 PasswordErrorMessage.Text = "";
@@ -115,7 +121,7 @@ namespace VideoRentalSystem
             }
 
             string username = UsernameTextBox.Text;
-
+            //username length validation
             if (username.Length < 5)
             {
                 UsernameErrorMessage.Text = "Must be 5 characters at most";
@@ -126,7 +132,7 @@ namespace VideoRentalSystem
             {
                 UsernameErrorMessage.Text = "";
             }
-
+            //proceed if all validation pass
             if (isValid)
             {
                 Login login = new Login();
@@ -140,6 +146,7 @@ namespace VideoRentalSystem
             }
             try
             {
+                //attempt database insertion
                 dbConnection.InsertUser(username, email, password, profilePictureData);
                 DisplayMessage("Registered successfully!", Color.Green);
             }
@@ -154,11 +161,8 @@ namespace VideoRentalSystem
                 // Log ex if needed
                 DisplayMessage("Error: " + ex.Message, Color.Red);
             }
-
-
-
         }
-
+        //email validation
         private bool IsValidEmail(string email)
         {
             try
@@ -171,7 +175,7 @@ namespace VideoRentalSystem
                 return false;
             }
         }
-
+        //check password complexity
         private static bool IsPasswordValid(string password)
         {
             const int MIN_LENGTH = 5;
@@ -202,21 +206,23 @@ namespace VideoRentalSystem
             return isPasswordStrong;
 
         }
+        //universal message display method
         private void DisplayMessage(string message, Color color)
         {
             ErrorTextImage.Text = message;  // Ensure ErrorTextImage is a Label in your form
             ErrorTextImage.ForeColor = color;
         }
     }
+    //database interaction class
     public class DatabaseConnection
     {
         private string connectionString;
-
+        //builds conneciton string from server/database name
         public DatabaseConnection(string server, string database)
         {
             connectionString = $"Server={server};Database={database};Integrated Security=True;TrustServerCertificate=True;";
         }
-
+        //safe user insertion method with transaction handling
         public void InsertUser(string username, string email, string password, byte[] profilePicture)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -252,7 +258,7 @@ namespace VideoRentalSystem
                     transaction.Rollback();
                     throw new Exception("Database insert failed: " + sqlEx.Message);
                 }
-                catch (Exception ex)
+                catch (Exception ex)// error message
                 {
                     transaction.Rollback();
                     throw new Exception("Error: " + ex.Message);

@@ -1,4 +1,5 @@
-﻿#nullable disable
+﻿//imports
+#nullable disable
 using System.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Timer = System.Windows.Forms.Timer;
@@ -8,28 +9,31 @@ namespace VideoRentalSystem
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public partial class Main : Form
     {
-        private CustomHashTable userInfo;
-        private CustomHashTable videoData;
-        private CustomHashTable videoRentals;
-        private FlowLayoutPanel flowLayoutPanel;
+        private CustomHashTable userInfo;// store logged-in user information
+        private CustomHashTable videoData;// contains available video data
+        private CustomHashTable videoRentals;//tracks active video rentals
+        private FlowLayoutPanel flowLayoutPanel;// UI container for video cards
 
         public Main(CustomHashTable userInfo, CustomHashTable videoData, CustomHashTable videoRentals)
         {
+            // initialise data structures
             this.userInfo = userInfo;
             this.videoData = videoData;
             this.videoRentals = videoRentals;
             InitializeComponent();
-            DisplayVideoDataAsCards();
+            DisplayVideoDataAsCards(); //populate UI with video cards on startup
 
         }
 
+        // handles user logout process
         private void Logout_CLick(object sender, EventArgs e)
         {
+            //sync data with database before logout
             var rentalManager = new VideoRentalManager(videoRentals, userInfo);
             rentalManager.SyncRentalsToDatabase();
             rentalManager.UpdateAllRentalTimersInDB();
             rentalManager.ClearVideoDatabaseAndUnlinkChildren();
-
+            //close cuurent form and return to login  
             this.Close();
             Login login = new Login();
             login.Show();
@@ -45,6 +49,7 @@ namespace VideoRentalSystem
             return path.Contains("\\") || path.Contains("/");
         }
 
+        //generates and displays video cards in a scrollable layout
         private void DisplayVideoDataAsCards()
         {
             // Create a FlowLayoutPanel to hold the video cards
@@ -144,6 +149,7 @@ namespace VideoRentalSystem
             }
         }
 
+        //dsplays detailed video information in a popup dialog
         private void ShowVideoPopup(CustomHashTable videoData)
         {
             Form popup = new Form
@@ -239,7 +245,7 @@ namespace VideoRentalSystem
                 Size = new Size(150, 80),
                 Location = new Point(100, 220)
             };
-
+            //rent button click handler
             btnRent.Click += (sender, e) =>
             {
                 try
@@ -247,12 +253,13 @@ namespace VideoRentalSystem
                     var rentalManager = new VideoRentalManager(videoRentals, userInfo);
                     rentalManager.RentVideo(videoData, userInfo);
                 }
-                catch (Exception ex)
+                catch (Exception ex)//error message
                 {
                     MessageBox.Show("Error renting video: " + ex.Message);
                 }
             };
 
+            //assemble and show popup
             rightPanel.Controls.Add(lblTitle);
             rightPanel.Controls.Add(lblDescription);
             rightPanel.Controls.Add(lblTimeLimit);
@@ -443,9 +450,7 @@ namespace VideoRentalSystem
             flowLayoutPanel.Controls.Add(videoCard);
         }
 
-
-
-
+        // manage video rental operations and database synchronisation
         public class VideoRentalManager
         {
             private CustomHashTable videoRentals;
@@ -463,12 +468,14 @@ namespace VideoRentalSystem
             // Method to rent a video (updates only CustomHashTable)
             public void RentVideo(CustomHashTable videoData, CustomHashTable userInfo)
             {
+                //validate and parse rental duration
                 if (!videoData.ContainsKey("TimeLimit") || !int.TryParse(videoData["TimeLimit"]?.ToString(), out int timeLimit))
                 {
+                    //error message
                     MessageBox.Show("Invalid or missing time limit.");
                     return;
                 }
-
+                //create rental record
                 string rentalKey = Guid.NewGuid().ToString();
 
                 var rentalDetails = new CustomHashTable(10000)
@@ -484,6 +491,7 @@ namespace VideoRentalSystem
 
                 videoRentals[rentalKey] = rentalDetails;
 
+                //start countdown timer for rental
                 Timer rentalTimer = new Timer { Interval = 1000 };
                 rentalTimer.Tick += (sender, e) => UpdateRentalTimer(rentalKey);
                 rentalTimer.Start();
@@ -492,6 +500,7 @@ namespace VideoRentalSystem
 
                 MessageBox.Show("Video rented successfully!");
             }
+            //synchronises in-memory rentals with database
             public void SyncRentalsToDatabase()
             {
                 // 1. Update in-database rentals that are still marked as "rented"
@@ -608,9 +617,7 @@ namespace VideoRentalSystem
                 return DBNull.Value;
             }
 
-
-
-
+            //update remaining time for a single rental
             private void UpdateRentalTimer(string rentalKey)
             {
                 // Check if the rental exists in the hashtable.
@@ -744,12 +751,10 @@ namespace VideoRentalSystem
                 }
             }
         }
-
         private void Main_Load(object sender, EventArgs e)
         {
 
         }
-
 
         //search button to display another window that displays the list 
         private void SearchButtonFunction(object sender, EventArgs e)
@@ -758,7 +763,7 @@ namespace VideoRentalSystem
             search.Show();
             this.Hide();
         }
-
+        //move to profile page
         private void button7_Click(object sender, EventArgs e)
         {
             ProfilePage profile = new ProfilePage(userInfo, videoData, videoRentals);
