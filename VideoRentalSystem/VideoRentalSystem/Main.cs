@@ -187,10 +187,8 @@ namespace VideoRentalSystem
                 }
             }
 
-
             leftPanel.Controls.Add(pictureBox);
             popup.Controls.Add(leftPanel);
-
 
             // Right panel for details
             Panel rightPanel = new Panel
@@ -713,8 +711,6 @@ namespace VideoRentalSystem
                     }
                 }
             }
-
-
 
             public void ClearVideoDatabaseAndUnlinkChildren()
             {

@@ -19,12 +19,12 @@ namespace VideoRentalSystem
         {
             InitializeComponent();
         }
-
+        //navigate back to login form
         private void Login_Click(object sender, EventArgs e)
         {
             Login login = new Login();
             login.Show();
-            this.Hide();
+            this.Hide();//hide current form rather than closing it
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -36,7 +36,6 @@ namespace VideoRentalSystem
         {
 
         }
-
 
         private void Reset_button_Click(object sender, EventArgs e)
         {
@@ -82,8 +81,7 @@ namespace VideoRentalSystem
             }
         }
 
-
-
+        //real-time password validation
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
             // Capture the new password
@@ -100,7 +98,7 @@ namespace VideoRentalSystem
                 lblPasswordValidation.Text = ""; // Clear the message if valid
             }
         }
-
+        //password confirmation check
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
             // Capture the confirm new password
@@ -120,7 +118,7 @@ namespace VideoRentalSystem
                 lblPasswordMatchValidation.ForeColor = Color.Green;
             }
         }
-
+        //username verification
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
             // Capture the username entered by the user

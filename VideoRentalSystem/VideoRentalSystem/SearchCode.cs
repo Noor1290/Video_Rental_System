@@ -236,7 +236,6 @@ namespace VideoRentalSystem
             decimal MaxPrice = MaxPriceBox.Value == 0 ? 1000 : MaxPriceBox.Value;
 
             //perform live search and filter results
-
             var FilteredRows = DataTable.AsEnumerable()
                 .Where(row =>
                 {
@@ -253,8 +252,6 @@ namespace VideoRentalSystem
                     return matchesSearch && matchesPrice;
                 })
                 .ToList();
-
-
 
             //display
             if (FilteredRows.Any())

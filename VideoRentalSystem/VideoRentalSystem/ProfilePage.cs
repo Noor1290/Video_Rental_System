@@ -2,7 +2,6 @@
 //imports
 using System.Diagnostics;
 
-
 namespace VideoRentalSystem
 {
     public class ProfilePage : Form
@@ -259,8 +258,5 @@ namespace VideoRentalSystem
             Main mainPage = new Main(userInfo, videoData, videoRentals);
             mainPage.Show();
         }
-
-
-
     }
 }

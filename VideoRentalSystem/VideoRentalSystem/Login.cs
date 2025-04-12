@@ -364,8 +364,6 @@ namespace VideoRentalSystem
             Debug.WriteLine("=== Import process completed ===");
         }
 
-
-
         private async Task<(CustomHashTable, CustomHashTable)> LoadVideoDataAsync(string userId, string connectionString)
         {
             CustomHashTable videoData = new CustomHashTable(10000);
@@ -443,7 +441,6 @@ namespace VideoRentalSystem
 
             return (videoData, videoRentals);
         }
-
         private void TextFile_TextChanged(object sender, EventArgs e)
         {
             string filePath = TextFile.Text.Trim(); // Get and trim any leading/trailing spaces from the input
@@ -471,7 +468,5 @@ namespace VideoRentalSystem
                 lblTextFile.ForeColor = Color.Red; // Set text color to red for error
             }
         }
-
-
     }
 }
