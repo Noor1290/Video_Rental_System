@@ -116,30 +116,52 @@ In Main Page:
 
 2.The Clear Query on ***Line 712*** needs to be changed.
 
-##  How to Use
+##  Navigation
 
 ### **1. Welcome Section**
-- The application opens to a **welcome page** whith 2 options:
-  - **Login**
-  - **Register**
+- The application opens to a **welcome page** with 2 options:
+  - **Users**
+  - **Adminr**
+## 1. Admin Section
+### **1. Welcome Section for Admin**
+ The application opens to a **welcome page** for Admin user allowing him to:
+  - Add video
+  - Delete video
 
-### **2. Login Section**
-- Enter the previously registered user information such as **Name and Pssword**.
+### **2. Login Section for Admin**
+ ***Note***: The Admin user credentials are as follows:
+- **Username**: <span style="color:lightgreen;">admin</span>
+- **Password**: <span style="color:lightgreen;">admin123</span>
+- ### **3. Main Page for Admin**
+There are 3 buttons on the Admin's main page:
+- ***Add***: Allowing the admin to add videoes that will be saved in hashtable with validations checking whether the video name is already present to prevent duplications.
+- ***Delete***: Allowing the admin to delete videos from the hashtable with validations checking whether the video title exists.
+- ***Logout***: Upon clicking on this button, the program will uery SQL to store all additions and deletions made in the hashtable.
 
+## 2. Users Section
 
-### **3. Register Section**
-- Register new packages with sender and receiver details.
-- Assign a delivery officer.
-- Track package delivery.
+### **1. Welcome Section for Users**
+- The application opens to a **welcome page** for Users allowing them to:
+  - Login
+  - Register for new users
 
-### **4. Main Page**
-- Handle postal money transfers.
-- Keep records of sender/receiver information.
+### **1. Register Section**
+This section will prompt new users to enter their persoonal information:
+- Username: It should be at least 5 characters long amd unique (validations)
+- Email: It should contain symbols which will show on the screen when the user did not input the correct format.
+- Among others
 
-### **5. Logout**
-- Clicking **Logout** will **clear session data** and **exit the program**.
-- It will save everything in SQL
+### **4. Login Section**
+This page is for previously logged in user
 
+### **5. Main Page**
+This section allows the user to search for specific video through videoTitle or through Categories.
+- The user will then click on their desired video which will open a pop up window displaying all the video information and a ***rent button***
+- The user will then press on the rent button which will save it in hashtable which can be viewed in ***profile page***
+- ***Logout Button*** : This button will save everything in all 3 hashtable to SQL permanently.
+- ***Profile Page*** : This button will display all the videos rented by the logged in user
+	 - All rented videos will be dispalyed in orange if timelimit has not been up yet.
+	 -  All expired videos will be displayed in LightBlue.
 ---
 
 
