@@ -175,6 +175,7 @@
             GoBackBtn.TabIndex = 36;
             GoBackBtn.Text = "Go Back";
             GoBackBtn.UseVisualStyleBackColor = false;
+            GoBackBtn.Click += GoBackBtn_Click_1;
             // 
             // label3
             // 

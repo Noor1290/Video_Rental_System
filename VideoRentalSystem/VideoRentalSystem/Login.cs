@@ -460,5 +460,12 @@ namespace VideoRentalSystem
                 lblTextFile.ForeColor = Color.Red; // Set text color to red for error
             }
         }
+
+        private void GoBackBtn_Click(object sender, EventArgs e)
+        {
+            WelcomeUsers users = new WelcomeUsers();
+            users.Show();
+            this.Hide();
+        }
     }
 }

@@ -39,35 +39,43 @@ namespace VideoRentalSystem
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // Save video data to the database
-            SaveVideoDataToDatabase();
-            //remove database entires not in current dataset
-            LogoutAndDeleteFromDatabase();
+            try
+            {
+                
 
-            // You can also add any other logout logic here (like showing a confirmation message)
-            MessageBox.Show("Logged out successfully, and video data has been saved!");
+                // Ensure that video data is saved before deleting or modifying anything
+                LogoutAndDeleteFromDatabase();
+                // Save video data to the database first
+                SaveVideoDataToDatabase();
 
-            // Close or hide the current form and show the login page (or another form)
-            this.Hide();
-            LoginAdmin loginForm = new LoginAdmin();
-            loginForm.Show();
+                // Provide feedback after successful operation
+                MessageBox.Show("Logged out successfully, and video data has been saved!");
+
+                // Close or hide the current form and show the login page
+                this.Hide();
+                LoginAdmin loginForm = new LoginAdmin();
+                loginForm.Show();
+            }
+            catch (Exception ex)
+            {
+                // Handle errors here, such as logging the error
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
-        // Method to save videos to the database (insert or update)
+
+        // Method to save videos to the database
         private void SaveVideoDataToDatabase()
         {
             //connection string for SQL server
             string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
-            Debug.WriteLine("Starting SaveVideoDataToDatabase method...");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open(); // Open the SQL connection synchronously
-                Debug.WriteLine("Database connection opened.");
 
                 // Loop through each entry in the videoData CustomHashTable
                 foreach (KeyValuePair<string, object> entry in videoData)
                 {
-                    Debug.WriteLine($"Processing Video ID: {entry.Key}");
 
                     // Get the video details
                     CustomHashTable videoDetails = (CustomHashTable)entry.Value;
@@ -87,16 +95,7 @@ namespace VideoRentalSystem
 
                     // Set userID properly if it's "NULL" or empty
                     object userIdValue = string.IsNullOrEmpty(userID) || userID == "NULL" ? DBNull.Value : (object)userID;
-
-                    Debug.WriteLine($"userIdValue: {userIdValue}");
-                    Debug.WriteLine($"Video Title: {videoTitle}");
-
-                    // Debugging: Output the extracted details to see how the data is being stored in the hashtable
-                    Debug.WriteLine($"Extracted Video ID: {videoID}, Video Title: {videoTitle}, Duration: {duration}, TimeLimit: {timeLimit}, Price: {price}, Genre: {genre}");
-                    Debug.WriteLine($"UserID: {userIdValue}, UploadDate: {uploadDate}, VideoPath: {videoPath}");
-
-
-                
+               
 
                     // Insert or update video data in the database
                     string query = @"
@@ -130,14 +129,11 @@ namespace VideoRentalSystem
                         cmd.Parameters.AddWithValue("@UploadDate", uploadDate);
                         cmd.Parameters.AddWithValue("@VideoPath", videoPath);
 
-                        // Debugging: Output the parameters being sent to the SQL command to see exactly what is being executed
-                        Debug.WriteLine($"Executing SQL Command with Parameters: VideoID={videoID}, VideoTitle={videoTitle}, Duration={duration}, TimeLimit={timeLimit}, Price={price}, Genre={genre}, UserID={userIdValue}, UploadDate={uploadDate}, VideoPath={videoPath}");
 
                         // Execute the command synchronously
                         try
                         {
                             cmd.ExecuteNonQuery();
-                            Debug.WriteLine($"Successfully executed query for VideoID: {videoID}");
                         }
                         catch (SqlException sqlEx)
                         {

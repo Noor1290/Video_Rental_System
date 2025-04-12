@@ -1,12 +1,6 @@
 ﻿//imports
-using System;
 using System.Data;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
-// for hash table
-using System.Collections.Generic;
-using VideoRentalSystem;
+
 
 namespace VideoRentalSystem
 {
@@ -21,11 +15,16 @@ namespace VideoRentalSystem
         private Label NoResultsLabel, MinPriceLabel, MaxPriceLabel, SearchLabel;
         //data storage
         private CustomHashTable videoData;
+        private CustomHashTable userInfo;
+        private CustomHashTable videoRentals;
+        private Button GoBackButton;
 
 
-        public SearchForm(CustomHashTable videoData)
+        public SearchForm(CustomHashTable userInfo, CustomHashTable videoData, CustomHashTable videoRentals)
         {
             this.videoData = videoData;
+            this.userInfo = userInfo;
+            this.videoRentals = videoRentals;
             InitialiseUI(); // setup UI components
             InitialiseDataTable(); // Load sample data
         }
@@ -33,7 +32,7 @@ namespace VideoRentalSystem
         {
             //set form properties
             this.Text = "Video Search";
-            this.Size = new Size(700, 500);
+            this.Size = new Size(700, 600);
             this.BackColor = Color.WhiteSmoke;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -117,6 +116,25 @@ namespace VideoRentalSystem
 
             ClearButton.FlatAppearance.BorderSize = 0;
             ClearButton.Click += ClearButton_Click; // attach click event handler
+
+            // Go Back button
+            GoBackButton = new Button()
+            {
+                Text = "Go Back",
+                Location = new Point(300, 450),  // Adjust the location as needed
+                Width = 120,
+                Height = 40,
+                BackColor = Color.SteelBlue,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+
+            GoBackButton.FlatAppearance.BorderSize = 0;
+            GoBackButton.Click += GoBackButton_Click; // attach click event handler
+
+            // Add the GoBackButton to the form
+            this.Controls.Add(GoBackButton);
 
             // data grid to display results
             DataGridView = new DataGridView()
@@ -283,5 +301,12 @@ namespace VideoRentalSystem
             NoResultsLabel.Visible = false;
 
         }
+        private void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Main main = new Main(userInfo, videoData, videoRentals);
+            main.Show();  // Show the Main form
+            this.Hide();  // Hide the current SearchForm
+        }
+
     }
 }

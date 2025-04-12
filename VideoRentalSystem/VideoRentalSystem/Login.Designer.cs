@@ -47,6 +47,7 @@ namespace VideoRentalSystem
             lblTextFile = new Label();
             label5 = new Label();
             TextFile = new TextBox();
+            GoBackBtn = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -54,6 +55,7 @@ namespace VideoRentalSystem
             // panel1
             // 
             panel1.BackColor = Color.LightBlue;
+            panel1.Controls.Add(GoBackBtn);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(Reset_button);
             panel1.Controls.Add(button1);
@@ -73,7 +75,6 @@ namespace VideoRentalSystem
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 14;
             pictureBox1.TabStop = false;
-            
             // 
             // Reset_button
             // 
@@ -227,6 +228,18 @@ namespace VideoRentalSystem
             TextFile.TabIndex = 18;
             TextFile.TextChanged += TextFile_TextChanged;
             // 
+            // GoBackBtn
+            // 
+            GoBackBtn.Font = new Font("Lucida Handwriting", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            GoBackBtn.Location = new Point(22, 490);
+            GoBackBtn.Margin = new Padding(2, 3, 2, 3);
+            GoBackBtn.Name = "GoBackBtn";
+            GoBackBtn.Size = new Size(134, 50);
+            GoBackBtn.TabIndex = 15;
+            GoBackBtn.Text = "Go Back";
+            GoBackBtn.UseVisualStyleBackColor = true;
+            GoBackBtn.Click += GoBackBtn_Click;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -273,6 +286,7 @@ namespace VideoRentalSystem
         private Label lblTextFile;
         private Label label5;
         private TextBox TextFile;
+        private Button GoBackBtn;
     }
 }
 

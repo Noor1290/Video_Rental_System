@@ -30,11 +30,6 @@ namespace VideoRentalSystem
             lblMessage.Text = "";
             lblPassword.Text = "";
 
-            // Debugging login process
-            Debug.WriteLine("Login attempt started");
-            Debug.WriteLine($"Entered username: {enteredUsername}");
-            Debug.WriteLine($"Entered password: {enteredPassword}");
-
             if (enteredUsername != correctUsername)
             {
                 lblMessage.Text = "Invalid username.";
@@ -53,33 +48,19 @@ namespace VideoRentalSystem
 
             lblMessage.Text = "Login successful!";
             lblMessage.ForeColor = Color.Green;
-            Debug.WriteLine("Login successful!");
 
             // Now load video data asynchronously
             string connectionString = "Server=NOOR\\SQLEXPRESS01;Database=VideoRentalSystem;Integrated Security=True;TrustServerCertificate=True;";
-            Debug.WriteLine($"Connection string: {connectionString}");
 
             CustomHashTable videoData = await LoadVideoDataAsync(connectionString);
-
-            // Use videoData for any further operations you need
-            Debug.WriteLine("Video data loaded successfully.");
 
             AdminMain main = new AdminMain(videoData);
             main.Show();
             this.Hide();
-            Debug.WriteLine("AdminMain form shown, LoginAdmin form hidden.");
 
             // Continue to the main page or other actions after successful login
         }
 
-        private void GoBackBtn_Click(object sender, EventArgs e)
-        {
-            //creates welcome admin form
-            WelcomeAdmin admin = new WelcomeAdmin();
-            admin.Show();//show welcome page
-            this.Close();//close login form
-            Debug.WriteLine("GoBackBtn clicked. WelcomeAdmin form shown and LoginAdmin form closed.");
-        }
 
         // Asynchronously load video data from the database and store it in the hash table
         private async Task<CustomHashTable> LoadVideoDataAsync(string connectionString)
@@ -122,7 +103,6 @@ namespace VideoRentalSystem
 
                                 // Now store the entire videoDetails in the videoData hashtable
                                 videoData.Add(videoReader["VideoID"].ToString(), videoDetails);
-                                Debug.WriteLine($"Video data added for VideoID: {videoReader["VideoID"]}");
                             }
                         }
                     }
@@ -136,6 +116,13 @@ namespace VideoRentalSystem
 
             Debug.WriteLine("Finished loading video data.");
             return videoData;//return populated hash table
+        }
+
+        private void GoBackBtn_Click_1(object sender, EventArgs e)
+        {
+            WelcomeAdmin admin = new WelcomeAdmin();
+            admin.Show();//show welcome page
+            this.Close();//close login form
         }
     }
 }

@@ -272,7 +272,6 @@ namespace VideoRentalSystem
         {
             // Get the search query from the textbox (convert to lowercase for case-insensitive search)
             string searchQuery = ProductsName.Text.ToLower();
-            Debug.WriteLine("Search:" + searchQuery);
 
             // Clear the current display (reset the flowLayoutPanel)
             flowLayoutPanel.Controls.Clear();
@@ -755,7 +754,7 @@ namespace VideoRentalSystem
         //search button to display another window that displays the list 
         private void SearchButtonFunction(object sender, EventArgs e)
         {
-            SearchForm search = new SearchForm(videoData);
+            SearchForm search = new SearchForm(userInfo,videoData, videoRentals);
             search.Show();
             this.Hide();
         }
