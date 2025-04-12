@@ -90,79 +90,93 @@ namespace VideoRentalSystem
 
         }
 
-        // main registration submission handler
+        // Modify the Submit_Click method to use the DoesUserExist method.
         private void Submit_Click(object sender, EventArgs e)
         {
             bool isValid = true;
             string email = EmailTextBox.Text;
-            
-            //email validation
+            string username = UsernameTextBox.Text;
+            string password = PasswordTextBox.Text;
+
+            // Validate email format
             if (IsValidEmail(email))
             {
-                EmailErrorMessage.Text = "";
+                EmailErrorMessage.Text = "";  // Clear error message if email is valid
             }
             else
             {
                 EmailErrorMessage.Text = "Email should be unique, contains @ and . symbols";
                 EmailErrorMessage.ForeColor = Color.Red;
-                isValid = false;
+                isValid = false;  // Set isValid to false if email is invalid
             }
 
-            string password = PasswordTextBox.Text;
-            //password complexity validation
-            if (IsPasswordValid(password))
+            // Validate if the email already exists in the database
+            if (isValid && dbConnection.DoesUserExistByEmail(email))
             {
-                PasswordErrorMessage.Text = "";
-            }
-            else
-            {
-                PasswordErrorMessage.Text = "Password should contain\n 1 Uppercase, 1 Lowercase,\n a decimal digit and\n be 5 - 10 characters long";
-                PasswordErrorMessage.ForeColor = Color.Red;
-                isValid = false;
+                EmailErrorMessage.Text = "Email is already registered!";
+                EmailErrorMessage.ForeColor = Color.Red;
+                isValid = false;  // Set isValid to false if email already exists
             }
 
-            string username = UsernameTextBox.Text;
-            //username length validation
+            // Validate username length
             if (username.Length < 5)
             {
-                UsernameErrorMessage.Text = "Must be 5 characters at most";
+                UsernameErrorMessage.Text = "Username must be at least 5 characters.";
                 UsernameErrorMessage.ForeColor = Color.Red;
                 isValid = false;
             }
             else
             {
-                UsernameErrorMessage.Text = "";
+                UsernameErrorMessage.Text = "";  // Clear error message if username is valid
             }
-            //proceed if all validation pass
+
+            // Validate if the username already exists in the database
+            if (isValid && dbConnection.DoesUserExistByUsername(username))
+            {
+                UsernameErrorMessage.Text = "Username already exists!";
+                UsernameErrorMessage.ForeColor = Color.Red;
+                isValid = false;  // Set isValid to false if username already exists
+            }
+
+            // Validate password complexity
+            if (IsPasswordValid(password))
+            {
+                PasswordErrorMessage.Text = "";  // Clear error message if password is valid
+            }
+            else
+            {
+                PasswordErrorMessage.Text = "Password should contain\n1 Uppercase, 1 Lowercase,\n1 decimal digit and be 5-10 characters long.";
+                PasswordErrorMessage.ForeColor = Color.Red;
+                isValid = false;  // Set isValid to false if password is invalid
+            }
+
+            // Proceed with registration if all validations pass
             if (isValid)
             {
-                Login login = new Login();
-                login.Show();
-                this.Hide();
-
+                try
+                {
+                    dbConnection.InsertUser(username, email, password, profilePictureData);
+                    DisplayMessage("Registered successfully!", Color.Green);
+                    Login login = new Login();
+                    login.Show();
+                    this.Hide();
+                }
+                catch (SqlException sqlEx)
+                {
+                    DisplayMessage("SQL Error: " + sqlEx.Message, Color.Red);
+                }
+                catch (Exception ex)
+                {
+                    DisplayMessage("Error: " + ex.Message, Color.Red);
+                }
             }
             else
             {
                 return;
             }
-            try
-            {
-                //attempt database insertion
-                dbConnection.InsertUser(username, email, password, profilePictureData);
-                DisplayMessage("Registered successfully!", Color.Green);
-            }
-            catch (SqlException sqlEx)
-            {
-                // Log sqlEx if needed
-                UsernameErrorMessage.Text = "SQL Error: " + sqlEx.Message;
-                UsernameErrorMessage.ForeColor = Color.Red;
-            }
-            catch (Exception ex)
-            {
-                // Log ex if needed
-                DisplayMessage("Error: " + ex.Message, Color.Red);
-            }
         }
+
+
         //email validation
         private bool IsValidEmail(string email)
         {
@@ -263,6 +277,41 @@ namespace VideoRentalSystem
                 {
                     transaction.Rollback();
                     throw new Exception("Error: " + ex.Message);
+                }
+            }
+        }
+        public bool DoesUserExistByUsername(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = @"
+            SELECT COUNT(*) FROM Users
+            WHERE Username = @Username";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+                    int userCount = (int)command.ExecuteScalar();
+                    return userCount > 0;  // Returns true if a user with the same username exists
+                }
+            }
+        }
+
+        public bool DoesUserExistByEmail(string email)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = @"
+            SELECT COUNT(*) FROM Users
+            WHERE Email = @Email";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+                    int userCount = (int)command.ExecuteScalar();
+                    return userCount > 0;  // Returns true if a user with the same email exists
                 }
             }
         }

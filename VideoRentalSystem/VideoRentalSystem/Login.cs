@@ -250,9 +250,6 @@ namespace VideoRentalSystem
                     string genre = tokens[6].Trim();
                     string videoPath = tokens[7].Trim();
 
-                    // Log the values to check for consistency in format
-                    Debug.WriteLine($"Checking for duplicate: VideoTitle={videoTitle}, Duration={DurationStr}");
-
                     // Check if the data already exists (excluding UserID, checking VideoTitle and Duration)
                     string checkQuery = @"
                                     SELECT COUNT(1) 
@@ -272,9 +269,6 @@ namespace VideoRentalSystem
 
                             // If result is DBNull, treat it as 0
                             int existingRecords = result != DBNull.Value ? Convert.ToInt32(result) : 0;
-
-                            // Debug statement to show how many duplicates are found
-                            Debug.WriteLine($"Found {existingRecords} duplicate(s) for VideoTitle={videoTitle} with Duration={DurationStr}.");
 
 
                             if (existingRecords > 0)  // Data exists, display a message
@@ -360,8 +354,6 @@ namespace VideoRentalSystem
                     Debug.WriteLine("All data was successfully inserted into the database.");
                 }
             }
-
-            Debug.WriteLine("=== Import process completed ===");
         }
 
         private async Task<(CustomHashTable, CustomHashTable)> LoadVideoDataAsync(string userId, string connectionString)
