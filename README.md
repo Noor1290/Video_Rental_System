@@ -162,6 +162,17 @@ This section allows the user to search for specific video through videoTitle or 
 - **Rented videos** will be displayed in <span style="color:orange;">orange</span> if the time limit has not been reached yet.
 - **Expired videos** will be displayed in <span style="color:cyan;">light blue</span>.
 
+### **6.Search Page**
+This section allows the user to search specific video through video title, price, genre and duration.
+- It is found on top right corner of the main page.
+- It initially displays a table of videos along with their respective data.
+- It will performs a live search.
+- The user can input the video title, genre or the duration in the search box.
+- The user can also input the minimum price and maximum price that is of his interest.
+- The table of videos will be adjusted according to what the user types in the search box
+- If the video is not found, an error message is displayed in red.
+- The user can click the clear button to erase content in the search box and the table of videos will appear.
+- The user can also return by clicking on the go back button.
 ### Instructions:
 
 - When a video is rented, it will show in **orange** until the time limit is up.
