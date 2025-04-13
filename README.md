@@ -7,7 +7,7 @@ This is a **Video Renting System** that allows users to browse, search, and rent
 ## Features
 
 - **Login System**: Users can log in and retrieve their video and rental data from the SQL database into a hash table.
-- **Search Functionality**: Users can search for videos by title.
+- **Search Functionality**: Users can search for videos by title, price, genre and duration.
 - **Rent Videos**: Users can rent videos, and the system will update rental information.
 - **Database Integration**: The system integrates an SQL database.
 - **Modifications via Hash Table**: All data manipulations (like renting videos) are done in memory via hash tables. The changes are later pushed back to the SQL database when the user logs out.
@@ -118,7 +118,7 @@ Please press
 ### **1. Welcome Section**
 - The application opens to a **welcome page** with 2 options:
   - **Users**
-  - **Adminr**
+  - **Admin**
 ## 1. Admin Section
 ### **1. Welcome Section for Admin**
  The application opens to a **welcome page** for Admin user allowing him to:
@@ -131,9 +131,9 @@ Please press
 - **Password**: <span style="color:lightgreen;">admin123</span>
 - ### **3. Main Page for Admin**
 There are 3 buttons on the Admin's main page:
-- ***Add***: Allowing the admin to add videoes that will be saved in hashtable with validations checking whether the video name is already present to prevent duplications.
+- ***Add***: Allowing the admin to add videos that will be saved in hashtable with validations checking whether the video name is already present to prevent duplications.
 - ***Delete***: Allowing the admin to delete videos from the hashtable with validations checking whether the video title exists.
-- ***Logout***: Upon clicking on this button, the program will uery SQL to store all additions and deletions made in the hashtable.
+- ***Logout***: Upon clicking on this button, the program will query SQL to store all additions and deletions made in the hashtable.
 
 ## 2. Users Section
 
@@ -143,8 +143,8 @@ There are 3 buttons on the Admin's main page:
   - Register for new users
 
 ### **1. Register Section**
-This section will prompt new users to enter their persoonal information:
-- Username: It should be at least 5 characters long amd unique (validations)
+This section will prompt new users to enter their personal information:
+- Username: It should be at least 5 characters long and unique (validations)
 - Email: It should contain symbols which will show on the screen when the user did not input the correct format.
 - Among others
 
@@ -152,9 +152,9 @@ This section will prompt new users to enter their persoonal information:
 - This page is for previously logged in user
 - Please note that the text file input box will allow the user to upload a text file containing his database for the main table.
 - Validations have been used to 
-	- Verfiry whether the database is empty and to check for duplicates.
+	- Verify whether the database is empty and to check for duplicates.
 	- The user will have to copy the full path of the text file called ***Database.txt*** using
-	- `Ctrl + Shift + C` or bying right clicking on the text file and looking for copy as path.
+	- `Ctrl + Shift + C` or by right clicking on the text file and looking for copy as path.
 	 - <span style="color:red;">**ERROR**</span> may arise when copying the path with its double quotes, which needs to be removed.
 
 ### **5. Main Page**
@@ -171,7 +171,7 @@ This section allows the user to search for specific video through videoTitle or 
 ### **6.Search Page**
 This section allows the user to search specific video through video title, price, genre and duration.
 - It is found on top right corner of the main page.
-- It initially displays a table of videos along with their respective data.
+- It initially displays a table of available videos along with their respective data.
 - It will performs a live search.
 - The user can input the video title, genre or the duration in the search box.
 - The user can also input the minimum price and maximum price that is of his interest.
