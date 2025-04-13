@@ -516,7 +516,6 @@ C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8
 C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\testhost.dll
 C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\VideoRentalSystem.deps.json
 C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\VideoRentalSystem.runtimeconfig.json
-C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\database.txt
 C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\VideoRentalSystem.exe
 C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\testhost.exe
 C:\Users\noorp\OneDrive\Desktop\testi14\VideoRentalSystem\Testing\bin\Debug\net8.0-windows7.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll

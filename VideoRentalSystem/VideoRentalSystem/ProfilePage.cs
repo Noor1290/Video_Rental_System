@@ -61,7 +61,7 @@ namespace VideoRentalSystem
             // Add panels to the form
             this.Controls.Add(leftPanel);
             this.Controls.Add(rightPanel);
-            Debug.WriteLine($"Right Panel Size: {rightPanel.ClientSize.Width}x{rightPanel.ClientSize.Height}");
+
             // Create and configure profile picture
             profilePicture = new PictureBox
             {
@@ -127,7 +127,6 @@ namespace VideoRentalSystem
 
             try
             {
-                // Assuming userInfo contains the user data in key-value pairs
                 string username = userInfo.Get("Username")?.ToString() ?? "No username available";
                 string email = userInfo.Get("Email")?.ToString() ?? "No email available";
 
@@ -181,8 +180,7 @@ namespace VideoRentalSystem
             else
             {
                 Debug.WriteLine("No profile picture found, setting to null.");
-                // If no profile picture is available, set a default image or handle accordingly
-                profilePicture.Image = null; // Optionally, set a default placeholder image
+                profilePicture.Image = null;
             }
         }
 
@@ -252,9 +250,6 @@ namespace VideoRentalSystem
         {
             // Close the current ProfilePage
             this.Close();
-
-            // Optionally, you can show the main page again
-            // Assuming MainPage is the form you want to go back to
             Main mainPage = new Main(userInfo, videoData, videoRentals);
             mainPage.Show();
         }
