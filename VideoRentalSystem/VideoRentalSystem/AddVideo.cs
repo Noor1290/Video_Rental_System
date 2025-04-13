@@ -1,4 +1,4 @@
-﻿//imports
+﻿//imports for debugging
 using System.Diagnostics;
 
 
@@ -217,11 +217,12 @@ namespace VideoRentalSystem
         { "Biopic", "Image/Biopic.jpeg" },
         { "Action", "Image/Action.jpeg" },
         { "Comedy", "Image/Comedy.jpeg" },
+        { "Cyborg", "Image/Cyborg.jpeg" },
         { "Outlaw", "Image/Outlaw.jpeg" },
         { "Adventure", "Image/Adventure.jpeg" },
         { "Animation", "Image/Animation.jpeg" },
         { "Apocalyptic", "Image/Apocalyptic.jpeg" },
-        { "Default", "Image/Default.jpeg" },
+        { "Default", "Image/Default.jpg" },
         { "Documentary", "Image/Documentary.jpeg" },
         { "Drama", "Image/Drama.jpeg" },
         { "Fantasy", "Image/Fantasy.jpeg" },
