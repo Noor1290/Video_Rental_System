@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using static VideoRentalSystem.AdminAuthenticate;
 
 namespace VideoRentalSystem
 {
@@ -53,7 +54,12 @@ namespace VideoRentalSystem
 
                 // Close or hide the current form and show the login page
                 this.Hide();
-                LoginAdmin loginForm = new LoginAdmin();
+                // Initialize the dependencies
+                IAuthenticator authenticator = new AdminAuthenticate.AdminAuthenticator();  // Create the authenticator instance
+                IVideoDataLoader videoDataLoader = new VideoDataLoader(); // Create the video data loader instance
+
+                // Pass dependencies to LoginAdmin
+                LoginAdmin loginForm = new LoginAdmin(authenticator, videoDataLoader);
                 loginForm.Show();
             }
             catch (Exception ex)

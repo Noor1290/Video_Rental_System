@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Last;
+using static VideoRentalSystem.AdminAuthenticate;
 using Timer = System.Windows.Forms.Timer;
 
 
@@ -132,10 +133,16 @@ namespace VideoRentalSystem
         // Event handler for Login button click
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            LoginAdmin login = new LoginAdmin();
-            login.Show();
+            // Initialize the dependencies
+            IAuthenticator authenticator = new AdminAuthenticate.AdminAuthenticator();  // Admin authentication logic
+            IVideoDataLoader videoDataLoader = new VideoDataLoader(); // Video data loading logic
+
+            // Create and pass dependencies to LoginAdmin and show the form
+            LoginAdmin loginForm = new LoginAdmin(authenticator, videoDataLoader);
+            loginForm.Show();
             this.Hide();
         }
+
 
         // Event handler for Register button click
         private void BtnGoBack_Click(object sender, EventArgs e)
