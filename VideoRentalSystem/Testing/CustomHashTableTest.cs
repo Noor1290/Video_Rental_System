@@ -36,7 +36,7 @@ namespace Testing
 
         // Test for adding an item to the hash table
         [TestMethod]
-        public void Add_ShouldInsertKeyValue_WhenDataIsValid()
+        public void Add_Functionaltity()
         {
             // Arrange
             string key = "TestUser";
@@ -61,7 +61,7 @@ namespace Testing
 
         // Test for searching an item in the hash table
         [TestMethod]
-        public void Get_ShouldReturnCorrectValue_WhenKeyExists()
+        public void Get_Functionality()
         {
             // Arrange
             string key = "TestUser";
@@ -85,7 +85,7 @@ namespace Testing
 
         // Test for removing an item from the hash table
         [TestMethod]
-        public void Remove_ShouldDeleteKeyValue_WhenKeyExists()
+        public void Remove_Functionality()
         {
             // Arrange
             string key = "TestUser";
@@ -111,7 +111,7 @@ namespace Testing
 
         // Test for checking if a key exists
         [TestMethod]
-        public void ContainsKey_ShouldReturnTrue_WhenKeyExists()
+        public void ContainsKey_Functionality()
         {
             // Arrange
             string key = "TestUser";

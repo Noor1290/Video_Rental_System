@@ -45,7 +45,6 @@ namespace VideoRentalSystem
         public static bool IsValidPath(string path)
         {
             // Check if the path contains typical file path characters
-            // such as directory separators or drive letters (e.g., C:\)
             return path.Contains("\\") || path.Contains("/");
         }
 
@@ -57,21 +56,20 @@ namespace VideoRentalSystem
             {
                 flowLayoutPanel = new FlowLayoutPanel
                 {
-                    Dock = DockStyle.None, // Ensure the panel is not docked to fill the container
-                    FlowDirection = FlowDirection.LeftToRight, // Make the cards appear side by side
-                    WrapContents = true, // Allow the cards to wrap to the next row
-                    AutoScroll = true, // Allow scrolling if content exceeds the panel size
+                    Dock = DockStyle.None, 
+                    FlowDirection = FlowDirection.LeftToRight,
+                    WrapContents = true, 
+                    AutoScroll = true, 
                     Padding = new Padding(10),
-                    MaximumSize = new Size(Width, 600), // Set the max height to control overflow
-                    Size = new Size(1000, 1000) // Example size, adjust based on your design
+                    MaximumSize = new Size(Width, 600), 
+                    Size = new Size(1000, 1000) 
                 };
                 // Adjust the height to accommodate rows dynamically if required
-                int rowHeight = 1320; // Assuming the height of each video card including padding
-                int totalHeight = rowHeight * 2; // For example, two rows
-                flowLayoutPanel.Size = new Size(1000, totalHeight); // Adjust the height to fit the content
+                int rowHeight = 1320;
+                int totalHeight = rowHeight * 2; 
+                flowLayoutPanel.Size = new Size(1000, totalHeight); 
                 flowLayoutPanel.Margin = new Padding(100, 0, 100, 200);
-                // Position the FlowLayoutPanel below the "Products" section
-                flowLayoutPanel.Location = new Point(250, 350); // Adjust X and Y values as needed
+                flowLayoutPanel.Location = new Point(250, 350);
 
                 // Add the FlowLayoutPanel to the Form (or any container)
                 this.Controls.Add(flowLayoutPanel);
@@ -706,7 +704,6 @@ namespace VideoRentalSystem
                     using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                     {
                         int affectedRows = cmd.ExecuteNonQuery();
-                        MessageBox.Show($"{affectedRows} rentals updated in the database.");
                     }
                 }
             }

@@ -185,7 +185,8 @@ This section allows the user to search specific video through video title, price
 - Once the time limit has passed, the video will be marked as **expired** and displayed in **light blue**.
 ---
 
-
-
+### Testing
+- In order to run the testing part, the user needs to make sure that the testing is loaded into the program
+- If the testing is loaded, right click on the solution then press ***Run Tests***
 
 

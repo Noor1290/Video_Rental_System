@@ -145,7 +145,7 @@ namespace VideoRentalSystem
             }
             else
             {
-                PasswordErrorMessage.Text = "Password should contain\n1 Uppercase, 1 Lowercase,\n1 decimal digit and be 5-10 characters long.";
+                PasswordErrorMessage.Text = "Password should contain\n1 Uppercase, 1 Lowercase,\n1 decimal digit and\n be 5-10 characters long.";
                 PasswordErrorMessage.ForeColor = Color.Red;
                 isValid = false;  // Set isValid to false if password is invalid
             }
