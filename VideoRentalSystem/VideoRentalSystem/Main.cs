@@ -498,7 +498,7 @@ namespace VideoRentalSystem
             //synchronises in-memory rentals with database
             public void SyncRentalsToDatabase()
             {
-                // 1. Update in-database rentals that are still marked as "rented"
+                //  Update in-database rentals that are still marked as "rented"
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -520,7 +520,7 @@ namespace VideoRentalSystem
                     }
                 }
 
-                // 2. Synchronize the in-memory rentals with the database.
+                //  Synchronize the in-memory rentals with the database.
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -636,7 +636,6 @@ namespace VideoRentalSystem
                         rental["Status"] = "expired";
                     }
 
-                    // OPTIONAL: Immediately sync this single rental's updated TimeLimit to the DB
                     SyncSingleRentalToDatabase(rentalKey);
                 }
             }
@@ -653,14 +652,11 @@ namespace VideoRentalSystem
                 object rentalDateObj = DateTime.Parse(rental["RentalDate"].ToString());
                 object timeLimitObj = int.Parse(rental["TimeLimit"].ToString());
                 string status = rental["Status"].ToString();
-                // No ReturnDate, since it's computed in your table.
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    // Just do an UPDATE; we assume the row already exists in VideoRentals.
-                    // If you need to handle "row doesn't exist," replicate the existence check from SyncRentalsToDatabase.
                     string updateQuery = @"
                                             UPDATE VideoRentals
                                             SET TimeLimit = @TimeLimit,
@@ -728,13 +724,6 @@ namespace VideoRentalSystem
                         {
                             int unlinkRows = unlinkCmd.ExecuteNonQuery();
                         }
-
-                        // Now clear the VideoDatabase table.
-                        //string clearQuery = "DELETE FROM [VideoRentalSystem].[dbo].[VideoDatabase];";
-                        //using (SqlCommand clearCmd = new SqlCommand(clearQuery, conn))
-                        //{
-                        //    int rowsAffected = clearCmd.ExecuteNonQuery();
-                        //}
                     }
                 }
                 catch (Exception ex)
