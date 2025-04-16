@@ -141,11 +141,10 @@ namespace VideoRentalSystem
                 }
             }
 
-            // Generate a simple VideoID based on the last SQL VideoID or incremental logic
-            int newVideoID = GetNextVideoID();  // Method to get the next VideoID (incremental logic)
+            int newVideoID = GetNextVideoID(); 
 
             // Set UserID as NULL
-            string userID = "NULL"; // As you specified, UserID should be recorded as NULL
+            string userID = "NULL"; 
 
             // Record UploadDate as the current time
             string uploadDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -155,7 +154,7 @@ namespace VideoRentalSystem
 
             // Add new video to the hash table
             CustomHashTable videoDetails = new CustomHashTable(10000);
-            videoDetails.Add("VideoID", newVideoID.ToString());  // VideoID should be added as a string
+            videoDetails.Add("VideoID", newVideoID.ToString()); 
             videoDetails.Add("VideoTitle", videoTitle);
             videoDetails.Add("Duration", duration);
             videoDetails.Add("TimeLimit", timeLimit);
@@ -241,6 +240,6 @@ namespace VideoRentalSystem
         }
 
 
-        private Label lblMessage; // To show the success/error message
+        private Label lblMessage;
     }
 }

@@ -134,7 +134,7 @@ namespace VideoRentalSystem
                         // Add Click event for the label as well
                         lblTitle.Click += (s, e) => ShowVideoPopup(videoInfo);
 
-                        // Add the PictureBox and Label to the video card (Panel)
+                        // Add the PictureBox and Label to the video card
                         videoCard.Controls.Add(videoImageControl);
                         videoCard.Controls.Add(lblTitle);
 
@@ -268,13 +268,13 @@ namespace VideoRentalSystem
 
         private void ProductsName_TextChanged(object sender, EventArgs e)
         {
-            // Get the search query from the textbox (convert to lowercase for case-insensitive search)
+            // Get the search query from the textbox
             string searchQuery = ProductsName.Text.ToLower();
 
-            // Clear the current display (reset the flowLayoutPanel)
+            // Clear the current display 
             flowLayoutPanel.Controls.Clear();
 
-            int cardCount = 0; // Reset the card count to limit the number of displayed cards
+            int cardCount = 0; 
 
             // Loop through the video data and display cards based on search query
             foreach (KeyValuePair<string, object> entry in videoData)
@@ -437,7 +437,7 @@ namespace VideoRentalSystem
             // Add Click event for the label as well
             lblTitle.Click += (s, e) => ShowVideoPopup(videoInfo);
 
-            // Add the PictureBox and Label to the video card (Panel)
+            // Add the PictureBox and Label to the video card
             videoCard.Controls.Add(videoImageControl);
             videoCard.Controls.Add(lblTitle);
 
@@ -539,7 +539,7 @@ namespace VideoRentalSystem
                         string status = rentalDetails["Status"].ToString();
                         string videoTitle = rentalDetails["VideoTitle"].ToString();
 
-                        // Existence check using composite key (handling NULL for VideoID)
+                        // Existence check using composite key
                         string checkQuery = @"
                                                 SELECT COUNT(*) 
                                                 FROM VideoRentals
@@ -677,7 +677,7 @@ namespace VideoRentalSystem
                     }
                 }
             }
-            // 1. Add this to VideoRentalManager:
+            // Add this to VideoRentalManager:
             public void UpdateAllRentalTimersInDB()
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
